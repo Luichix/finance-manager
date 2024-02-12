@@ -2,7 +2,8 @@
   // Configuration for JavaScript files
   "extends": ["plugin:prettier/recommended", "plugin:import/recommended"],
   "rules": {
-    "prettier/prettier": ["error", { "tabWidth": 4, "printWidth": 120 }]
+    // "prettier/prettier": ["error", { "tabWidth": 4, "printWidth": 120 }],
+    "prettier/prettier": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,7 +18,8 @@
       "extends": ["plugin:prettier/recommended"],
       "rules": {
         "import/no-extraneous-dependencies": "off", // mjs is only used by Astro for configuration, false positive
-        "import/no-unresolved": "off" // Also false positive with mjs file
+        "import/no-unresolved": "off", // Also false positive with mjs file,
+        "prettier/prettier": "off"
       }
     },
     // Configuration for TypeScript files
@@ -71,7 +73,8 @@
         "unused-imports/no-unused-vars": [
           "error",
           { "argsIgnorePattern": "^_" }
-        ]
+        ],
+        "prettier/prettier": "off"
       }
     },
     // Configuration for Astro
@@ -131,7 +134,8 @@
         "unused-imports/no-unused-vars": [
           "error",
           { "argsIgnorePattern": "^_" }
-        ]
+        ],
+        "prettier/prettier": "off"
       },
       "globals": {
         "Astro": "readonly"
