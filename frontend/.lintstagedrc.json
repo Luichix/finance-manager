@@ -1,0 +1,7 @@
+{
+  "src/**/*.{js,jsx,ts,tsx,astro}": [
+    "prettier --write --plugin=prettier-plugin-astro",
+    "eslint --fix"
+  ],
+  "src/**/*.{md,mdx}": "prettier --write"
+}

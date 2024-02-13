@@ -1,0 +1,31 @@
+{
+  "site": {
+    "title": "",
+    "base_url": "",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "",
+    "logo": "",
+    "logo_width": "45",
+    "logo_height": "45",
+    "logo_text": ""
+  },
+  "settings": {
+    "pagination": 10,
+    "summary_length": 100
+  },
+  "metadata": {
+    "meta_author": "",
+    "meta_image": "",
+    "meta_description": ""
+  },
+  "params": {
+    "contact_form_action": "#",
+    "copyright": ""
+  },
+  "contactinfo": {
+    "address": "",
+    "email": "",
+    "phone": ""
+  }
+}

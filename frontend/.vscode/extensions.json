@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "wayou.vscode-todo-highlight",
+    "aaron-bond.better-comments"
+  ],
+  "unwantedRecommendations": []
+}
