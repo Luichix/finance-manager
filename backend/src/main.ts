@@ -2,6 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import * as dotenv from 'dotenv';
+import {
+  DocumentBuilder,
+  SwaggerCustomOptions,
+  SwaggerModule,
+} from '@nestjs/swagger';
+import swaggerJsdoc from 'swagger-jsdoc';
 dotenv.config();
 
 class ServerInit {
@@ -16,8 +22,10 @@ class ServerInit {
   private middlewares() {}
   public async bootstrap() {
     this.app = await NestFactory.create(AppModule, { cors: { origin: '*' } });
-    this.app.listen(this.PORT);
+    // const swaggerDocument = require('./swagger.json');
+    // SwaggerModule.setup('api', this.app, swaggerDocument);
     this.app.setGlobalPrefix(this.PREFIX);
+    this.app.listen(this.PORT);
     if (this.PORT && this.HOST) {
       const server = `http://${this.HOST}:${this.PORT}`;
       console.log(`🚀 Server deployed at: ${server}`);
