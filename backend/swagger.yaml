@@ -1,0 +1,15 @@
+openapi: 3.0
+info:
+  title: DHYRIUM API
+  description: |-
+    Welcome to my DHYRIUM API
+  version: 1.0.0"
+externalDocs:
+  description: Repository
+  url: https://github.com/juancotrado/quisvar_proyect_bk
+servers:
+  - url: http://localhost:8081/api/v1
+  - url: http://localhost:8082/api/v1
+#   # - url: https://dev.aqku.pe/api/v1
+#   # - url: https://api.aqku.pe/api/v1
+tags:

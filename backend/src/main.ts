@@ -8,6 +8,8 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 import swaggerJsdoc from 'swagger-jsdoc';
+import YAML from 'yamljs';
+import { patito } from 'example';
 dotenv.config();
 
 class ServerInit {
@@ -20,10 +22,11 @@ class ServerInit {
     this.middlewares();
   }
   private middlewares() {}
+
   public async bootstrap() {
     this.app = await NestFactory.create(AppModule, { cors: { origin: '*' } });
-    // const swaggerDocument = require('./swagger.json');
-    // SwaggerModule.setup('api', this.app, swaggerDocument);
+    const swaggerDocument = await import('../swagger.json');
+    SwaggerModule.setup('api-docs', this.app, swaggerDocument);
     this.app.setGlobalPrefix(this.PREFIX);
     this.app.listen(this.PORT);
     if (this.PORT && this.HOST) {

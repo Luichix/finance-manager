@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": [
-      "ES2020",
-      "ES2019",
-      "ES2021",
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ES2020", "ES2019", "ES2021", "ESNext", "DOM"],
+    "resolveJsonModule": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
