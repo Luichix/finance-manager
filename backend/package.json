@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@nest-middlewares/morgan": "^10.0.0",
-    "@nestjs/common": "^10.0.0",
+    "@nestjs/common": "^10.3.3",
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/platform-express": "^10.0.0",
@@ -34,8 +34,9 @@
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "sequelize": "^6.36.0",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize": "^6.37.0",
+    "sequelize-typescript": "^2.1.6",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

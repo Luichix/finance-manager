@@ -31,7 +31,7 @@ export class UsersService {
 
   public async delete(id: User['id']) {
     if (!id) throw new ServerError('Opss!, Invalid ID', 'BAD_REQUEST');
-    const deleteUser = await User.destroy({ where: { id } });
+    const deleteUser = await User.destroy({ where: { id: 2 } });
     if (!deleteUser)
       throw new ServerError(
         'Usuario No encontrado en los registros',

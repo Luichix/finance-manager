@@ -45,7 +45,7 @@ export class UsersController {
   ) {
     try {
       const { id } = req.params;
-      const query = await this.UsersService.delete(+id);
+      const query = await this.UsersService.delete(id);
       res.status(HttpStatus.NO_CONTENT).json(query);
     } catch (error) {
       next(error);
