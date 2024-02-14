@@ -24,7 +24,7 @@ export default {
 				},
 				//! <--- CUSTOM THEMES ------------------------------------------>
 				//? <--- HOW TO USE ------------------------------------------>
-				'purple-dark': {
+				'brand': {
 					extend: 'dark', // <-HEREDA LOS VALORES POR DEFECTO DEL TEMA DARK
 					colors: {
 						background: '#282f37', //? sujeto a cambio
@@ -62,20 +62,20 @@ export default {
 							DEFAULT: '#FFF'
 						},
 						focus: '#ffffff'
-					},
-					layout: {
-						disabledOpacity: '0.3', //? disabledOpacity
-						radius: {
-							small: '4px', //? sm
-							medium: '6px', //? md
-							large: '8px' //?lg
-						},
-						borderWidth: {
-							small: '1px', //? sm
-							medium: '2px', //? md
-							large: '3px' //?lg
-						}
 					}
+					// layout: {
+					// 	disabledOpacity: '0.3', //? disabledOpacity
+					// 	radius: {
+					// 		small: '4px', //? sm
+					// 		medium: '6px', //? md
+					// 		large: '8px' //?lg
+					// 	},
+					// 	borderWidth: {
+					// 		small: '1px', //? sm
+					// 		medium: '2px', //? md
+					// 		large: '3px' //?lg
+					// 	}
+					// }
 				}
 			},
 			//! <--- COMMON COLORS ------------------------------------------>
