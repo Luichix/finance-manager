@@ -27,30 +27,41 @@ export default {
 				'purple-dark': {
 					extend: 'dark', // <-HEREDA LOS VALORES POR DEFECTO DEL TEMA DARK
 					colors: {
-						background: '#0D001A',
+						background: '#282f37', //? sujeto a cambio
 						foreground: '#ffffff',
 						primary: {
-							//! Primario único color
-							50: '#3B096C', //? text-primary-50
-							100: '#520F83',
-							200: '#7318A2',
-							300: '#9823C2',
-							400: '#c031e2',
-							500: '#DD62ED',
-							600: '#F182F6',
-							700: '#FCADF9',
-							800: '#FDD5F9',
-							900: '#FEECFE',
-							DEFAULT: '#DD62ED', //? text-primary
+							//! Pr	imario único color
+							50: '#2e551c', //? text-primary-50
+							100: '#376621',
+							200: '#407727',
+							300: '#4a882c',
+							400: '#539932',
+							500: '#5caa37', // default
+							600: '#6cb34b',
+							700: '#7dbb5f',
+							800: '#8dc473',
+							900: '#9dcc87',
+							DEFAULT: '#5CAA37', //? text-primary
 							foreground: '#ffffff'
 						},
 						secondary: {
-							DEFAULT: 'green'
+							50: '#2c1c47', //? text-primary-50
+							100: '#352155',
+							200: '#3e2763',
+							300: '#462c71',
+							400: '#4f327f',
+							500: '#58378d',
+							600: '#694b98',
+							700: '#795fa4',
+							800: '#8a73af',
+							900: '#9b87bb',
+							DEFAULT: '#58378D',
+							foreground: '#ffffff'
 						},
 						tertiary: {
-							DEFAULT: 'blue'
+							DEFAULT: '#FFF'
 						},
-						focus: '#F182F6'
+						focus: '#ffffff'
 					},
 					layout: {
 						disabledOpacity: '0.3', //? disabledOpacity
