@@ -1,7 +1,7 @@
 ---
 import "@/styles/index.scss";
-import Header from "./partials/Header.astro";
-import Footer from "./partials/Footer.astro";
+// import Header from './partials/Header.astro';
+// import Footer from './partials/Footer.astro';
 import config from "@/config/config.json";
 import { plainify } from "@/utils/textConverter";
 
@@ -133,10 +133,10 @@ const { title, meta_title, description, image, noindex, canonical } =
   </head>
   <body>
     <!-- <TwSizeIndicator /> -->
-    <Header />
+    <!-- <Header /> -->
     <main id="main-content" class="">
       <slot />
     </main>
-    <Footer />
+    <!-- <Footer /> -->
   </body>
 </html>

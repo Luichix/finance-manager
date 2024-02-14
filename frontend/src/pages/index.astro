@@ -5,8 +5,20 @@ import Base from "@/layouts/Base.astro";
 ---
 
 <Base title="FIXME">
-  <main class="purple-dark mb-4">
-    <h1 class="text-secondary">Aplicación de Finanzas Personales</h1>
-    <Button color="primary" client:visible>Boton</Button>
-  </main>
+  <div class="flex flex-col p-5 gap-6">
+    <div class="flex flex-col gap-3">
+      <h1 class="text-primary font-bold text-3xl">
+        Aplicación de Finanzas Personales
+      </h1>
+      <p class="text-base max-w-screen-sm">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus
+        optio ex nisi, corporis adipisci autem sequi explicabo dolor nostrum
+        ipsa odio accusantium alias delectus neque quia laborum sunt obcaecati
+        officiis.
+      </p>
+    </div>
+    <Button className="flex self-start" color="primary" client:visible>
+      Boton
+    </Button>
+  </div>
 </Base>
