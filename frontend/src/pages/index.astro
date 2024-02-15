@@ -1,24 +1,11 @@
 ---
 import { Button } from "@nextui-org/react";
-
+import { Tab } from "../components/Index";
 import Base from "@/layouts/Base.astro";
 ---
 
-<Base title="FIXME">
-  <div class="flex flex-col p-5 gap-6">
-    <div class="flex flex-col gap-3">
-      <h1 class="text-primary font-bold text-3xl">
-        Aplicación de Finanzas Personales
-      </h1>
-      <p class="text-base max-w-screen-sm">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus
-        optio ex nisi, corporis adipisci autem sequi explicabo dolor nostrum
-        ipsa odio accusantium alias delectus neque quia laborum sunt obcaecati
-        officiis.
-      </p>
-    </div>
-    <Button className="flex self-start" color="primary" client:visible>
-      Boton
-    </Button>
-  </div>
+<Base title="Gestor de finanzas | DineroGestor">
+  <section class="dark pt-20 pb-4 px-5 bg-primary">
+    <Tab client:visible />
+  </section>
 </Base>
