@@ -8,7 +8,7 @@ Este sprite.svg no va a ser útilizado en CSS ni SASS, solo lo llamaremos desde 
 
 ```html
 <svg>
-  <use href="@/assets/svgs/sprite.svg#IDDELSVG"></use>
+  <use href="public/Icons/sprite.svg#IDDELSVG"></use>
 </svg>
 ```
 
