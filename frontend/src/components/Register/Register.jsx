@@ -10,11 +10,12 @@ const Register = () => {
   const [emailError, setemailError] = useState();
   const [userNameError, setuserNameError] = useState();
   const [passError, setPassError] = useState();
-  const [confirmPassError, setConfirmPassError] = useState();
+  const [matchPassError, setmatchPassError] = useState();
 
   const emailNotValid = "El correo introducido no es válido";
   const userNotValid = "El usuario no es válido";
   const passNotValid = "La contraseña no es válida";
+  const passNotMatch = "La contraseña debe de ser igual a la introducida";
 
   const checkValidUser = (user) => {
     const userRegex = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -30,15 +31,22 @@ const Register = () => {
     const passRegEx =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    console.log(`checkValidPwd > pwd ${pwd} `);
-
     if (!pwd) {
-      console.log("Entro por el if");
       return false;
     } else {
-      console.log("Entro por el else");
       return passRegEx.test(pwd);
     }
+  };
+
+  const checkMathPwd = (pwd) => {
+    const passRegEx =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    console.log("checkMathPwd > ", pwd);
+
+    if (pwd !== password) {
+      setmatchPassError(passNotMatch);
+    } else return passRegEx.test(pwd);
   };
 
   const handleSumbit = (e) => {
@@ -57,12 +65,18 @@ const Register = () => {
       setuserNameError(false);
     }
 
+    // Validar password
     if (typeof password === "undefined") {
-      console.log("password no definida");
       setPassError(passNotValid);
     } else {
-      console.log("voy a validar la password");
       checkValidPwd(password);
+    }
+    // check math password
+    if (typeof matchPwd === "undefined" || matchPwd == "") {
+      console.log("match password no definida");
+      setmatchPassError(passNotValid);
+    } else {
+      checkMathPwd(matchPwd);
     }
   };
 
@@ -140,6 +154,7 @@ const Register = () => {
               className="w-full p-2 border text-black"
               onChange={handleMatchPwd}
             />
+            <p className="text-red-500 text-sm"> {matchPassError} </p>
           </div>
 
           <button
