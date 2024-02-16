@@ -1,0 +1,483 @@
+<!DOCTYPE >
+<html lang="en">
+	<head>
+		<title>SVG Sprite</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="UTF-8" />
+		<style>
+			      html { box-sizing: border-box }
+			      body {
+			        margin: 0;
+			        padding: 0;
+			        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto",
+			          "Oxygen","Ubuntu","Cantarell","Fira Sans",
+			          "Droid Sans","Helvetical Neue",sans-serif;
+			        font-size: 1.125rem;
+			        text-align: center
+			      }
+			      h1{
+			        font-weight: 100;
+			        margin-bottom: 1em
+			      }
+			      small { font-size: .34em }
+			      .icon {
+			  width: 50px;
+			  height: 50px;
+			  margin: .5em;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- SVG Sprite -->
+		<svg width="0" height="0" class="hidden">
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="log-in">
+				<path
+					d="M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"
+					d="M288 336l80-80-80-80M80 256h272"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="report">
+				<path
+					d="M480-160q-54.231 0-99.731-26.615-45.5-26.616-72.885-73.385H220q-8.5 0-14.25-5.758-5.75-5.757-5.75-14.269t5.75-14.242Q211.5-300 220-300h70.154Q281-329.231 280.5-359.487 280-389.744 280-420h-60q-8.5 0-14.25-5.758-5.75-5.757-5.75-14.269t5.75-14.242Q211.5-460 220-460h60q0-30.769-.269-61.154-.27-30.384 10.423-58.846H220q-8.5 0-14.25-5.758-5.75-5.757-5.75-14.269t5.75-14.242Q211.5-620 220-620h87.384q14.77-26.077 36.5-46.462 21.731-20.384 49.346-33.077l-58.538-58.769q-5.615-5.23-5.615-13.077 0-7.846 5.98-13.826 5.481-5.482 13.251-5.482 7.769 0 13.384 5.616L432.769-714q23.385-6.693 47-6.693 23.616 0 47 6.693l73.077-71.308q5.231-5.615 13.077-5.615t13.826 5.98q5.482 5.481 5.482 13.251 0 7.769-5.615 13.384l-58.77 58.769q27.616 12.693 48.808 32.962 21.192 20.269 35.962 46.577H740q8.5 0 14.25 5.758 5.75 5.757 5.75 14.269t-5.75 14.242Q748.5-580 740-580h-70.154q10.693 28.462 10.423 58.974Q680-490.513 680-460h60q8.5 0 14.25 5.758 5.75 5.757 5.75 14.269t-5.75 14.242Q748.5-420 740-420h-60q0 30-.5 60.385-.5 30.384-9.654 59.615H740q8.5 0 14.25 5.758 5.75 5.757 5.75 14.269t-5.75 14.242Q748.5-260 740-260h-87.384q-27.385 46.769-72.885 73.385Q534.231-160 480-160Zm0-40q66 0 113-47t47-113v-160q0-66-47-113t-113-47q-66 0-113 47t-47 113v160q0 66 47 113t113 47Zm-47.692-140h95.384q8.5 0 14.25-5.758 5.75-5.757 5.75-14.269t-5.75-14.242q-5.75-5.731-14.25-5.731h-95.384q-8.5 0-14.25 5.758-5.75 5.757-5.75 14.269t5.75 14.242q5.75 5.731 14.25 5.731Zm0-160h95.384q8.5 0 14.25-5.758 5.75-5.757 5.75-14.269t-5.75-14.242q-5.75-5.731-14.25-5.731h-95.384q-8.5 0-14.25 5.758-5.75 5.757-5.75 14.269t5.75 14.242q5.75 5.731 14.25 5.731ZM480-440Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="return">
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"
+					d="M112 352l-64-64 64-64"></path>
+				<path
+					d="M64 288h294c58.76 0 106-49.33 106-108v-20"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="remove">
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"
+					d="M400 256H112"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="arrow-right">
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="48"
+					d="M184 112l144 144-144 144"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="log-out">
+				<path
+					d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="youtube">
+				<path
+					d="M508.64 148.79c0-45-33.1-81.2-74-81.2C379.24 65 322.74 64 265 64h-18c-57.6 0-114.2 1-169.6 3.6C36.6 67.6 3.5 104 3.5 149 1 184.59-.06 220.19 0 255.79q-.15 53.4 3.4 106.9c0 45 33.1 81.5 73.9 81.5 58.2 2.7 117.9 3.9 178.6 3.8q91.2.3 178.6-3.8c40.9 0 74-36.5 74-81.5 2.4-35.7 3.5-71.3 3.4-107q.34-53.4-3.26-106.9zM207 353.89v-196.5l145 98.2z"></path>
+			</symbol>
+			<symbol
+				version="1.1"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 300 300.251"
+				id="x">
+				<path
+					d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="logo-instagram">
+				<path
+					d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"></path>
+				<path
+					d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="undo">
+				<path
+					d="M316.154-240q-8.539 0-14.269-5.731-5.731-5.73-5.731-14.269 0-8.538 5.731-14.269 5.73-5.731 14.269-5.731h270.154q62.23 0 106.038-42.692 43.808-42.693 43.808-104.231t-43.808-103.846q-43.808-42.308-106.038-42.308H276.616l104.461 104.462q6.385 6.384 6.385 14.153 0 7.77-6.385 14.154-6.385 6.385-14.539 6-8.153-.384-13.769-6L222.615-570.462q-5.231-5.23-7.346-10.692-2.115-5.461-2.115-11.923T215.269-605q2.115-5.462 7.346-10.692l130.154-130.154q6.385-6.385 14.154-6.385t14.154 6.385q6.385 6.384 6 14.538-.385 8.154-6 13.77L276.616-613.077h309.692q78.538 0 134.192 54.154 55.654 54.154 55.654 132T720.5-294.538Q664.846-240 586.308-240H316.154Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="close">
+				<path
+					d="M480-451.692 270.154-241.846q-5.615 5.615-13.769 6-8.154.385-14.539-6T235.461-256q0-7.769 6.385-14.154L451.692-480 241.846-689.846q-5.615-5.615-6-13.769-.385-8.154 6-14.539T256-724.539q7.769 0 14.154 6.385L480-508.308l209.846-209.846q5.615-5.615 13.769-6 8.154-.385 14.539 6T724.539-704q0 7.769-6.385 14.154L508.308-480l209.846 209.846q5.615 5.615 6 13.769.385 8.154-6 14.539T704-235.461q-7.769 0-14.154-6.385L480-451.692Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="check">
+				<path
+					d="m382-324.769 352.077-352.077q5.846-5.846 13.885-6.231 8.038-.385 14.653 6.231 6.616 6.615 6.616 14.269t-6.616 14.269l-358 358q-9.692 9.693-22.615 9.693-12.923 0-22.615-9.693l-162-162q-5.847-5.846-6.116-13.884-.269-8.039 6.346-14.654 6.616-6.616 14.27-6.616t14.269 6.616L382-324.769Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="edit-variant">
+				<path
+					d="M200-200h43.923l427.923-427.923-43.923-43.923L200-243.923V-200Zm-7.693 40q-13.73 0-23.019-9.288Q160-178.577 160-192.307v-41.616q0-13.265 5.231-25.287 5.23-12.021 13.923-20.713l508.077-508.616q6.146-5.481 13.573-8.471 7.427-2.99 15.486-2.99 8.06 0 15.616 2.538 7.556 2.539 13.94 9.154l42.693 42.923q6.615 6.385 9.038 14.008Q800-723.754 800-716.131q0 8.131-2.741 15.558-2.74 7.427-8.72 13.573L279.923-179.154q-8.692 8.693-20.713 13.923Q247.188-160 233.923-160h-41.616Zm568.462-556.308-44.461-44.461 44.461 44.461Zm-111.27 66.809-21.576-22.347 43.923 43.923-22.347-21.576Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="edit">
+				<path
+					d="M120 0q-16.077 0-28.038-11.577Q80-23.154 80-40q0-16.077 11.962-28.039Q103.923-80 120-80h720q16.077 0 28.038 11.578Q880-56.847 880-40q0 16.077-11.962 28.038Q856.077 0 840 0H120Zm120-286.923h42.923l352-351.769-21.308-22.077-21.846-21.077-351.769 352v42.923Zm-40 7.692v-54.539q0-6.461 1.846-12.038t7.077-10.808l439.846-438.846q6.385-6.385 13.962-9.308t15.115-2.923q8.308 0 15.231 2.923t13.538 9.539l41.154 41.385q6.616 6.384 9.424 13.692Q760-732.846 760-724.539q0 7.308-2.807 14.885-2.808 7.577-9.424 14.193L308.923-256.615q-5.23 5.23-10.807 7.461t-12.039 2.231h-53.77q-13.923 0-23.115-9.192Q200-265.308 200-279.231Zm520.769-445.538-42.923-42.924 42.923 42.924Zm-85.846 86.077-21.308-22.077-21.846-21.077 43.154 43.154Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="history">
+				<path
+					d="M416 221.25V416a48 48 0 01-48 48H144a48 48 0 01-48-48V96a48 48 0 0148-48h98.75a32 32 0 0122.62 9.37l141.26 141.26a32 32 0 019.37 22.62z"
+					fill="none"
+					stroke="currentColor"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+				<path
+					d="M256 56v120a32 32 0 0032 32h120M176 288h160M176 368h160"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="eyy-off">
+				<path
+					d="M432 448a15.92 15.92 0 01-11.31-4.69l-352-352a16 16 0 0122.62-22.62l352 352A16 16 0 01432 448zM255.66 384c-41.49 0-81.5-12.28-118.92-36.5-34.07-22-64.74-53.51-88.7-91v-.08c19.94-28.57 41.78-52.73 65.24-72.21a2 2 0 00.14-2.94L93.5 161.38a2 2 0 00-2.71-.12c-24.92 21-48.05 46.76-69.08 76.92a31.92 31.92 0 00-.64 35.54c26.41 41.33 60.4 76.14 98.28 100.65C162 402 207.9 416 255.66 416a239.13 239.13 0 0075.8-12.58 2 2 0 00.77-3.31l-21.58-21.58a4 4 0 00-3.83-1 204.8 204.8 0 01-51.16 6.47zM490.84 238.6c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.66 96a227.34 227.34 0 00-74.89 12.83 2 2 0 00-.75 3.31l21.55 21.55a4 4 0 003.88 1 192.82 192.82 0 0150.21-6.69c40.69 0 80.58 12.43 118.55 37 34.71 22.4 65.74 53.88 89.76 91a.13.13 0 010 .16 310.72 310.72 0 01-64.12 72.73 2 2 0 00-.15 2.95l19.9 19.89a2 2 0 002.7.13 343.49 343.49 0 0068.64-78.48 32.2 32.2 0 00-.1-34.78z"></path>
+				<path
+					d="M256 160a95.88 95.88 0 00-21.37 2.4 2 2 0 00-1 3.38l112.59 112.56a2 2 0 003.38-1A96 96 0 00256 160zM165.78 233.66a2 2 0 00-3.38 1 96 96 0 00115 115 2 2 0 001-3.38z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="search">
+				<path
+					d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+					fill="none"
+					stroke="currentColor"
+					stroke-miterlimit="10"
+					stroke-width="32"></path>
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-miterlimit="10"
+					stroke-width="32"
+					d="M338.29 338.29L448 448"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="calendar">
+				<rect
+					fill="none"
+					stroke="currentColor"
+					stroke-linejoin="round"
+					stroke-width="32"
+					x="48"
+					y="80"
+					width="416"
+					height="384"
+					rx="48"></rect>
+				<circle cx="296" cy="232" r="24"></circle>
+				<circle cx="376" cy="232" r="24"></circle>
+				<circle cx="296" cy="312" r="24"></circle>
+				<circle cx="376" cy="312" r="24"></circle>
+				<circle cx="136" cy="312" r="24"></circle>
+				<circle cx="216" cy="312" r="24"></circle>
+				<circle cx="136" cy="392" r="24"></circle>
+				<circle cx="216" cy="392" r="24"></circle>
+				<circle cx="296" cy="392" r="24"></circle>
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linejoin="round"
+					stroke-width="32"
+					stroke-linecap="round"
+					d="M128 48v32M384 48v32"></path>
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linejoin="round"
+					stroke-width="32"
+					d="M464 160H48"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="user">
+				<path
+					d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+				<path
+					d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z"
+					fill="none"
+					stroke="currentColor"
+					stroke-miterlimit="10"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="menu">
+				<rect
+					x="48"
+					y="48"
+					width="176"
+					height="176"
+					rx="20"
+					ry="20"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></rect>
+				<rect
+					x="288"
+					y="48"
+					width="176"
+					height="176"
+					rx="20"
+					ry="20"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></rect>
+				<rect
+					x="48"
+					y="288"
+					width="176"
+					height="176"
+					rx="20"
+					ry="20"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></rect>
+				<rect
+					x="288"
+					y="288"
+					width="176"
+					height="176"
+					rx="20"
+					ry="20"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></rect>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="monitoring">
+				<path
+					d="M120-160v-40l80-80v120q0 17-11.5 28.5T160-120q-17 0-28.5-11.5T120-160Zm160 0v-200l80-80v280q0 17-11.5 28.5T320-120q-17 0-28.5-11.5T280-160Zm160 0v-280l80 81v199q0 17-11.5 28.5T480-120q-17 0-28.5-11.5T440-160Zm160 0v-199l80-80v279q0 17-11.5 28.5T640-120q-17 0-28.5-11.5T600-160Zm160 0v-360l80-80v440q0 17-11.5 28.5T800-120q-17 0-28.5-11.5T760-160ZM132-452l211-211q23-23 57-23t57 23l103 103 212-212q12-12 28.5-11.5T829-771q11 12 10.5 28.5T828-715L617-504q-23 23-57 23t-57-23L400-607 188-395q-12 12-28.5 11.5T131-396q-11-12-10.5-28.5T132-452Z"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="home-outline">
+				<path
+					d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+				<path
+					d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="heart">
+				<path
+					d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="transfer">
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"
+					d="M464 208L352 96 240 208M352 113.13V416M48 304l112 112 112-112M160 398V96"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 512 512"
+				id="cart">
+				<circle
+					cx="176"
+					cy="416"
+					r="16"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></circle>
+				<circle
+					cx="400"
+					cy="416"
+					r="16"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></circle>
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"
+					d="M48 80h64l48 272h256"></path>
+				<path
+					d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128"
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="32"></path>
+			</symbol>
+			<symbol
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 -960 960 960"
+				id="dolar-sign">
+				<path
+					d="M481-120q-17 0-28.5-11.5T441-160v-46q-45-10-79-35t-55-70q-7-14-.5-29.5T330-363q14-6 29 .5t23 21.5q17 30 43 45.5t64 15.5q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-44q0-17 11.5-28.5T481-840q17 0 28.5 11.5T521-800v44q38 6 66 24.5t46 45.5q9 13 3.5 29T614-634q-14 6-29 .5T557-653q-13-14-30.5-21.5T483-682q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v44q0 17-11.5 28.5T481-120Z"></path>
+			</symbol>
+		</svg>
+		<h1>
+			SVG Sprite Demo
+			<br />
+			<small>
+				created with <a href="https://svgsprit.es/">svgsprit.es</a>
+			</small>
+		</h1>
+		<svg class="icon">
+			<use xlink:href="#log-in"></use></svg
+		><svg class="icon">
+			<use xlink:href="#report"></use></svg
+		><svg class="icon">
+			<use xlink:href="#return"></use></svg
+		><svg class="icon">
+			<use xlink:href="#remove"></use></svg
+		><svg class="icon">
+			<use xlink:href="#arrow-right"></use></svg
+		><svg class="icon">
+			<use xlink:href="#log-out"></use></svg
+		><svg class="icon">
+			<use xlink:href="#youtube"></use></svg
+		><svg class="icon">
+			<use xlink:href="#x"></use></svg
+		><svg class="icon">
+			<use xlink:href="#logo-instagram"></use></svg
+		><svg class="icon">
+			<use xlink:href="#undo"></use></svg
+		><svg class="icon">
+			<use xlink:href="#close"></use></svg
+		><svg class="icon">
+			<use xlink:href="#check"></use></svg
+		><svg class="icon">
+			<use xlink:href="#edit-variant"></use></svg
+		><svg class="icon">
+			<use xlink:href="#edit"></use></svg
+		><svg class="icon">
+			<use xlink:href="#history"></use></svg
+		><svg class="icon">
+			<use xlink:href="#eyy-off"></use></svg
+		><svg class="icon">
+			<use xlink:href="#search"></use></svg
+		><svg class="icon">
+			<use xlink:href="#calendar"></use></svg
+		><svg class="icon">
+			<use xlink:href="#user"></use></svg
+		><svg class="icon">
+			<use xlink:href="#menu"></use></svg
+		><svg class="icon">
+			<use xlink:href="#monitoring"></use></svg
+		><svg class="icon">
+			<use xlink:href="#home-outline"></use></svg
+		><svg class="icon">
+			<use xlink:href="#heart"></use></svg
+		><svg class="icon">
+			<use xlink:href="#transfer"></use></svg
+		><svg class="icon">
+			<use xlink:href="#cart"></use></svg
+		><svg class="icon">
+			<use xlink:href="#dolar-sign"></use>
+		</svg>
+	</body>
+</html>
