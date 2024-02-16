@@ -13,11 +13,11 @@ const Account = () => {
   const [editUsername, setEditUsername] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
 
-  const handleEdit = (editFunction) => {
+  const handleEdit = (editFunction: any) => {
     editFunction(true);
   };
 
-  const handleSave = (editFunction) => {
+  const handleSave = (editFunction: any) => {
     editFunction(false);
   };
 
