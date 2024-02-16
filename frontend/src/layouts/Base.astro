@@ -2,8 +2,10 @@
 import "@/styles/index.scss";
 // import Header from './partials/Header.astro';
 // import Footer from './partials/Footer.astro';
+import TwSizeIndicator from "./partials/TwSizeIndicator.astro";
 import config from "@/config/config.json";
 import { plainify } from "@/utils/textConverter";
+import Sidebar from "./partials/Sidebar.astro";
 
 // types for frontmatters
 export interface Props {
@@ -132,9 +134,12 @@ const { title, meta_title, description, image, noindex, canonical } =
     <!-- Google tag (gtag.js) -->
   </head>
   <body>
-    <!-- <TwSizeIndicator /> -->
+    <TwSizeIndicator />
     <!-- <Header /> -->
-    <main id="main-content" class="">
+    <main id="main-content" class="container-main">
+      <div class="hidden md:flex">
+        <Sidebar />
+      </div>
       <slot />
     </main>
     <!-- <Footer /> -->

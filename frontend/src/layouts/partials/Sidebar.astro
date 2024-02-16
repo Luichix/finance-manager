@@ -1,0 +1,34 @@
+---
+import { AiOutlineAppstore } from "react-icons/ai";
+import { LuPieChart, LuBook } from "react-icons/lu";
+import { CgProfile } from "react-icons/cg";
+import { MdLogout } from "react-icons/md";
+---
+
+<nav class="sidebar">
+  <div class="sidebar-profile">
+    <figure>
+      <img
+        src="https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/3.png"
+      />
+    </figure>
+  </div>
+  <ul class="sidebar-links">
+    <li>
+      <a href="/" class="text-base"><AiOutlineAppstore size={22} /> Registrar</a
+      >
+    </li>
+    <li>
+      <a href="/" class="text-base"> <LuBook size={20} /> Transacciones</a>
+    </li>
+    <li>
+      <a href="/" class="text-base"> <LuPieChart size={20} /> Reportes</a>
+    </li>
+    <li>
+      <a href="/" class="text-base"> <CgProfile size={20} /> Account</a>
+    </li>
+  </ul>
+  <div class="sidebar-logout">
+    <MdLogout size={20} /><span>Logout</span>
+  </div>
+</nav>
