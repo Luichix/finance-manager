@@ -1,16 +1,15 @@
-import { log } from "node_modules/astro/dist/core/logger/core";
 import React, { useState } from "react";
 
 const Login = () => {
-  const [userId, setUserID] = useState();
-  const [password, setPassword] = useState();
-  const [userErr, setUserErr] = useState();
-  const [passErr, setPassErr] = useState();
+  const [userId, setUserID] = useState<any>();
+  const [password, setPassword] = useState<any>();
+  const [userErr, setUserErr] = useState<any>();
+  const [passErr, setPassErr] = useState<any>();
 
   const userNotValid = "El usuario no es válido";
   const passNotValid = "La password no es válida";
 
-  const validarUsuario = (usuarioID) => {
+  const validarUsuario = (usuarioID: any) => {
     const userRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
 
     if (!usuarioID) {
@@ -20,13 +19,13 @@ const Login = () => {
     }
   };
 
-  const validarPassword = (password) => {
+  const validarPassword = (password: any) => {
     const passRegEx =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passRegEx.test(password);
   };
 
-  function handleSubmit(e) {
+  function handleSubmit(e: any) {
     e.preventDefault();
 
     if (!validarUsuario(userId)) {
@@ -42,11 +41,11 @@ const Login = () => {
     }
   }
 
-  const handleUserId = (event) => {
+  const handleUserId = (event: any) => {
     setUserID(event.target.value);
   };
 
-  const handlePassword = (event) => {
+  const handlePassword = (event: any) => {
     setPassword(event.target.value);
   };
 
