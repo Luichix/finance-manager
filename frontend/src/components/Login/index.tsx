@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 
 const Login = () => {
-  const [userId, setUserID] = useState<any>();
-  const [password, setPassword] = useState<any>();
-  const [userErr, setUserErr] = useState<any>();
-  const [passErr, setPassErr] = useState<any>();
+  const [userId, setUserID] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [userErr, setUserErr] = useState<boolean>(false);
+  const [passErr, setPassErr] = useState<boolean>(false);
 
-  const userNotValid = "El usuario no es válido";
-  const passNotValid = "La password no es válida";
-
-  const validarUsuario = (usuarioID: any) => {
+  const validarUsuario = (usuarioID: string) => {
     const userRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
 
     if (!usuarioID) {
@@ -19,33 +16,33 @@ const Login = () => {
     }
   };
 
-  const validarPassword = (password: any) => {
+  const validarPassword = (password: string) => {
     const passRegEx =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passRegEx.test(password);
   };
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
 
     if (!validarUsuario(userId)) {
-      setUserErr(userNotValid);
+      setUserErr(true);
     } else {
       setUserErr(false);
     }
 
     if (!validarPassword(password)) {
-      setPassErr(passNotValid);
+      setPassErr(true);
     } else {
       setPassErr(false);
     }
   }
 
-  const handleUserId = (event: any) => {
+  const handleUserId = (event: { target: { value: string } }) => {
     setUserID(event.target.value);
   };
 
-  const handlePassword = (event: any) => {
+  const handlePassword = (event: { target: { value: string } }) => {
     setPassword(event.target.value);
   };
 
@@ -68,7 +65,12 @@ const Login = () => {
               placeholder="Ingrese su email/ usuario"
               onChange={handleUserId}
             />
-            <p className="text-red-500 text-sm"> {userErr} </p>
+
+            <p
+              className={`text-red-500 text-sm  ${userErr ? "invisble" : "visible"}`}
+            >
+              El usuario no es válido
+            </p>
           </div>
 
           <div className="mb-4">
@@ -82,7 +84,12 @@ const Login = () => {
               placeholder="Ingrese su contraseña"
               onChange={handlePassword}
             />
-            <p className="text-red-500 text-sm"> {passErr} </p>
+            <p
+              className={`text-red-500 text-sm  ${passErr ? "invisble" : "visible"}`}
+            >
+              {" "}
+              La password no es válida
+            </p>
           </div>
 
           <div>

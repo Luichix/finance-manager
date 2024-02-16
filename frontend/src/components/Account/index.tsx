@@ -13,14 +13,6 @@ const Account = () => {
   const [editUsername, setEditUsername] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
 
-  const handleEdit = (editFunction: any) => {
-    editFunction(true);
-  };
-
-  const handleSave = (editFunction: any) => {
-    editFunction(false);
-  };
-
   return (
     <div
       className="flex items-center justify-center h-screen bg-gray-200"
@@ -40,7 +32,7 @@ const Account = () => {
             <button
               type="button"
               className="mr-2"
-              onClick={() => handleEdit(setEditFullName)}
+              onClick={() => setEditFullName(true)}
             >
               🖉
             </button>
@@ -59,7 +51,7 @@ const Account = () => {
             {editFullName && (
               <button
                 type="button"
-                onClick={() => handleSave(setEditFullName)}
+                onClick={() => setEditFullName(false)}
                 className="ml-2"
               >
                 ✔
@@ -71,7 +63,7 @@ const Account = () => {
             <button
               type="button"
               className="mr-2"
-              onClick={() => handleEdit(setEditPhoneNumber)}
+              onClick={() => setEditPhoneNumber(true)}
             >
               🖉
             </button>
@@ -90,7 +82,7 @@ const Account = () => {
             {editPhoneNumber && (
               <button
                 type="button"
-                onClick={() => handleSave(setEditPhoneNumber)}
+                onClick={() => setEditPhoneNumber(false)}
                 className="ml-2"
               >
                 ✔
@@ -102,7 +94,7 @@ const Account = () => {
             <button
               type="button"
               className="mr-2"
-              onClick={() => handleEdit(setEditUsername)}
+              onClick={() => setEditUsername(true)}
             >
               🖉
             </button>
@@ -121,7 +113,7 @@ const Account = () => {
             {editUsername && (
               <button
                 type="button"
-                onClick={() => handleSave(setEditUsername)}
+                onClick={() => setEditUsername(false)}
                 className="ml-2"
               >
                 ✔
@@ -133,7 +125,7 @@ const Account = () => {
             <button
               type="button"
               className="mr-2"
-              onClick={() => handleEdit(setEditEmail)}
+              onClick={() => setEditEmail(true)}
             >
               🖉
             </button>
@@ -152,7 +144,7 @@ const Account = () => {
             {editEmail && (
               <button
                 type="button"
-                onClick={() => handleSave(setEditEmail)}
+                onClick={() => setEditEmail(false)}
                 className="ml-2"
               >
                 ✔
