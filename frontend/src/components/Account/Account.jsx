@@ -1,67 +1,30 @@
 import React, { useState } from "react";
 
 const Account = () => {
-  const mockData = {
-    fullName: "John Doe",
-    phoneNumber: "123-456-7890",
-    username: "john_doe",
-    email: "john.doe@example.com",
+  // Mock data variables
+  const [fullName, setFullName] = useState("John Doe");
+  const [phoneNumber, setPhoneNumber] = useState("123-456-7890");
+  const [username, setUserName] = useState("john_doe");
+  const [email, setEmail] = useState("john.doe@example.com");
+
+  // Variables for edit mode
+  const [editFullName, setEditFullName] = useState(false);
+  const [editPhoneNumber, setEditPhoneNumber] = useState(false);
+  const [editUsername, setEditUsername] = useState(false);
+  const [editEmail, setEditEmail] = useState(false);
+
+  const handleEdit = (editFunction) => {
+    editFunction(true);
   };
 
-  const [editFields, setEditFields] = useState({
-    fullName: false,
-    phoneNumber: false,
-    username: false,
-    email: false,
-  });
-
-  const handleEdit = (field) => {
-    setEditFields((prevEditFields) => ({ ...prevEditFields, [field]: true }));
-  };
-
-  const handleSave = (field) => {
-    setEditFields((prevEditFields) => ({ ...prevEditFields, [field]: false }));
-  };
-
-  const renderField = (field, label) => {
-    return (
-      <div className="mb-4 flex items-center">
-        <button
-          type="button"
-          className="mr-2"
-          onClick={() => handleEdit(field)}
-        >
-          🖉
-        </button>
-        {editFields[field] ? (
-          <input
-            type="text"
-            value={mockData[field]}
-            onChange={(e) => (mockData[field] = e.target.value)}
-            className="w-full p-2 border"
-          />
-        ) : (
-          <label htmlFor="" className="block">
-            {label}: {mockData[field]}
-          </label>
-        )}
-        {editFields[field] && (
-          <button
-            type="button"
-            onClick={() => handleSave(field)}
-            className="ml-2"
-          >
-            ✔
-          </button>
-        )}
-      </div>
-    );
+  const handleSave = (editFunction) => {
+    editFunction(false);
   };
 
   return (
     <div
       className="flex items-center justify-center h-screen bg-gray-200"
-      id="background"
+      id="backgroud"
     >
       <div className="text-black bg-white p-8 rounded-lg shadow-md w-96">
         <div className="mb-4 text-center">
@@ -73,10 +36,129 @@ const Account = () => {
         </div>
 
         <form>
-          {renderField("fullName", "Nombre")}
-          {renderField("phoneNumber", "Teléfono")}
-          {renderField("username", "Usuario")}
-          {renderField("email", "Email")}
+          <div className="mb-4 flex items-center">
+            <button
+              type="button"
+              className="mr-2"
+              onClick={() => handleEdit(setEditFullName)}
+            >
+              🖉
+            </button>
+            {editFullName ? (
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full p-2 border"
+              />
+            ) : (
+              <label htmlFor="" className="block">
+                Nombre: {fullName}
+              </label>
+            )}
+            {editFullName && (
+              <button
+                type="button"
+                onClick={() => handleSave(setEditFullName)}
+                className="ml-2"
+              >
+                ✔
+              </button>
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <button
+              type="button"
+              className="mr-2"
+              onClick={() => handleEdit(setEditPhoneNumber)}
+            >
+              🖉
+            </button>
+            {editPhoneNumber ? (
+              <input
+                type="text"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-full p-2 border"
+              />
+            ) : (
+              <label htmlFor="" className="block">
+                Teléfono: {phoneNumber}
+              </label>
+            )}
+            {editPhoneNumber && (
+              <button
+                type="button"
+                onClick={() => handleSave(setEditPhoneNumber)}
+                className="ml-2"
+              >
+                ✔
+              </button>
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <button
+              type="button"
+              className="mr-2"
+              onClick={() => handleEdit(setEditUsername)}
+            >
+              🖉
+            </button>
+            {editUsername ? (
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+                className="w-full p-2 border"
+              />
+            ) : (
+              <label htmlFor="" className="block">
+                Usuario: {username}
+              </label>
+            )}
+            {editUsername && (
+              <button
+                type="button"
+                onClick={() => handleSave(setEditUsername)}
+                className="ml-2"
+              >
+                ✔
+              </button>
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <button
+              type="button"
+              className="mr-2"
+              onClick={() => handleEdit(setEditEmail)}
+            >
+              🖉
+            </button>
+            {editEmail ? (
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-2 border"
+              />
+            ) : (
+              <label htmlFor="" className="block">
+                Email: {email}
+              </label>
+            )}
+            {editEmail && (
+              <button
+                type="button"
+                onClick={() => handleSave(setEditEmail)}
+                className="ml-2"
+              >
+                ✔
+              </button>
+            )}
+          </div>
 
           <div className="mb-4">
             <input
