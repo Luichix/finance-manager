@@ -1,11 +1,11 @@
 ---
 import { Button } from "@nextui-org/react";
-import { Tab } from "../components/Index";
+import { Tab } from "@/components/Index";
 import Base from "@/layouts/Base.astro";
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
-  <section class="dark pt-20 pb-4 px-5 bg-primary">
-    <Tab client:visible />
+  <section class="dark pt-20 pb-4 px-2 bg-primary">
+    <Tab client:load />
   </section>
 </Base>

@@ -1,62 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import styles from "./Index.module.scss";
 
 export default function App() {
+  const [selected, setSelected] = useState(2);
+
   return (
-    <div className="flex w-full flex-col">
-      <Tabs
-        aria-label="Options"
-        color="secondary"
-        size="lg"
-        classNames={{
-          tabList:
-            "w-full grid grid-cols-3 justify-center align-center p-0 bg-secondary",
-          cursor: "w-full bg-secondary",
-          tab: "w-full py-6  text-xl sm:text-2xl sm:py-6 md:text-3xl md:py-8 data-[selected=true]:bg-secondary-400",
-          tabContent: "group-data-[selected=true]:text-foreground",
-        }}
-        disableAnimation="true"
-      >
-        <Tab key="photos" title="Gastos">
-          <Card className="flex flex-row gap-6 justify-center align-center bg-transparent shadow-none">
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              10,00
-            </CardBody>
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              10,00
-            </CardBody>
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              10,00
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key="music" title="Ingreso">
-          <Card className="flex flex-row gap-6 justify-center align-center bg-transparent shadow-none">
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              20,00
-            </CardBody>
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              20,00
-            </CardBody>
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              20,00
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key="videos" title="Saldo">
-          <Card className="flex flex-row gap-6 justify-center align-center bg-transparent shadow-none">
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              00,00
-            </CardBody>
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              00,00
-            </CardBody>
-            <CardBody className="text-center text-black text-xl bg-foreground rounded-xl">
-              00,00
-            </CardBody>
-          </Card>
-        </Tab>
-      </Tabs>
-    </div>
+    <>
+      <div className={styles.tab}>
+        <div className={styles.tab__nav}>
+          <button
+            className={`${selected === 1 ? "active" : ""}`}
+            onClick={() => setSelected(1)}
+          >
+            Gastos
+          </button>
+          <button
+            className={`${selected === 2 ? "active" : ""}`}
+            onClick={() => setSelected(2)}
+          >
+            Ingresos
+          </button>
+          <button
+            className={`${selected === 3 ? "active" : ""}`}
+            onClick={() => setSelected(3)}
+          >
+            Saldo
+          </button>
+        </div>
+        <div className={styles.tab__contentContainer}>
+          <div
+            className={`${styles.tab__content} ${selected === 1 ? "active" : ""}`}
+          >
+            <span>$50.000</span>
+            <span>$50.000</span>
+            <span>$50.000</span>
+          </div>
+          <div
+            className={`${styles.tab__content} ${selected === 2 ? "active" : ""}`}
+          >
+            <span>$450.000</span>
+            <span>$570.000</span>
+            <span>$520.000</span>
+          </div>
+          <div
+            className={`${styles.tab__content} ${selected === 3 ? "active" : ""}`}
+          >
+            <span>$5110.000</span>
+            <span>$5620.000</span>
+            <span>$6150.000</span>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
