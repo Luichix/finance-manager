@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import styles from "./Index.module.scss";
 
 export default function App() {
   const [selected, setSelected] = useState(2);
 
   return (
-    <>
+    <div className="container mx-auto">
       <div className={styles.tab}>
         <div className={styles.tab__nav}>
           <button
@@ -52,6 +51,6 @@ export default function App() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
