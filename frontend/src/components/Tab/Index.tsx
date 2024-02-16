@@ -12,7 +12,7 @@ export default function App() {
           tabList:
             "w-full grid grid-cols-3 justify-center align-center p-0 bg-secondary",
           cursor: "w-full bg-secondary",
-          tab: "w-full py-6  text-xl sm:text-2xl sm:py-6 md:text-3xl md:py-8",
+          tab: "w-full py-6  text-xl sm:text-2xl sm:py-6 md:text-3xl md:py-8 data-[selected=true]:bg-secondary-400",
           tabContent: "group-data-[selected=true]:text-foreground",
         }}
         disableAnimation="true"
