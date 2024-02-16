@@ -1,5 +1,6 @@
 import { log } from "node_modules/astro/dist/core/logger/core";
 import React, { useState } from "react";
+// import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState();
@@ -7,76 +8,131 @@ const Register = () => {
   const [password, setPassword] = useState();
   const [matchPwd, setMatchPwd] = useState();
 
-  const [emailError, setemailError] = useState();
+  const [emailError, setEmailError] = useState();
   const [userNameError, setuserNameError] = useState();
   const [passError, setPassError] = useState();
   const [matchPassError, setmatchPassError] = useState();
+  const [isValidLogin, setValidLogin] = useState();
 
-  const emailNotValid = "El correo introducido no es válido";
-  const userNotValid = "El usuario no es válido";
+  const emailNotValid =
+    "El correo introducido no está informado o no es correcto";
+
+  const userNotValid = "El usuario no está informado o no es correcto";
   const passNotValid = "La contraseña no es válida";
   const passNotMatch = "La contraseña debe de ser igual a la introducida";
 
-  const checkValidUser = (user) => {
+  // const navigate = useNavigate();
+
+  const checkValirEmail = () => {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    setValidLogin(true);
+
+    setEmailError(false);
+
+    if (typeof email === "undefined" || email == "") {
+      setEmailError(emailNotValid);
+      return false;
+    } else if (!emailRegex.test(email)) {
+      setEmailError(emailNotValid);
+      return false;
+    }
+
+    return true;
+  };
+
+  const checkValidUser = () => {
+    setValidLogin(true);
     const userRegex = /^[A-z][A-z0-9-_]{3,23}$/;
 
-    if (!user) {
+    setuserNameError(false);
+
+    if (typeof userName === "undefined" || userName == "") {
+      setuserNameError(userNotValid);
       return false;
-    } else {
-      return userRegex.test(user);
+    } else if (!userRegex.test(userName)) {
+      setuserNameError(userNotValid);
+      return false;
     }
   };
 
-  const checkValidPwd = (pwd) => {
+  const checkValidPwd = () => {
     const passRegEx =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!pwd) {
+    setValidLogin(true);
+
+    if (typeof password === "undefined" || password == "") {
+      setPassError(passNotValid);
       return false;
-    } else {
-      return passRegEx.test(pwd);
+    } else if (!passRegEx.test(password)) {
+      setPassError(passNotValid);
+      return false;
     }
   };
 
-  const checkMathPwd = (pwd) => {
+  const checkMathPwd = () => {
+    setValidLogin(true);
     const passRegEx =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    console.log("checkMathPwd > ", pwd);
-
-    if (pwd !== password) {
+    if (typeof matchPwd === "undefined" || matchPwd == "") {
+      setmatchPassError(passNotValid);
+      return false;
+    } else if (matchPwd !== password) {
       setmatchPassError(passNotMatch);
-    } else return passRegEx.test(pwd);
+      return false;
+    } else if (!passRegEx.test(matchPwd)) {
+      setmatchPassError(passNotValid);
+    }
   };
 
   const handleSumbit = (e) => {
     e.preventDefault();
 
     console.log(
-      `Datos del formulario email: ${email} \n username: ${userName} \n password: ${password} \n matchPwd:  ${matchPwd}`,
+      `Datos del formulario email: \n ${email} \n username: ${userName} \n password: ${password} \n matchPwd:  ${matchPwd}`,
     );
 
+    setEmailError(false);
     setuserNameError(false);
     setPassError(false);
+    setmatchPassError(false);
 
-    if (!checkValidUser(userName)) {
-      setuserNameError(userNotValid);
-    } else {
-      setuserNameError(false);
-    }
+    setValidLogin(true);
+
+    // Validar email
+    let v1 = checkValirEmail();
+
+    // Validar usuario
+    let v2 = checkValidUser();
 
     // Validar password
-    if (typeof password === "undefined") {
-      setPassError(passNotValid);
-    } else {
-      checkValidPwd(password);
-    }
+    let v3 = checkValidPwd();
+
     // check math password
-    if (typeof matchPwd === "undefined" || matchPwd == "") {
-      console.log("match password no definida");
-      setmatchPassError(passNotValid);
-    } else {
-      checkMathPwd(matchPwd);
+    let v4 = checkMathPwd();
+
+    if (!v1 || !v2 || !v3 || v4) {
+      //todo
+
+      let data = {
+        username: userName,
+        password: password,
+        mail: email,
+      };
+
+      fetch("https://backend-finance-managegr.onrender.com/api/v1/users", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      })
+        .then((resp) => resp.json())
+        .then((response) => {
+          console.log("Respuesta ", response);
+          // navigate('/')
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -102,7 +158,10 @@ const Register = () => {
       id="backgroud"
     >
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
+        <img src="./src/assets/LogoH.png" alt="Logo" />
+
         <h1 className="mb-4 font-blod text-xl"> ¡Bienvenido! </h1>
+
         <form onSubmit={handleSumbit}>
           <div className="mb-4">
             <label htmlFor="" className="block text-black">
