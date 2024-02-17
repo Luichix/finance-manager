@@ -83,10 +83,12 @@ const Login = () => {
           console.log("Respuesta ", response);
 
           if (response.message) {
-            console.log("entro en el if");
             setLoginErr(response.message);
           } else {
-            console.log("Redirijo");
+            localStorage.setItem("id", response.token.id);
+            localStorage.setItem("username", response.token.username);
+            localStorage.setItem("mail", response.token.mail);
+            localStorage.setItem("token", response.token.token);
             window.location.href = "/";
           }
         })
