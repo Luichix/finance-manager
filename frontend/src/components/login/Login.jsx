@@ -82,8 +82,12 @@ const Login = () => {
         .then((response) => {
           console.log("Respuesta ", response);
 
-          if (response.status != 200) {
+          if (response.message) {
+            console.log("entro en el if");
             setLoginErr(response.message);
+          } else {
+            console.log("Redirijo");
+            window.location.href = "/";
           }
         })
         .catch((err) => console.log(err));
