@@ -11,25 +11,6 @@
     {
       "name": "Estadisticas",
       "url": "/statistics"
-    },
-    {
-      "name": "Recursos",
-      "url": "",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Acerca de",
-          "url": "/about"
-        },
-        {
-          "name": "Contacto",
-          "url": "/contact"
-        },
-        {
-          "name": "Política de Privacidad",
-          "url": "/privacy-policy"
-        }
-      ]
     }
   ],
   "footer": [

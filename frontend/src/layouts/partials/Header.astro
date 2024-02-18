@@ -1,6 +1,6 @@
 ---
 // import Logo from "@layouts/components/Logo.astro";
-import menu from "@/config/menu.json";
+// import menu from '@/config/menu.json';
 // import { IoSearch } from 'react-icons/io5';
 
 export interface ChildNavigationLink {
@@ -14,14 +14,14 @@ export interface NavigationLink {
   hasChildren?: boolean;
   children?: ChildNavigationLink[];
 }
-
-const { main }: { main: NavigationLink[] } = menu;
 ---
 
-<header class="header pt-3">
-  <nav class="navbar container">
+<header class="header pt-3 shadow-lg bg-white">
+  <nav class="navbar px-4 md:px-8">
     <!-- logo -->
-    <div class="order-0 text-gray-400"></div>
+    <div class="order-0">
+      <img src="/svg/logo.svg" width="200px" height="28px" />
+    </div>
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
@@ -48,41 +48,23 @@ const { main }: { main: NavigationLink[] } = menu;
     </label>
     <!-- /navbar toggler -->
 
-    <ul
-      id="nav-menu"
-      class="navbar-nav order-3 hidden w-full md:order-1 md:flex md:w-auto"
-    >
-      {
-        main.map((menu) => (
-          <>
-            {menu.hasChildren ? (
-              <li class="nav-item nav-dropdown group relative cursor-pointer">
-                <span class="nav-link inline-flex items-center">
-                  {menu.name}
-                  <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-                <ul class="nav-dropdown-list hidden group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100">
-                  {menu.children?.map((child) => (
-                    <li class="nav-dropdown-item">
-                      <a href={child.url} class="nav-dropdown-link">
-                        {child.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ) : (
-              <li class="nav-item">
-                <a href={menu.url} class="nav-link block">
-                  {menu.name}
-                </a>
-              </li>
-            )}
-          </>
-        ))
-      }
+    <ul id="nav-menu" class="navbar-nav hidden w-full md:flex md:w-auto">
+      <li class="nav-item">
+        <a href={"/home"} class="nav-link block"> Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a href={"/transactions"} class="nav-link block"> Transacciones</a>
+      </li>
+      <li class="nav-item">
+        <a href={"/statistics"} class="nav-link block"> Estadisticas</a>
+      </li>
     </ul>
+
+    <div>
+      <input
+        type="date"
+        class="border-secondary text-secondary rounded-lg border-2 px-4 bg-white outline-none"
+      />
+    </div>
   </nav>
 </header>

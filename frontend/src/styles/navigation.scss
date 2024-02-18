@@ -12,7 +12,7 @@ input#nav-toggle:checked ~ #nav-menu {
 
 // navbar items
 .navbar {
-  @apply relative flex max-w-[1260px] flex-wrap items-center justify-between;
+  @apply relative flex  h-20 flex-wrap items-center justify-between;
 }
 
 .navbar-brand img {
@@ -20,15 +20,27 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .navbar-nav {
-  @apply text-center md:text-left;
+  @apply text-center md:text-left pl-5 flex-1;
 }
 
 .nav-item {
-  @apply mx-1;
+  @apply mx-2;
 }
 
 .nav-link {
-  @apply p-3  font-semibold text-gray-400 transition hover:text-secondary md:p-4;
+  @apply p-3  font-semibold text-base text-xl transition  md:p-4;
+}
+
+.nav-link::after {
+  content: '**';
+  color: transparent;
+  @apply decoration-secondary;
+}
+
+.nav-link:hover {
+  @apply text-secondary decoration-secondary;
+  text-decoration: underline 2.5px;
+  text-underline-offset: 8px;
 }
 
 .nav-dropdown-list {
@@ -59,7 +71,7 @@ input#nav-toggle:checked ~ #nav-menu {
 
 // Sidebar styles
 .sidebar {
-  @apply flex-col justify-between fixed top-1 left-0 z-40 w-56 gap-6 min-h-[99%] p-8 bg-white  shadow-xl  rounded-e-xl hidden md:flex;
+  @apply flex-col justify-between w-56 gap-6 h-full p-8 hidden md:flex bg-gradient-to-b from-primary  to-secondary filter brightness-125;
 }
 
 .sidebar-profile {
@@ -69,7 +81,7 @@ input#nav-toggle:checked ~ #nav-menu {
     @apply flex w-24 h-24;
 
     img {
-      @apply w-full h-full border-4 rounded-full border-tertiary;
+      @apply w-full h-full border-4 rounded-md border-secondary;
     }
   }
 }
@@ -78,10 +90,6 @@ input#nav-toggle:checked ~ #nav-menu {
   @apply flex flex-col gap-6 flex-1;
 
   li a {
-    @apply flex items-center gap-4  text-gray-400 hover:text-secondary;
+    @apply flex items-center gap-4   text-white hover:text-secondary;
   }
-}
-
-.sidebar-logout {
-  @apply flex gap-4 items-center text-gray-400 hover:text-secondary;
 }

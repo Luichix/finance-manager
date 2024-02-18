@@ -1,5 +1,6 @@
 @media (width > 768px) {
   .container-main {
+    min-height: calc(100vh - 80px);
     display: grid;
     grid-template-columns: 224px 1fr;
   }

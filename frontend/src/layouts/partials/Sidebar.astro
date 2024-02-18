@@ -6,29 +6,36 @@ import { MdLogout } from "react-icons/md";
 ---
 
 <nav class="sidebar">
-  <div class="sidebar-profile">
-    <figure>
+  <div class="sidebar-profile gap-2">
+    <!-- <figure>
       <img
-        src="https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/3.png"
+        src="https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/6.png"
       />
-    </figure>
+    </figure> -->
+    <div class="bg-secondary-300 p-5 border-secondary rounded-md">
+      <span class="text-white text-4xl">AF</span>
+    </div>
+    <span> Bienvenida Andrea!</span>
   </div>
   <ul class="sidebar-links">
     <li>
-      <a href="/" class="text-base"><AiOutlineAppstore size={22} /> Registrar</a
+      <a href="/" class="text-white"
+        ><AiOutlineAppstore size={30} /> Registrar</a
       >
     </li>
     <li>
-      <a href="/" class="text-base"> <LuBook size={20} /> Transacciones</a>
+      <a href="/" class="text-white"> <LuBook size={28} /> Transacciones</a>
     </li>
     <li>
-      <a href="/" class="text-base"> <LuPieChart size={20} /> Reportes</a>
+      <a href="/" class="text-white"> <LuPieChart size={28} /> Reportes</a>
     </li>
     <li>
-      <a href="/" class="text-base"> <CgProfile size={20} /> Account</a>
+      <a href="/" class="text-white"> <CgProfile size={28} /> Account</a>
+    </li>
+    <li>
+      <a href="/">
+        <MdLogout size={28} />Logout
+      </a>
     </li>
   </ul>
-  <div class="sidebar-logout">
-    <MdLogout size={20} /><span>Logout</span>
-  </div>
 </nav>
