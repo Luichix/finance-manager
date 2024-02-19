@@ -1,10 +1,13 @@
 import { Button } from "@nextui-org/react";
 import { log } from "node_modules/astro/dist/core/logger/core";
 import React, { useState } from "react";
+import EyeOff from "./EyeOff";
+import EyeOn from "./EyeOn";
 
 const Login = () => {
   const [user, setuser] = useState();
   const [password, setPassword] = useState();
+  const [ispasswordVisible, setPasswordVisble] = useState(false);
 
   const [userErr, setuserErr] = useState();
   const [passErr, setPassErr] = useState();
@@ -49,6 +52,10 @@ const Login = () => {
       return false;
     }
     return true;
+  };
+
+  const togglePassword = () => {
+    setPasswordVisble(!ispasswordVisible);
   };
 
   function handleSubmit(e) {
@@ -111,7 +118,7 @@ const Login = () => {
           <h1 className="text-2xl font-medium text-black">¡Bienvenido! </h1>
 
           <p className="text-red-500 text-sm"> {loginErr} </p>
-
+          {/* Usuario */}
           <div className="mb-4">
             <label htmlFor="" className="block text-sm text-black">
               {" "}
@@ -125,21 +132,35 @@ const Login = () => {
             />
             <p className="text-red-500 text-sm"> {userErr} </p>
           </div>
-
+          {/* Contraseña */}
           <div className="mb-4">
             <label htmlFor="" className="text-sm text-black">
               {" "}
               Contraseña{" "}
             </label>
-            <input
-              type="password"
-              className="w-full p-2 border text-black"
-              placeholder="Ingrese su contraseña"
-              onChange={handlePassword}
-            />
-            <p className="text-red-500 text-sm"> {passErr} </p>
+
+            <div className="relative">
+              <input
+                type={ispasswordVisible ? "text" : "password"}
+                className="w-full p-2 border text-black"
+                placeholder="Ingrese su contraseña"
+                onChange={handlePassword}
+              />
+              <div class="absolute inset-y-0 right-0 pr-3 flex">
+                <button
+                  type="button"
+                  onClick={togglePassword}
+                  className="rounded border-gray-300 "
+                >
+                  {ispasswordVisible ? <EyeOn /> : <EyeOff />}
+                </button>
+              </div>
+
+              <p className="text-red-500 text-sm"> {passErr} </p>
+            </div>
           </div>
 
+          {/* Recordar constraseña */}
           <div className="flex justify-between">
             <div>
               <input
