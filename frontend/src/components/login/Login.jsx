@@ -180,7 +180,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="text-center bg-primary-50 text-white p-2 border rounded"
+            className="text-center bg-secondary-50 text-white p-2 border rounded"
           >
             {" "}
             Inciar Sesión{" "}
@@ -188,7 +188,11 @@ const Login = () => {
 
           <p className="text-black text-center text-sm">
             {" "}
-            ¿No tienes cuenta? <a href="/register"> crear una </a>{" "}
+            ¿No tienes cuenta?{" "}
+            <a href="/register" className="font-bold">
+              {" "}
+              crear una{" "}
+            </a>{" "}
           </p>
         </form>
       </div>
