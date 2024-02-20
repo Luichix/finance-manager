@@ -1,5 +1,3 @@
-import { Button } from "@nextui-org/react";
-import { log } from "node_modules/astro/dist/core/logger/core";
 import React, { useState } from "react";
 import EyeOff from "./EyeOff";
 import EyeOn from "./EyeOn";
@@ -12,8 +10,6 @@ const Login = () => {
   const [userErr, setuserErr] = useState();
   const [passErr, setPassErr] = useState();
   const [loginErr, setLoginErr] = useState();
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const userNotValid = "El user no es válido";
   const userMandatory = "El campo user es obligatorio";

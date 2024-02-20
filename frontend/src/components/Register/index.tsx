@@ -3,18 +3,18 @@ import EyeOff from "./EyeOff";
 import EyeOn from "./EyeOn";
 
 const Register = () => {
-  const [email, setEmail] = useState();
-  const [userName, setUserName] = useState();
-  const [password, setPassword] = useState();
-  const [matchPwd, setMatchPwd] = useState();
+  const [email, setEmail] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [matchPwd, setMatchPwd] = useState<string>("");
 
-  const [ispasswordVisible, setPasswordVisble] = useState(false);
+  const [ispasswordVisible, setPasswordVisble] = useState<boolean>(false);
 
-  const [emailError, setEmailError] = useState();
-  const [userNameError, setuserNameError] = useState();
-  const [passError, setPassError] = useState();
-  const [matchPassError, setmatchPassError] = useState();
-  // const [isValidLogin, setValidLogin] = useState();
+  const [emailError, setEmailError] = useState<string | boolean>(false);
+  const [userNameError, setuserNameError] = useState<string | boolean>(false);
+  const [passError, setPassError] = useState<string | boolean>(false);
+  const [matchPassError, setmatchPassError] = useState<string | boolean>(false);
+  // const [isValidLogin, setValidLogin] = useState<boolean>(false);
 
   const emailNotValid =
     "El correo introducido no está informado o no es correcto";
@@ -89,7 +89,7 @@ const Register = () => {
     }
   };
 
-  const handleSumbit = (e) => {
+  const handleSumbit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     console.log(
@@ -138,22 +138,6 @@ const Register = () => {
     }
   };
 
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleuserName = (event) => {
-    setUserName(event.target.value);
-  };
-
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleMatchPwd = (event) => {
-    setMatchPwd(event.target.value);
-  };
-
   const togglePassword = () => {
     setPasswordVisble(!ispasswordVisible);
   };
@@ -177,9 +161,8 @@ const Register = () => {
             <input
               type="email"
               className="border w-full p-2 text-black"
-              onChange={handleEmail}
+              onChange={({ target }) => setEmail(target.value)}
             />
-            <p> </p>
             <p className="text-red-500 text-sm"> {emailError} </p>
           </div>
 
@@ -191,7 +174,7 @@ const Register = () => {
             <input
               type="text"
               className="w-full p-2 border text-black"
-              onChange={handleuserName}
+              onChange={({ target }) => setUserName(target.value)}
             />
             <p className="text-red-500 text-sm"> {userNameError} </p>
           </div>
@@ -205,10 +188,10 @@ const Register = () => {
               <input
                 type={ispasswordVisible ? "text" : "password"}
                 className="w-full p-2 border text-black"
-                onChange={handlePassword}
+                onChange={({ target }) => setPassword(target.value)}
               />
 
-              <div class="absolute inset-y-0 right-0 pr-3 flex">
+              <div className="absolute inset-y-0 right-0 pr-3 flex">
                 <button
                   type="button"
                   onClick={togglePassword}
@@ -230,7 +213,7 @@ const Register = () => {
             <input
               type="password"
               className="w-full p-2 border text-black"
-              onChange={handleMatchPwd}
+              onChange={({ target }) => setMatchPwd(target.value)}
             />
             <p className="text-red-500 text-sm"> {matchPassError} </p>
           </div>
