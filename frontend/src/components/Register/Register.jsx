@@ -1,12 +1,14 @@
-import { log } from "node_modules/astro/dist/core/logger/core";
 import React, { useState } from "react";
-// import { useNavigate } from 'react-router-dom';
+import EyeOff from "./EyeOff";
+import EyeOn from "./EyeOn";
 
 const Register = () => {
   const [email, setEmail] = useState();
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
   const [matchPwd, setMatchPwd] = useState();
+
+  const [ispasswordVisible, setPasswordVisble] = useState(false);
 
   const [emailError, setEmailError] = useState();
   const [userNameError, setuserNameError] = useState();
@@ -152,6 +154,10 @@ const Register = () => {
     setMatchPwd(event.target.value);
   };
 
+  const togglePassword = () => {
+    setPasswordVisble(!ispasswordVisible);
+  };
+
   return (
     <div
       className="flex items-center justify-center h-screen bg-gray-200"
@@ -189,20 +195,33 @@ const Register = () => {
             />
             <p className="text-red-500 text-sm"> {userNameError} </p>
           </div>
-
+          {/* Contraseña */}
           <div className="mb-4">
             <label htmlFor="" className="block text-black">
               {" "}
               Contraseña{" "}
             </label>
-            <input
-              type="password"
-              className="w-full p-2 border text-black"
-              onChange={handlePassword}
-            />
-            <p className="text-red-500 text-sm"> {passError} </p>
-          </div>
+            <div className="relative">
+              <input
+                type={ispasswordVisible ? "text" : "password"}
+                className="w-full p-2 border text-black"
+                onChange={handlePassword}
+              />
 
+              <div class="absolute inset-y-0 right-0 pr-3 flex">
+                <button
+                  type="button"
+                  onClick={togglePassword}
+                  className="rounded border-gray-300 "
+                >
+                  {ispasswordVisible ? <EyeOn /> : <EyeOff />}
+                </button>
+              </div>
+
+              <p className="text-red-500 text-sm"> {passError} </p>
+            </div>
+          </div>
+          {/* Confirmar Contraseña */}
           <div className="mb-4">
             <label htmlFor="" className="block text-black">
               {" "}
@@ -218,7 +237,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="bg-primary-50 text-white p-2 w-full mb-4"
+            className="bg-secondary-500 text-white p-2 w-full mb-4"
           >
             {" "}
             Registrar{" "}
@@ -227,7 +246,7 @@ const Register = () => {
           <p className="text-center text-black">
             {" "}
             ¿Ya tienes una cuenta?{" "}
-            <a className="text-blood text-black" href="/login">
+            <a className="font-bold" href="/login">
               {" "}
               Iniciar sesion{" "}
             </a>{" "}
