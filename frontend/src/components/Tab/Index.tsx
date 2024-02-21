@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styles from "./Index.module.scss";
-import navItems from "./navItems";
-import Nav from "./Nav";
-import Content from "./Content";
+import React, { useState } from 'react';
+import styles from './Index.module.scss';
+import navItems from './navItems';
+import Nav from './Nav';
+import Content from './Content';
 
 // *contenidos a desplegar (jsx)
 const contents = [
@@ -33,7 +33,7 @@ export default function App() {
           {navItems.map(({ name }, i) => (
             <button
               key={i}
-              className={`${selected === i + 1 ? "active" : ""}`}
+              className={`${selected === i + 1 ? 'active' : ''}`}
               onClick={() => setSelected(i + 1)}
             >
               {name}
