@@ -1,42 +1,42 @@
 .footer {
 	background-color: hsl(var(--myapp-base));
-	font-size: 0.8rem;
-	padding: 4.8rem 0 2.4rem;
+	font-size: calc(0.8rem + 0.5vw);
+	padding: 4.8rem 0.8rem 1.6rem;
 
-	&__firstBox {
-	}
-	&__secondBox {
-		.footer__social {
-			a {
-				color: #fff;
-			}
+	&__sectionContainer {
+		margin: 0 auto;
+		max-width: max-content;
+		gap: 1.6rem;
 
-			svg {
-				fill: #fff !important;
-				stroke: #fff !important;
-				color: #fff !important;
+		section {
+			width: 100%;
+			display: flex;
+
+			h3 {
+				font-weight: 600;
+				font-size: calc(1.2rem + 0.5vw);
 			}
 		}
 	}
 
-	&__sectionContainer {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-		justify-items: center;
-		gap: 0.4rem;
-	}
-
-	section {
+	&__social {
 		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: flex-start;
-		gap: 0.6rem;
-		max-width: max-content;
+		justify-content: space-between;
+		gap: 0.8rem;
+		a:link,
+		a:visited {
+			padding: 0.6rem;
+			background-color: hsl(var(--myapp-base-600));
+			border-radius: 100px;
+		}
+		a:hover,
+		a:focus {
+		}
 
-		h3 {
-			font-weight: 600;
-			font-size: 1.2rem;
+		svg {
+			width: 1.2rem;
+			height: 1.2rem;
+			fill: hsl(var(--myapp-foreground));
 		}
 	}
 }

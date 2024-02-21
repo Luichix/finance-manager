@@ -1,0 +1,24 @@
+.content {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 0.4rem;
+	background-color: hsl(var(--myapp-secondary-800));
+	border-radius: 15px;
+	color: hsl(var(--myapp-foreground));
+	font-size: 1rem;
+	font-weight: 500;
+	display: none;
+	padding: 0.6rem;
+
+	& span:not(:last-child) {
+		border-right: 2px solid hsl(var(--myapp-tertiary));
+		padding-right: 0.4rem;
+	}
+
+	&:global(.active) {
+		display: grid;
+	}
+}
