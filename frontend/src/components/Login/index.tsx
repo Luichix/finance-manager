@@ -9,17 +9,26 @@ const Login = () => {
 
   const checkValiduser = () => {
     const userRegex = /^[a-z0-9_-]{3,15}$/;
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
     setUserErr(false);
 
     if (typeof userId === "undefined" || userId == "") {
       setUserErr(true);
       return false;
-    } else if (!userRegex.test(userId)) {
-      setUserErr(true);
-      return false;
     }
-
-    return true;
+    // Compruebo si cumple con los requisitos de email, si no los cumple
+    // compruebo si cumple requisito de usuario.
+    if (!emailRegex.test(userId)) {
+      if (!userRegex.test(userId)) {
+        setUserErr(true);
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   };
 
   const checkValidPwd = () => {

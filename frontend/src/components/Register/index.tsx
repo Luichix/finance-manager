@@ -137,7 +137,7 @@ const Register = () => {
         .then((resp) => resp.json())
         .then((response) => {
           console.log("Respuesta ", response);
-          // navigate('/')
+          window.location.href = "/";
 
           if (response.status) {
             setloginError("Login incorrecto");
