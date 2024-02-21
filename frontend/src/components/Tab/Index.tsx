@@ -32,6 +32,7 @@ export default function App() {
         <Nav>
           {navItems.map(({ name }, i) => (
             <button
+              key={i}
               className={`${selected === i + 1 ? "active" : ""}`}
               onClick={() => setSelected(i + 1)}
             >
