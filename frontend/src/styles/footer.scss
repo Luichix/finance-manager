@@ -1,5 +1,5 @@
 .footer {
-  background-color: hsl(var(--myapp-black));
+  background-color: hsl(var(--myapp-base));
   font-size: calc(0.8rem + 0.5vw);
   padding: 4.8rem 0.8rem 1.6rem;
 
@@ -26,7 +26,7 @@
     a:link,
     a:visited {
       padding: 0.6rem;
-      background-color: hsl(var(--myapp-black-600));
+      background-color: hsl(var(--myapp-base-600));
       border-radius: 100px;
     }
     a:hover,
