@@ -14,6 +14,7 @@ const Register = () => {
   const [userNameError, setuserNameError] = useState<string | boolean>(false);
   const [passError, setPassError] = useState<string | boolean>(false);
   const [matchPassError, setmatchPassError] = useState<string | boolean>(false);
+  const [loginError, setloginError] = useState<string | boolean>(false);
   // const [isValidLogin, setValidLogin] = useState<boolean>(false);
 
   const emailNotValid =
@@ -22,6 +23,7 @@ const Register = () => {
   const userNotValid = "El usuario no está informado o no es correcto";
   const passNotValid = "La contraseña no es válida";
   const passNotMatch = "La contraseña debe de ser igual a la introducida";
+  const notValidLogin = "El usuario ya está registrado";
 
   // const navigate = useNavigate();
 
@@ -76,15 +78,18 @@ const Register = () => {
   const checkMathPwd = () => {
     // setValidLogin(true);
     const passRegEx =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
 
     if (typeof matchPwd === "undefined" || matchPwd == "") {
+      console.log("validacion 1");
       setmatchPassError(passNotValid);
       return false;
     } else if (matchPwd !== password) {
+      console.log("validacion 2");
       setmatchPassError(passNotMatch);
       return false;
     } else if (!passRegEx.test(matchPwd)) {
+      console.log("validacion 3 ");
       setmatchPassError(passNotValid);
     }
   };
@@ -133,6 +138,10 @@ const Register = () => {
         .then((response) => {
           console.log("Respuesta ", response);
           // navigate('/')
+
+          if (response.status) {
+            setloginError("Login incorrecto");
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -147,8 +156,11 @@ const Register = () => {
       className="flex items-center justify-center h-screen bg-gray-200"
       id="backgroud"
     >
+      {/* Logo */}
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <img src="./src/assets/LogoH.png" alt="Logo" />
+
+        <p className="text-red-500 text-sm"> {loginError}</p>
 
         <h1 className="mb-4 font-blod text-xl"> ¡Bienvenido! </h1>
 
