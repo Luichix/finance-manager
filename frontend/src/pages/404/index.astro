@@ -3,19 +3,25 @@ import Layout from "../../layouts/Base.astro";
 ---
 
 <Layout title="404 NOT FOUND">
-  <main class="flex justify-center items-center h-screen bg-white">
-    <div class="flex flex-col items-center mx-auto text-center">
-      <img src="./src/assets/LogoH.png" alt="" class="w-64" />
-      <h1 class="text-4xl font-medium text-black mt-6">404</h1>
-      <p class="text-xl font-medium text-black">Página no encontrada</p>
-      <a
-        href="/"
-        class="bg-secondary-500 hover:bg-secondary-700 px-4 py-2 border rounded-full text-sm mt-6"
-      >
-        Volver al inicio
-      </a>
+  <main class="flex flex-col items-center justify-center">
+    <img
+      src="./src/assets/LogoH.png"
+      width="631"
+      height="379"
+      alt="404-not-found"
+    />
+    <img
+      src="./src/assets/error-404.jpg"
+      width="631"
+      height="379"
+      alt="404-not-found"
+    />
 
-      <button></button>
-    </div>
+    <a
+      href="/"
+      class="bg-secondary-500 hover:bg-secondary-700 px-4 py-2 border rounded-full text-sm mt-6"
+    >
+      Volver al inicio
+    </a>
   </main>
 </Layout>
