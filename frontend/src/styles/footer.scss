@@ -1,42 +1,42 @@
 .footer {
-	background-color: hsl(var(--myapp-base));
-	font-size: calc(0.8rem + 0.5vw);
-	padding: 4.8rem 0.8rem 1.6rem;
+  background-color: hsl(var(--myapp-black));
+  font-size: calc(0.8rem + 0.5vw);
+  padding: 4.8rem 0.8rem 1.6rem;
 
-	&__sectionContainer {
-		margin: 0 auto;
-		max-width: max-content;
-		gap: 1.6rem;
+  &__sectionContainer {
+    margin: 0 auto;
+    max-width: max-content;
+    gap: 1.6rem;
 
-		section {
-			width: 100%;
-			display: flex;
+    section {
+      width: 100%;
+      display: flex;
 
-			h3 {
-				font-weight: 600;
-				font-size: calc(1.2rem + 0.5vw);
-			}
-		}
-	}
+      h3 {
+        font-weight: 600;
+        font-size: calc(1.2rem + 0.5vw);
+      }
+    }
+  }
 
-	&__social {
-		display: flex;
-		justify-content: space-between;
-		gap: 0.8rem;
-		a:link,
-		a:visited {
-			padding: 0.6rem;
-			background-color: hsl(var(--myapp-base-600));
-			border-radius: 100px;
-		}
-		a:hover,
-		a:focus {
-		}
+  &__social {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    a:link,
+    a:visited {
+      padding: 0.6rem;
+      background-color: hsl(var(--myapp-black-600));
+      border-radius: 100px;
+    }
+    a:hover,
+    a:focus {
+    }
 
-		svg {
-			width: 1.2rem;
-			height: 1.2rem;
-			fill: hsl(var(--myapp-foreground));
-		}
-	}
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: hsl(var(--myapp-foreground));
+    }
+  }
 }
