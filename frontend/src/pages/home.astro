@@ -1,12 +1,14 @@
 ---
-import { Tab } from "@/components/Index";
-import Base from "@/layouts/Base.astro";
+import { Tab } from '@/components/Index';
+import Base from '@/layouts/Base.astro';
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
-  <section class="dark pt-8 pb-4 bg-primary">
-    <div class="mx-4">
-      <Tab client:load />
+  <section class="dark pt-8 pb-4 bg-foreground">
+    <div class="px-4 md:px-8">
+      <div class="flex flex-col gap-24 w-full lg:grid lg:grid-cols-12">
+        <FormDashboard client:load />
+      </div>
     </div>
   </section>
 </Base>
