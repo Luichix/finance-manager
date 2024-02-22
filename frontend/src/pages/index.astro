@@ -1,12 +1,9 @@
 ---
-import { Tab } from "@/components/Index";
-import Base from "@/layouts/Base.astro";
+import Layout from "@/layouts/Landing.astro";
 ---
 
-<Base title="Gestor de finanzas | DineroGestor">
-  <section class="dark pt-8 pb-4 bg-primary">
-    <div class="mx-4">
-      <Tab client:load />
-    </div>
+<Layout title="Gestor de finanzas | DineroGestor">
+  <section class="min-h-screen">
+    <div class="mx-4">Gestiona tus Finanzas de manera simple</div>
   </section>
-</Base>
+</Layout>

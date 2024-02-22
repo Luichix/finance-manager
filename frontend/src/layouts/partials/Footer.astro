@@ -5,7 +5,7 @@
 <footer class="footer">
   <div class="container mx-auto">
     <div
-      class="footer__sectionContainer grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-6"
+      class="footer__sectionContainer flex flex-col gap-2.5 max-w-max sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-full"
     >
       <section class="items-center sm:items-start flex-col justify-start">
         <h3>Compania</h3>
@@ -14,19 +14,23 @@
         <a href="#">Estadisticas</a>
         <a href="#">Contactanos</a>
       </section>
-      <section class="items-center sm:items-start flex-col justify-start">
+      <section
+        class="items-center sm:items-start flex-col justify-start lg:ml-14 xl:mr-20 2xl:mr-30"
+      >
         <h3>Soporte</h3>
         <a href="#">Ayuda</a>
         <a href="#">Comunidad</a>
       </section>
-      <section class="items-center sm:items-start flex-col justify-start">
+      <section
+        class="items-center sm:items-start flex-col justify-start lg:ml-14 xl:mr-20 2xl:mr-30"
+      >
         <h3>Legal</h3>
         <a href="#">Política de Cookies</a>
         <a href="#">Política de privacidad</a>
         <a href="#">Terminos y condiciones</a>
       </section>
       <section
-        class="items-center col-span-full flex-col sm:flex-row sm:justify-between sm:items-center sm:w-full"
+        class="items-center flex-col sm:flex-row sm:justify-between sm:items-center sm:w-full"
       >
         <div class="footer__social mb-4 sm:mb-0">
           <a href="#">
@@ -45,6 +49,10 @@
             </svg>
           </a>
         </div>
+      </section>
+      <section
+        class="items-center sm:items-start flex-col justify-start col-start-3 lg:ml-14 xl:mr-20 2xl:mr-30"
+      >
         <p class="footer__copy">&copy; 2024 - All rights reserved.</p>
       </section>
     </div>

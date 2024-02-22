@@ -1,0 +1,165 @@
+//! form
+.form-container {
+	max-width: 800px;
+	margin: 0 auto;
+	width: 100%;
+	.tabs {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.8rem;
+		margin-bottom: 1.6rem;
+		button {
+			padding: 0.4rem;
+			border-radius: 11px;
+			background-color: hsl(var(--myapp-foreground));
+			color: hsl(var(--myapp-base));
+			font-weight: 600;
+			text-transform: uppercase;
+			border: 3px solid hsl(var(--myapp-secondary));
+			transition:
+				background-color 0.3s,
+				color 0.3s;
+
+			&.active {
+				background-color: hsl(var(--myapp-secondary));
+				color: hsl(var(--myapp-foreground));
+			}
+		}
+	}
+	.income,
+	.outcome {
+		display: grid;
+		grid-template-columns: min-content 1fr;
+		align-items: start;
+		gap: 0.8rem;
+		row-gap: 1.6rem;
+		color: hsl(var(--myapp-base));
+	}
+	.income {
+		label {
+			font-size: calc(0.8rem + 0.5vw);
+		}
+		input,
+		textarea {
+			padding: 0.2rem 0rem 0.2rem 0.8rem;
+			width: 100%;
+			border-radius: 5px;
+			border: 2px solid hsl(var(--myapp-base));
+			background: none;
+			font-size: calc(0.8rem + 1vw);
+			font-weight: 600;
+			&:focus {
+				border-color: transparent;
+				outline: solid hsl(var(--myapp-primary));
+			}
+			&::placeholder {
+				color: hsl(var(--myapp-base));
+			}
+		}
+
+		button {
+			padding: 0.2rem 0.8rem;
+			grid-column: 2 / 3;
+			border: 2px solid hsl(var(--myapp-base));
+			border-radius: 5px;
+			background-color: hsl(var(--myapp-primary));
+			text-transform: uppercase;
+			font-weight: 600;
+			font-size: 1.2rem;
+			transition:
+				background-color 0.3s,
+				color 0.3s;
+			&:hover {
+				background-color: hsl(var(--myapp-primary-600));
+				color: hsl(var(--myapp-base-400));
+			}
+		}
+	}
+}
+
+//! modal
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: hsl(var(--myapp-base));
+
+	// !oculto
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(0.2) translateY(100%);
+
+	.modal:not(&.open) {
+		transform: scale(0.2) translateY(300%);
+		opacity: 0;
+		visibility: hidden;
+
+		transition:
+			transform 0.4s cubic-bezier(0.64, 0, 0.78, 0),
+			opacity 0.4s cubic-bezier(0.11, 0, 0.5, 0),
+			visibility 0.4s;
+	}
+
+	&.open {
+		opacity: 1;
+		visibility: visible;
+		transform: scale(1);
+
+		transition:
+			transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.3s,
+			visibility 0.3s;
+	}
+	&__container {
+		position: relative;
+		padding: 0.8rem;
+		max-width: 600px;
+		min-height: 50%;
+		width: 90%;
+		background-color: hsl(var(--myapp-foreground));
+		color: hsl(var(--myapp-base));
+	}
+
+	&__selected {
+		padding: 0.2rem 0.4rem;
+		margin-bottom: 0.6rem;
+		border: 2px solid hsl(var(--myapp-base));
+		background-color: hsl(var(--myapp-secondary));
+		color: hsl(var(--myapp-foreground));
+		font-weight: 600;
+		&.selected {
+			background-color: hsl(var(--myapp-primary));
+		}
+	}
+
+	&__actions {
+		position: absolute;
+		bottom: -1.6rem;
+		right: 0;
+		display: flex;
+		gap: 0.8rem;
+		color: hsl(var(--myapp-foreground));
+	}
+}
+
+//! categorias
+
+.categories {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	&__item {
+		padding: 0.2rem 0.4rem;
+		border: 2px solid hsl(var(--myapp-base));
+		font-size: calc(0.8rem + 0.3vw);
+		transition: background-color 0.3s;
+		&:hover {
+			background-color: hsl(var(--myapp-primary));
+		}
+	}
+}

@@ -1,0 +1,18 @@
+---
+import { Tab, FormDashboard } from "@/components/Index";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base title="Gestor de finanzas | DineroGestor">
+  <section class="dark pt-8 pb-4 bg-foreground">
+    <div class="mx-4">
+      <div
+        class="container mx-auto flex flex-col gap-24 lg:grid lg:grid-cols-12"
+      >
+        <Tab client:load />
+        <div></div>
+        <FormDashboard client:visible />
+      </div>
+    </div>
+  </section>
+</Base>

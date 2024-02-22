@@ -20,7 +20,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .navbar-nav {
-  @apply text-center md:text-left pl-5 flex-1;
+  @apply text-center;
 }
 
 .nav-item {
@@ -28,7 +28,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .nav-link {
-  @apply p-3  font-semibold text-base text-xl transition  md:p-4;
+  @apply p-3 text-gray-400 text-xl transition  md:p-4;
 }
 
 .nav-link::after {

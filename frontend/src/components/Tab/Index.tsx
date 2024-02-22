@@ -27,11 +27,12 @@ export default function App() {
   const [selected, setSelected] = useState(2);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto lg:col-span-5">
       <div className={styles.tab}>
         <Nav>
           {navItems.map(({ name }, i) => (
             <button
+              key={i}
               className={`${selected === i + 1 ? "active" : ""}`}
               onClick={() => setSelected(i + 1)}
             >
@@ -40,7 +41,7 @@ export default function App() {
           ))}
         </Nav>
         {contents.map((content, i) => (
-          <Content selected={selected} i={i + 1}>
+          <Content selected={selected} i={i + 1} key={i}>
             {content}
           </Content>
         ))}

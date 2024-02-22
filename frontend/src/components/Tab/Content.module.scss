@@ -1,20 +1,24 @@
 .content {
+	padding: 1.6rem 0.6rem;
+	border-radius: 11px;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	align-items: center;
 	justify-content: center;
-	text-align: center;
 	gap: 0.4rem;
-	background-color: hsl(var(--myapp-secondary-800));
-	border-radius: 15px;
 	color: hsl(var(--myapp-foreground));
-	font-size: 1rem;
+	background: linear-gradient(
+		to bottom,
+		hsl(var(--myapp-secondary-700)),
+		hsl(var(--myapp-secondary-900))
+	);
+	text-align: center;
+	font-size: 1.2rem;
 	font-weight: 500;
 	display: none;
-	padding: 0.6rem;
 
 	& span:not(:last-child) {
-		border-right: 2px solid hsl(var(--myapp-tertiary));
+		border-right: 2px solid hsl(var(--myapp-foreground));
 		padding-right: 0.4rem;
 	}
 
