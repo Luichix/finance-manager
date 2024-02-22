@@ -1,0 +1,27 @@
+{
+    "expenses": [
+      {
+        "category": "Alquiler",
+        "date": "01-02-2024",
+        "amount": 50.0
+      },
+      {
+        "category": "Supermercado",
+        "date": "22-02-2024",
+        "amount": 75.0
+      }
+    ],
+    "incomes": [
+      {
+        "category": "Sueldo",
+        "date": "21-02-2024",
+        "amount": 50.0
+      },
+      {
+        "category": "Transferencia",
+        "date": "05-01-2024",
+        "amount": 75.0
+      }
+    ]
+  }
+  

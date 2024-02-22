@@ -1,0 +1,41 @@
+---
+import { Tab } from "@/components/Index";
+import Base from "@/layouts/Base.astro";
+import TransactionCard from "@/components/TransactionCard";
+import transactions from "@/pages/transactions/transactions.json";
+---
+
+<Base title="Gestor de finanzas | DineroGestor">
+  <section class="dark pt-8 pb-4 bg-foreground">
+    <div class="mx-4">
+      <Tab client:load />
+    </div>
+
+    <div class="md:flex gap-8 mx-2 my-2 px-4 py-4">
+      <div class="text-black w-full sm:w-full md:w-1/2 lg:w-1/2">
+        <h2 class="text-xl font-bold mb-4">Egresos</h2>
+        {
+          transactions.expenses.map((expense) => (
+            <TransactionCard
+              category={expense.category}
+              date={expense.date}
+              amount={expense.amount}
+            />
+          ))
+        }
+      </div>
+      <div class="text-black w-full sm:w-full md:w-1/2 lg:w-1/2">
+        <h2 class="text-xl font-bold mb-4">Ingresos</h2>
+        {
+          transactions.incomes.map((income) => (
+            <TransactionCard
+              category={income.category}
+              date={income.date}
+              amount={income.amount}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
