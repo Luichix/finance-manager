@@ -6,19 +6,33 @@
 	.tabs {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 0.8rem;
-		margin-bottom: 1.6rem;
-		button {
+		grid-column-start: 2;
+
+		&__btn {
 			padding: 0.4rem;
-			border-radius: 11px;
+			grid-column: auto !important;
+			border-radius: 6px;
 			background-color: hsl(var(--myapp-foreground));
-			color: hsl(var(--myapp-base));
-			font-weight: 600;
+			@apply text-gray-400;
 			text-transform: uppercase;
-			border: 3px solid hsl(var(--myapp-secondary));
+			border: 1px solid hsl(var(--myapp-secondary-200));
+			background-color: hsl(var(--myapp-secondary-900));
+			color: hsl(var(--myapp-foreground));
+
 			transition:
 				background-color 0.3s,
 				color 0.3s;
+
+			&:first-child {
+				border-end-end-radius: 0;
+				border-start-end-radius: 0;
+				border-right: none;
+			}
+			&:last-child {
+				border-end-start-radius: 0;
+				border-start-start-radius: 0;
+				border-left: 0;
+			}
 
 			&.active {
 				background-color: hsl(var(--myapp-secondary));
@@ -31,38 +45,41 @@
 		display: grid;
 		grid-template-columns: min-content 1fr;
 		align-items: start;
+		text-align: right;
 		gap: 0.8rem;
 		row-gap: 1.6rem;
-		color: hsl(var(--myapp-base));
 	}
 	.income {
 		label {
 			font-size: calc(0.8rem + 0.5vw);
+			@apply text-gray-500;
+		}
+		textarea {
+			resize: none;
 		}
 		input,
 		textarea {
 			padding: 0.2rem 0rem 0.2rem 0.8rem;
 			width: 100%;
-			border-radius: 5px;
-			border: 2px solid hsl(var(--myapp-base));
+			border-radius: 6px;
+			@apply border text-gray-400;
 			background: none;
-			font-size: calc(0.8rem + 1vw);
-			font-weight: 600;
+			font-size: calc(0.8rem + 0.5vw);
 			&:focus {
 				border-color: transparent;
-				outline: solid hsl(var(--myapp-primary));
+				outline: 2px solid hsl(var(--myapp-secondary));
 			}
 			&::placeholder {
-				color: hsl(var(--myapp-base));
+				@apply text-gray-400;
 			}
 		}
 
-		button {
-			padding: 0.2rem 0.8rem;
+		&__submit {
+			padding: 0.4rem 0.8rem;
 			grid-column: 2 / 3;
-			border: 2px solid hsl(var(--myapp-base));
-			border-radius: 5px;
-			background-color: hsl(var(--myapp-primary));
+			color: hsl(var(--myapp-foreground));
+			border-radius: 6px;
+			background-color: hsl(var(--myapp-secondary));
 			text-transform: uppercase;
 			font-weight: 600;
 			font-size: 1.2rem;
@@ -70,8 +87,7 @@
 				background-color 0.3s,
 				color 0.3s;
 			&:hover {
-				background-color: hsl(var(--myapp-primary-600));
-				color: hsl(var(--myapp-base-400));
+				background-color: hsl(var(--myapp-secondary-400));
 			}
 		}
 	}
@@ -87,8 +103,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: hsl(var(--myapp-base));
-
+	background-color: rgba(0, 0, 0, 0.12);
 	// !oculto
 	opacity: 0;
 	visibility: hidden;
@@ -98,6 +113,7 @@
 		transform: scale(0.2) translateY(300%);
 		opacity: 0;
 		visibility: hidden;
+		background-color: transparent;
 
 		transition:
 			transform 0.4s cubic-bezier(0.64, 0, 0.78, 0),
@@ -111,55 +127,123 @@
 		transform: scale(1);
 
 		transition:
-			transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 0.3s,
-			visibility 0.3s;
+			visibility 0.3s,
+			background-color 0.3s 0.03s cubic-bezier(0.55, 0, 1, 0.45);
 	}
 	&__container {
 		position: relative;
-		padding: 0.8rem;
+		width: 100%;
+		padding: 20px;
 		max-width: 600px;
-		min-height: 50%;
-		width: 90%;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+		border-radius: 11px;
 		background-color: hsl(var(--myapp-foreground));
 		color: hsl(var(--myapp-base));
+		box-shadow: 0 8px 0.8rem rgba(0, 0, 0, 0.2);
+
+		@media only screen and (width >= 640px) {
+			max-width: 600px;
+		}
+	}
+
+	&__header {
+		padding: 0.2rem 0.4rem;
+		color: hsl(var(--myapp-secondary));
+		font-weight: 600;
+		font-size: 1.4rem;
 	}
 
 	&__selected {
 		padding: 0.2rem 0.4rem;
-		margin-bottom: 0.6rem;
-		border: 2px solid hsl(var(--myapp-base));
-		background-color: hsl(var(--myapp-secondary));
-		color: hsl(var(--myapp-foreground));
+		color: hsl(var(--myapp-secondary));
 		font-weight: 600;
+		font-size: 1.6rem;
+
 		&.selected {
-			background-color: hsl(var(--myapp-primary));
+			color: hsl(var(--myapp-primary));
 		}
 	}
 
 	&__actions {
-		position: absolute;
-		bottom: -1.6rem;
-		right: 0;
+		margin-top: 0.6rem;
 		display: flex;
 		gap: 0.8rem;
 		color: hsl(var(--myapp-foreground));
+
+		button {
+			background-color: hsl(var(--myapp-secondary-900));
+			padding: 0.2rem 1rem;
+			border-radius: 6px;
+		}
+	}
+	&__close-btn {
+		position: absolute;
+		right: 10px;
+		top: 20px;
+		svg {
+			width: 2.4rem;
+			height: 2.4rem;
+		}
 	}
 }
 
 //! categorias
 
 .categories {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 	flex-wrap: wrap;
-	gap: 0.4rem;
+	column-gap: 0.8rem;
+	row-gap: 0.4rem;
+	font-size: calc(0.6rem + 0.5vw);
+
+	@media only screen and (width >= 640px) {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	}
+
 	&__item {
-		padding: 0.2rem 0.4rem;
-		border: 2px solid hsl(var(--myapp-base));
-		font-size: calc(0.8rem + 0.3vw);
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 0.4rem;
+		padding: 0.2rem 0.6rem;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 4px;
 		transition: background-color 0.3s;
+		font-weight: 600;
+		@apply text-gray-400;
+		transition:
+			background-color 0.3s,
+			color 0.3s;
 		&:hover {
-			background-color: hsl(var(--myapp-primary));
+			background-color: hsl(var(--myapp-secondary));
+			color: hsl(var(--myapp-foreground));
+			svg {
+				fill: hsl(var(--myapp-foreground));
+			}
+		}
+
+		&.selected {
+			background-color: hsl(var(--myapp-secondary));
+			color: hsl(var(--myapp-foreground));
+
+			svg {
+				fill: hsl(var(--myapp-foreground));
+			}
+		}
+
+		svg {
+			min-height: 1.2rem;
+			min-width: 1.2rem;
+			height: 1.2rem;
+			width: 1.2rem;
+			@apply fill-gray-400;
+			transition: fill 0.3s;
 		}
 	}
 }

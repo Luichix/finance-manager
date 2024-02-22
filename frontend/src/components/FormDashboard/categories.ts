@@ -84,6 +84,31 @@ const CATEGORIES: Record<string, string | boolean>[] = [
     isIncome: false,
     id: "books",
   },
+  {
+    name: "Pagos",
+    isIncome: true,
+    id: "finances",
+  },
+  {
+    name: "Regalos",
+    isIncome: true,
+    id: "gift",
+  },
+  {
+    name: "Donaciones",
+    isIncome: true,
+    id: "donations",
+  },
+  {
+    name: "Salario",
+    isIncome: true,
+    id: "finance",
+  },
+  {
+    name: "Bonus",
+    isIncome: true,
+    id: "ribbon",
+  },
 ];
 
 export { CATEGORIES };

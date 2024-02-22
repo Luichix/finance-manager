@@ -1,22 +1,32 @@
 import React from "react";
-import categories from "./categories";
+import { CATEGORIES } from "./categories";
 
-export default function Categories({ setSelected }) {
-  function handleClick(e: any) {
-    setSelected(categories[e.target.dataset.tab]);
-  }
+export default function Categories({
+  selected,
+  setSelectedTab,
+  selectedCategory,
+  setSelectedCategory,
+}: any) {
   return (
     <div className="categories">
-      {categories.map((item, i) => (
-        <button
-          className="categories__item"
-          key={item}
-          data-tab={i}
-          onClick={handleClick}
-        >
-          {item}
-        </button>
-      ))}
+      {CATEGORIES.map(
+        ({ name, isIncome, id }, i: number) =>
+          selected === isIncome && (
+            <button
+              className={`categories__item${selectedCategory === name ? " selected" : ""}`}
+              key={i}
+              data-tab={i}
+              onClick={() => {
+                setSelectedTab(name);
+              }}
+            >
+              <svg>
+                <use href={`Icons/sprite.svg#${id}`}></use>
+              </svg>
+              <span>{name}</span>
+            </button>
+          ),
+      )}
     </div>
   );
 }

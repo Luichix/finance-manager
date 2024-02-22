@@ -4,14 +4,14 @@ export default function Tabs({ selected, setSelected }: any) {
   return (
     <div className="tabs">
       <button
-        className={`${selected === 1 ? "active" : ""}`}
-        onClick={() => setSelected(1)}
+        className={`tabs__btn${selected ? " active" : ""}`}
+        onClick={() => setSelected(true)}
       >
         Ingreso
       </button>
       <button
-        className={`${selected === 2 ? "active" : ""}`}
-        onClick={() => setSelected(2)}
+        className={`tabs__btn${!selected ? " active" : ""}`}
+        onClick={() => setSelected(false)}
       >
         Egreso
       </button>

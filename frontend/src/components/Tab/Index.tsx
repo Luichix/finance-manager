@@ -27,7 +27,7 @@ export default function App() {
   const [selected, setSelected] = useState(2);
 
   return (
-    <div className="container mx-auto lg:col-span-5">
+    <div className="lg:col-span-5">
       <div className={styles.tab}>
         <Nav>
           {navItems.map(({ name }, i) => (

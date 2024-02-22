@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
+import Tabs from "./Tabs";
 
 export default function Ingreso() {
   const [ammount, setAmmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const categoryRef: any = useRef(null);
-
+  const categoryRef = useRef(null);
+  const [selectedTab, setSelectedTab] = useState(true);
   function handleKeyUp(e: any) {
     if (e.key === "Escape") {
       setModalOpen(false);
@@ -17,7 +18,7 @@ export default function Ingreso() {
   useEffect(() => {
     function handleKeyUpWrapper(e: any) {
       handleKeyUp(e);
-      if (categoryRef.current) categoryRef.current.blur();
+      categoryRef.current.blur();
     }
 
     if (modalOpen) {
@@ -32,6 +33,7 @@ export default function Ingreso() {
   return (
     <>
       <form action="#" method="POST" className="income">
+        <Tabs selected={selectedTab} setSelected={setSelectedTab} />
         <label htmlFor="ammount">Cantidad</label>
         <input
           name="ammount"
@@ -61,12 +63,16 @@ export default function Ingreso() {
           onChange={(e) => setDescription(e.target.value)}
           rows={2}
         />
-        <button>Enviar</button>
+
+        <button className="income__submit" type="submit">
+          Registrar
+        </button>
       </form>
       <Modal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         setCategory={setCategory}
+        selectedTab={selectedTab}
       />
     </>
   );
