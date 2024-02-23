@@ -14,7 +14,7 @@ export default function Modal({
         <div className="modal__categories">
           <div className="categories">
             {CATEGORIES.map(
-              ({ name, isIncome, id }, i: number) =>
+              ({ name, type: isIncome, id }, i: number) =>
                 selectedTab === isIncome && (
                   <button
                     className={`categories__item${category === name ? ' selected' : ''}`}
