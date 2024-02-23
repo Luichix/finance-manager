@@ -3,6 +3,7 @@ import { Tab } from "@/components/Index";
 import Base from "@/layouts/Base.astro";
 import TransactionCard from "@/components/TransactionCard";
 import transactions from "@/pages/transactions/transactions.json";
+import { CATEGORIES } from "@/components/FormDashboard/categories";
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
@@ -20,6 +21,7 @@ import transactions from "@/pages/transactions/transactions.json";
               category={expense.category}
               date={expense.date}
               amount={expense.amount}
+              categoryList={CATEGORIES}
             />
           ))
         }
@@ -32,6 +34,7 @@ import transactions from "@/pages/transactions/transactions.json";
               category={income.category}
               date={income.date}
               amount={income.amount}
+              categoryList={CATEGORIES}
             />
           ))
         }
