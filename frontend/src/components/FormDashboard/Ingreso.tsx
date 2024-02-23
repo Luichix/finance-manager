@@ -1,17 +1,44 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import Modal from "./Modal";
 import Tabs from "./Tabs";
+import BtnRegister from "./BtnRegister";
+const initialState = {
+  ammount: "",
+  category: "",
+  description: "",
+  isModalOpen: false,
+  selectedTab: true,
+};
+
+function reducer(state: any, action: any) {
+  switch (action.type) {
+    case "closeModal":
+      return { ...state, isModalOpen: false };
+    case "openModal":
+      return { ...state, isModalOpen: true };
+    case "setAmmount":
+      return { ...state, ammount: action.payload };
+    case "setCategory":
+      return { ...state, category: action.payload };
+    case "setDescription":
+      return { ...state, description: action.payload };
+    case "setTabIncome":
+      return { ...state, selectedTab: true };
+    case "setTabOutcome":
+      return { ...state, selectedTab: false };
+  }
+}
 
 export default function Ingreso() {
-  const [ammount, setAmmount] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
+  const [
+    { ammount, category, description, isModalOpen, selectedTab },
+    dispatch,
+  ] = useReducer(reducer, initialState);
   const categoryRef = useRef(null);
-  const [selectedTab, setSelectedTab] = useState(true);
+
   function handleKeyUp(e: any) {
     if (e.key === "Escape") {
-      setModalOpen(false);
+      dispatch({ type: "closeModal" });
     }
   }
 
@@ -21,25 +48,32 @@ export default function Ingreso() {
       categoryRef.current.blur();
     }
 
-    if (modalOpen) {
+    if (isModalOpen) {
       document.addEventListener("keyup", handleKeyUpWrapper);
     }
 
     return () => {
       document.removeEventListener("keyup", handleKeyUpWrapper);
     };
-  }, [modalOpen]);
+  }, [isModalOpen]);
 
   return (
     <>
-      <form action="#" method="POST" className="income">
-        <Tabs selected={selectedTab} setSelected={setSelectedTab} />
+      <form
+        action="#"
+        method="POST"
+        className="income"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <Tabs selected={selectedTab} dispatch={dispatch} />
         <label htmlFor="ammount">Cantidad</label>
         <input
           name="ammount"
           id="ammount"
           value={ammount}
-          onChange={(e) => setAmmount(e.target.value)}
+          onChange={(e) =>
+            dispatch({ type: "setAmmount", payload: e.target.value })
+          }
           type="number"
           placeholder="1000000"
         />
@@ -52,7 +86,7 @@ export default function Ingreso() {
           onChange={(e) => e.preventDefault()}
           type="text"
           placeholder="Selecciona categoría"
-          onFocus={() => setModalOpen(true)}
+          onFocus={() => dispatch({ type: "openModal" })}
           autoComplete="off"
         />
         <label htmlFor="description">Descripción</label>
@@ -60,19 +94,18 @@ export default function Ingreso() {
           name="description"
           id="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) =>
+            dispatch({ type: "setDescription", payload: e.target.value })
+          }
           rows={2}
         />
-
-        <button className="income__submit" type="submit">
-          Registrar
-        </button>
+        <BtnRegister />
       </form>
       <Modal
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        setCategory={setCategory}
+        isModalOpen={isModalOpen}
+        category={category}
         selectedTab={selectedTab}
+        dispatch={dispatch}
       />
     </>
   );

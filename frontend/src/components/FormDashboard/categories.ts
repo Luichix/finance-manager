@@ -102,7 +102,7 @@ const CATEGORIES: Record<string, string | boolean>[] = [
   {
     name: "Salario",
     isIncome: true,
-    id: "finance",
+    id: "finances",
   },
   {
     name: "Bonus",
