@@ -1,5 +1,6 @@
 import React from "react";
 import { FaMoneyCheckAlt } from "react-icons/fa";
+import Icon from "@/components/Icon/Index";
 
 interface TransactionCardProps {
   categoryId: number;
@@ -23,7 +24,7 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
   return (
     <div className="transaction-card flex items-center justify-between mx-4 p-4 shadow-md rounded">
       <div className="column">
-        <FaMoneyCheckAlt size={40} color="#72CE49" />
+        <Icon id={"finances"} />
       </div>
       <div className="column">
         <p className="font-semibold">{`Categoria: ${categoryId}`}</p>

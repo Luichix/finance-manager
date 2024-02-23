@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CATEGORIES } from "./categories";
-
+import Icon from "@/components/Icon/Index";
 export default function Modal({
   selectedTab,
   isModalOpen,
@@ -46,9 +46,7 @@ export default function Modal({
           className="modal__close-btn"
           onClick={() => dispatch({ type: "closeModal" })}
         >
-          <svg>
-            <use href="Icons/sprite.svg#close"></use>
-          </svg>
+          <Icon id="close" />
         </button>
       </div>
     </div>

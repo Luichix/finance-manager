@@ -7,7 +7,7 @@ const initialState = {
   category: "",
   description: "",
   isModalOpen: false,
-  selectedTab: true,
+  selectedTab: "INCOME",
 };
 
 function reducer(state: any, action: any) {
@@ -23,9 +23,17 @@ function reducer(state: any, action: any) {
     case "setDescription":
       return { ...state, description: action.payload };
     case "setTabIncome":
-      return { ...state, selectedTab: true };
+      return {
+        ...state,
+        selectedTab: "INCOME",
+        category: initialState.category,
+      };
     case "setTabOutcome":
-      return { ...state, selectedTab: false };
+      return {
+        ...state,
+        selectedTab: "OUTCOME",
+        category: initialState.category,
+      };
   }
 }
 
@@ -65,7 +73,7 @@ export default function Ingreso() {
         className="income"
         onSubmit={(e) => e.preventDefault()}
       >
-        <Tabs selected={selectedTab} dispatch={dispatch} />
+        <Tabs selectedTab={selectedTab} dispatch={dispatch} />
         <label htmlFor="ammount">Cantidad</label>
         <input
           name="ammount"
