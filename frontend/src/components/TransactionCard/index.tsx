@@ -1,44 +1,40 @@
 import React from "react";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 
 interface TransactionCardProps {
-  category: string;
+  categoryId: number;
   date: string;
-  amount: number;
-  categoryList: Record<string, string | boolean>[];
+  amount: number | null;
+  description: string;
 }
 
-const getIconByCategory = (
-  category: string,
-  categoryList: Record<string, string | boolean>[],
-) => {
-  const foundCategory = categoryList.find((c) => c.id === category);
-
-  if (foundCategory && foundCategory.icon) {
-    const IconComponent = foundCategory.icon as any;
-    return <IconComponent className="w-8 h-8 mr-4" />;
-  }
-
-  return null;
-};
-
 const TransactionCard: React.FC<TransactionCardProps> = ({
-  category,
+  categoryId,
   date,
   amount,
-  categoryList,
+  description,
 }) => {
-  const icon = getIconByCategory(category, categoryList);
+  const formattedDate = new Date(date).toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "2-digit",
+  });
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-md mb-4">
-      <div className="flex items-center">
-        {icon}
-        <div>
-          <div className="font-semibold">{category}</div>
-          <div className="text-gray-500 text-sm">{date}</div>
-        </div>
+    <div className="transaction-card flex items-center justify-between mx-4 p-4 shadow-md rounded">
+      <div className="column">
+        <FaMoneyCheckAlt size={40} color="#72CE49" />
       </div>
-      <div className="text-lg font-semibold">${amount}</div>
+      <div className="column">
+        <p className="font-semibold">{`Categoria: ${categoryId}`}</p>
+        <p>{formattedDate}</p>
+      </div>
+      <div className="column text-lg font-bold">
+        <p>{amount !== null ? `$${amount.toFixed(2)}` : "N/A"}</p>
+      </div>
+      <div className="column">
+        <p>{description}</p>
+      </div>
     </div>
   );
 };
