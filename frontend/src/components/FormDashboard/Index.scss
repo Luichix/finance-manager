@@ -143,11 +143,18 @@
     gap: 0.8rem;
     border-radius: 11px;
     background-color: hsl(var(--myapp-foreground));
-    color: hsl(var(--myapp-base));
+    color: hsl(var(--myapp-black));
     box-shadow: 0 8px 0.8rem rgba(0, 0, 0, 0.2);
 
     @media only screen and (width >= 640px) {
       max-width: 600px;
+    }
+
+    button {
+      span,
+      svg {
+        pointer-events: none;
+      }
     }
   }
 

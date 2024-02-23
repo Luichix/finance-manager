@@ -1,41 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import Categories from './Categories';
+import { CATEGORIES } from './categories';
 
 export default function Modal({
   selectedTab,
-  setSelectedTab,
-  modalOpen,
-  setModalOpen,
-  setCategory,
+  isModalOpen,
+  category,
+  dispatch,
 }: any) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  useEffect(
-    function () {
-      if (selectedTab) {
-        setModalOpen(false);
-      }
-    },
-    [selectedTab]
-  );
   return (
-    <div className={`modal${modalOpen ? ' open' : ''}`}>
+    <div className={`modal${isModalOpen ? ' open' : ''}`}>
       <div className="modal__container">
         <div className="modal__header">Seleccione la categoría</div>
         <div className="modal__categories">
-          <Categories
-            selectedTab={selectedTab}
-            setSelectedTab={setSelectedTab}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+          <div className="categories">
+            {CATEGORIES.map(
+              ({ name, isIncome, id }, i: number) =>
+                selectedTab === isIncome && (
+                  <button
+                    className={`categories__item${category === name ? ' selected' : ''}`}
+                    key={i}
+                    data-tab={name}
+                    onClick={(e) => {
+                      dispatch({
+                        type: 'setCategory',
+                        payload: e.target.dataset.tab,
+                      });
+                      dispatch({ type: 'closeModal' });
+                    }}
+                  >
+                    <svg>
+                      <use href={`Icons/sprite.svg#${id}`}></use>
+                    </svg>
+                    <span>{name}</span>
+                  </button>
+                )
+            )}
+          </div>
         </div>
         <div className="modal__actions">
-          <button onClick={() => setModalOpen(false)}>Cancelar</button>
+          <button onClick={() => dispatch({ type: 'closeModal' })}>
+            Cancelar
+          </button>
         </div>
         <button
           className="modal__close-btn"
-          onClick={() => setModalOpen(false)}
+          onClick={() => dispatch({ type: 'closeModal' })}
         >
           <svg>
             <use href="Icons/sprite.svg#close"></use>
