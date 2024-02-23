@@ -1,38 +1,33 @@
 import React from "react";
-import {
-  IoHomeOutline,
-  IoBagCheckOutline,
-  IoLogoUsd,
-  IoSwapHorizontalOutline,
-} from "react-icons/io5";
 
 interface TransactionCardProps {
   category: string;
   date: string;
   amount: number;
+  categoryList: Record<string, string | boolean>[];
 }
 
-const getIconByCategory = (category: string) => {
-  switch (category.toLowerCase()) {
-    case "alquiler":
-      return <IoHomeOutline className="w-8 h-8 mr-4" />;
-    case "supermercado":
-      return <IoBagCheckOutline className="w-8 h-8 mr-4" />;
-    case "sueldo":
-      return <IoLogoUsd className="w-8 h-8 mr-4" />;
-    case "transferencia":
-      return <IoSwapHorizontalOutline className="w-8 h-8 mr-4" />;
-    default:
-      return null;
+const getIconByCategory = (
+  category: string,
+  categoryList: Record<string, string | boolean>[],
+) => {
+  const foundCategory = categoryList.find((c) => c.id === category);
+
+  if (foundCategory && foundCategory.icon) {
+    const IconComponent = foundCategory.icon as any;
+    return <IconComponent className="w-8 h-8 mr-4" />;
   }
+
+  return null;
 };
 
 const TransactionCard: React.FC<TransactionCardProps> = ({
   category,
   date,
   amount,
+  categoryList,
 }) => {
-  const icon = getIconByCategory(category);
+  const icon = getIconByCategory(category, categoryList);
 
   return (
     <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-md mb-4">
