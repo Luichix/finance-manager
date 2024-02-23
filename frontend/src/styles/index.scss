@@ -1,8 +1,11 @@
+@import './minireset.scss';
+@import './fonts.css';
+@import './base.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import './minireset.scss';
 @import './navigation.scss';
 @import './components.scss';
 @import './footer.scss';

@@ -1,6 +1,21 @@
 import React, { useState } from "react";
-import EyeOff from "./EyeOff";
-import EyeOn from "./EyeOn";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+const content = {
+  welcome: "¡Bienvenido!",
+  email: "Correo Electronico",
+  user: "Usuario",
+  password: "Contraseña",
+  confirmPassword: "Confirmar contraseña",
+  register: "Registrar",
+  haveAccount: "¿Ya tienes una cuenta?",
+  login: "Iniciar Sesion",
+  emailNotValid: "El correo introducido no está informado o no es correcto",
+  userNotValid: "El usuario no está informado o no es correcto",
+  passNotValid: "La contraseña no es válida",
+  passNotMatch: "La contraseña debe de ser igual a la introducida",
+  notValidLogin: "El usuario ya está registrado",
+};
 
 const Register = () => {
   const [email, setEmail] = useState<string>("");
@@ -10,18 +25,12 @@ const Register = () => {
 
   const [ispasswordVisible, setPasswordVisble] = useState<boolean>(false);
 
-  const [emailError, setEmailError] = useState<string | boolean>(false);
-  const [userNameError, setuserNameError] = useState<string | boolean>(false);
-  const [passError, setPassError] = useState<string | boolean>(false);
-  const [matchPassError, setmatchPassError] = useState<string | boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [userNameError, setuserNameError] = useState<boolean>(false);
+  const [passError, setPassError] = useState<boolean>(false);
+  const [loginError, setloginError] = useState<boolean>(false);
+  const [matchPassError, setmatchPassError] = useState<boolean>(false);
   // const [isValidLogin, setValidLogin] = useState<boolean>(false);
-
-  const emailNotValid =
-    "El correo introducido no está informado o no es correcto";
-
-  const userNotValid = "El usuario no está informado o no es correcto";
-  const passNotValid = "La contraseña no es válida";
-  const passNotMatch = "La contraseña debe de ser igual a la introducida";
 
   // const navigate = useNavigate();
 
@@ -33,10 +42,10 @@ const Register = () => {
     setEmailError(false);
 
     if (typeof email === "undefined" || email == "") {
-      setEmailError(emailNotValid);
+      setEmailError(true);
       return false;
     } else if (!emailRegex.test(email)) {
-      setEmailError(emailNotValid);
+      setEmailError(true);
       return false;
     }
 
@@ -50,10 +59,10 @@ const Register = () => {
     setuserNameError(false);
 
     if (typeof userName === "undefined" || userName == "") {
-      setuserNameError(userNotValid);
+      setuserNameError(true);
       return false;
     } else if (!userRegex.test(userName)) {
-      setuserNameError(userNotValid);
+      setuserNameError(true);
       return false;
     }
   };
@@ -65,10 +74,10 @@ const Register = () => {
     // setValidLogin(true);
 
     if (typeof password === "undefined" || password == "") {
-      setPassError(passNotValid);
+      setPassError(true);
       return false;
     } else if (!passRegEx.test(password)) {
-      setPassError(passNotValid);
+      setPassError(true);
       return false;
     }
   };
@@ -76,16 +85,19 @@ const Register = () => {
   const checkMathPwd = () => {
     // setValidLogin(true);
     const passRegEx =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
 
     if (typeof matchPwd === "undefined" || matchPwd == "") {
-      setmatchPassError(passNotValid);
+      console.log("validacion 1");
+      setmatchPassError(true);
       return false;
     } else if (matchPwd !== password) {
-      setmatchPassError(passNotMatch);
+      console.log("validacion 2");
+      setmatchPassError(true);
       return false;
     } else if (!passRegEx.test(matchPwd)) {
-      setmatchPassError(passNotValid);
+      console.log("validacion 3 ");
+      setmatchPassError(true);
     }
   };
 
@@ -132,7 +144,11 @@ const Register = () => {
         .then((resp) => resp.json())
         .then((response) => {
           console.log("Respuesta ", response);
-          // navigate('/')
+          // window.location.href = '/';
+
+          if (response.status) {
+            setloginError(false);
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -142,52 +158,59 @@ const Register = () => {
     setPasswordVisble(!ispasswordVisible);
   };
 
+  // DO
+  console.log("page register ln 165", loginError);
+
   return (
     <div
-      className="flex items-center justify-center h-screen bg-gray-200"
+      className="flex items-center justify-center h-screen bg-white md:grid md:grid-cols-2  md:place-items-center"
       id="backgroud"
     >
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <img src="./src/assets/LogoH.png" alt="Logo" />
-
-        <h1 className="mb-4 font-blod text-xl"> ¡Bienvenido! </h1>
-
+      <div className="bg-white p-8 rounded-lg shadow-lg w-9/12 ">
+        <h1 className="mb-8 font-bold text-secondary text-4xl ">
+          {content.welcome}
+        </h1>
         <form onSubmit={handleSumbit}>
-          <div className="mb-4">
-            <label htmlFor="" className="block text-black">
-              {" "}
-              Email{" "}
+          <div className="mb-2">
+            <label htmlFor="" className="block text-black-900 ">
+              {content.email}
             </label>
             <input
               type="email"
-              className="border w-full p-2 text-black"
+              className="border w-full p-4 rounded-md text-lg text-black focus:outline-secondary"
               onChange={({ target }) => setEmail(target.value)}
             />
-            <p className="text-red-500 text-sm"> {emailError} </p>
+            <p
+              className={`text-red-500 text-sm ${emailError ? "visible" : "invisible"}`}
+            >
+              {content.emailNotValid}
+            </p>
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="" className="block text-black">
-              {" "}
-              Usuario
+          <div className="mb-2">
+            <label htmlFor="" className="block text-black-900 ">
+              {content.user}
             </label>
             <input
               type="text"
-              className="w-full p-2 border text-black"
+              className="w-full p-4 rounded-md border text-lg text-black focus:outline-secondary"
               onChange={({ target }) => setUserName(target.value)}
             />
-            <p className="text-red-500 text-sm"> {userNameError} </p>
+            <p
+              className={`text-red-500 text-sm ${userNameError ? "visible" : "invisible"}`}
+            >
+              {content.userNotValid}
+            </p>
           </div>
           {/* Contraseña */}
-          <div className="mb-4">
-            <label htmlFor="" className="block text-black">
-              {" "}
-              Contraseña{" "}
+          <div className="mb-2">
+            <label htmlFor="" className="block text-black-900 ">
+              {content.password}
             </label>
             <div className="relative">
               <input
                 type={ispasswordVisible ? "text" : "password"}
-                className="w-full p-2 border text-black"
+                className="w-full p-4 rounded-md border text-lg text-black focus:outline-secondary"
                 onChange={({ target }) => setPassword(target.value)}
               />
 
@@ -197,45 +220,55 @@ const Register = () => {
                   onClick={togglePassword}
                   className="rounded border-gray-300 "
                 >
-                  {ispasswordVisible ? <EyeOn /> : <EyeOff />}
+                  {ispasswordVisible ? (
+                    <FaEye color="#58378d" size={28} />
+                  ) : (
+                    <FaEyeSlash color="#58378d" size={28} />
+                  )}
                 </button>
               </div>
 
-              <p className="text-red-500 text-sm"> {passError} </p>
+              <p
+                className={`text-red-500 text-sm ${passError ? "visible" : "invisible"}`}
+              >
+                {content.passNotValid}
+              </p>
             </div>
           </div>
-          {/* Confirmar Contraseña */}
           <div className="mb-4">
-            <label htmlFor="" className="block text-black">
-              {" "}
-              Confirmar contraseña{" "}
+            <label htmlFor="" className="block text-black-900 ">
+              {content.confirmPassword}
             </label>
             <input
               type="password"
-              className="w-full p-2 border text-black"
+              className="w-full p-4 rounded-md border text-lg text-black focus:outline-secondary"
               onChange={({ target }) => setMatchPwd(target.value)}
             />
-            <p className="text-red-500 text-sm"> {matchPassError} </p>
+            <p
+              className={`text-red-500 text-sm ${matchPassError ? "visible" : "invisible"}`}
+            >
+              {content.passNotMatch}
+            </p>
           </div>
 
           <button
             type="submit"
-            className="bg-secondary-500 text-white p-2 w-full mb-4"
+            className="bg-secondary-500 text-white text-xl font-bold p-4 rounded-md w-full mb-4"
           >
-            {" "}
-            Registrar{" "}
+            {content.register}
           </button>
 
           <p className="text-center text-black">
-            {" "}
-            ¿Ya tienes una cuenta?{" "}
+            {content.haveAccount} &nbsp;
             <a className="font-bold" href="/login">
-              {" "}
-              Iniciar sesion{" "}
-            </a>{" "}
+              {content.login}
+            </a>
           </p>
         </form>
       </div>
+      <figure>
+        <img src="/images/authentication.jpg" alt="image authenticacion" />
+      </figure>
     </div>
   );
 };

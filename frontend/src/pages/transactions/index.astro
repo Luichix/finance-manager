@@ -1,0 +1,29 @@
+---
+import { Tab } from "@/components/Index";
+import Base from "@/layouts/Base.astro";
+import TransactionCard from "@/components/TransactionCard";
+const response = await fetch(
+  "https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true",
+);
+const data = await response.json();
+---
+
+<Base title="Gestor de finanzas | DineroGestor">
+  <section class="dark pt-8 pb-4 bg-foreground">
+    <div class="mx-4">
+      <Tab client:load />
+    </div>
+    <div class="text-black">
+      {
+        data.map((transaction: any) => (
+          <TransactionCard
+            categoryId={transaction.categoryId}
+            date={transaction.createdAt}
+            amount={transaction.amount}
+            description={transaction.description}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Base>
