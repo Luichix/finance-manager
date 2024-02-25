@@ -4,13 +4,12 @@
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 0.6rem;
-	border-radius: 100px;
+	border-radius: 11px;
 	overflow: hidden;
-	border: 3px solid hsl(var(--myapp-secondary-200));
+	border: 3px solid hsl(var(--myapp-secondary));
 
 	button {
 		padding: 0.6rem;
-		background-color: hsl(var(--myapp-foreground));
 		font-weight: 700;
 		text-transform: uppercase;
 		color: hsl(var(--myapp-secondary));
@@ -19,7 +18,7 @@
 	//funcionalidad
 
 	& :global(.active) {
-		background-color: hsl(var(--myapp-secondary-200));
+		background-color: hsl(var(--myapp-secondary));
 		color: hsl(var(--myapp-foreground));
 	}
 }
