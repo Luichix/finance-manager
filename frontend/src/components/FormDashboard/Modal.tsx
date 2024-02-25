@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CATEGORIES } from "./categories";
 import Icon from "@/components/Icon/Index";
 export default function Modal({
@@ -23,7 +23,7 @@ export default function Modal({
                     onClick={(e) => {
                       dispatch({
                         type: "setCategory",
-                        payload: e.target.dataset.tab,
+                        payload: e.currentTarget.dataset.tab,
                       });
                       dispatch({ type: "closeModal" });
                     }}

@@ -6,7 +6,15 @@ import {
   IoHomeOutline,
 } from "react-icons/io5";
 
-const CATEGORIES: Record<string, string | boolean | number | IconType>[] = [
+interface ICategories {
+  name: string;
+  type?: "INCOME" | "OUTCOME";
+  id: string | number;
+  icon?: IconType;
+  isIncome?: boolean;
+}
+
+const CATEGORIES: ICategories[] = [
   {
     name: "Suscripciones",
     type: "OUTCOME",

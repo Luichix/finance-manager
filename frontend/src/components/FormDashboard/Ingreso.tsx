@@ -1,37 +1,37 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
-import Modal from './Modal';
-import Tabs from './Tabs';
-import BtnRegister from './BtnRegister';
+import React, { useEffect, useReducer, useRef } from "react";
+import Modal from "./Modal";
+import Tabs from "./Tabs";
+import BtnRegister from "./BtnRegister";
 const initialState = {
-  ammount: '',
-  category: '',
-  description: '',
+  ammount: "",
+  category: "",
+  description: "",
   isModalOpen: false,
-  selectedTab: 'INCOME',
+  selectedTab: "INCOME",
 };
 
 function reducer(state: any, action: any) {
   switch (action.type) {
-    case 'closeModal':
+    case "closeModal":
       return { ...state, isModalOpen: false };
-    case 'openModal':
+    case "openModal":
       return { ...state, isModalOpen: true };
-    case 'setAmmount':
+    case "setAmmount":
       return { ...state, ammount: action.payload };
-    case 'setCategory':
+    case "setCategory":
       return { ...state, category: action.payload };
-    case 'setDescription':
+    case "setDescription":
       return { ...state, description: action.payload };
-    case 'setTabIncome':
+    case "setTabIncome":
       return {
         ...state,
-        selectedTab: 'INCOME',
+        selectedTab: "INCOME",
         category: initialState.category,
       };
-    case 'setTabOutcome':
+    case "setTabOutcome":
       return {
         ...state,
-        selectedTab: 'OUTCOME',
+        selectedTab: "OUTCOME",
         category: initialState.category,
       };
   }
@@ -42,26 +42,26 @@ export default function Ingreso() {
     { ammount, category, description, isModalOpen, selectedTab },
     dispatch,
   ] = useReducer(reducer, initialState);
-  const categoryRef = useRef(null);
+  const categoryRef = useRef<null | HTMLInputElement>(null);
 
   function handleKeyUp(e: any) {
-    if (e.key === 'Escape') {
-      dispatch({ type: 'closeModal' });
+    if (e.key === "Escape") {
+      dispatch({ type: "closeModal" });
     }
   }
 
   useEffect(() => {
     function handleKeyUpWrapper(e: any) {
       handleKeyUp(e);
-      categoryRef.current.blur();
+      categoryRef?.current?.blur();
     }
 
     if (isModalOpen) {
-      document.addEventListener('keyup', handleKeyUpWrapper);
+      document.addEventListener("keyup", handleKeyUpWrapper);
     }
 
     return () => {
-      document.removeEventListener('keyup', handleKeyUpWrapper);
+      document.removeEventListener("keyup", handleKeyUpWrapper);
     };
   }, [isModalOpen]);
 
@@ -80,7 +80,7 @@ export default function Ingreso() {
           id="ammount"
           value={ammount}
           onChange={(e) =>
-            dispatch({ type: 'setAmmount', payload: e.target.value })
+            dispatch({ type: "setAmmount", payload: e.target.value })
           }
           type="number"
           placeholder="1000000"
@@ -94,7 +94,7 @@ export default function Ingreso() {
           onChange={(e) => e.preventDefault()}
           type="text"
           placeholder="Selecciona categoría"
-          onFocus={() => dispatch({ type: 'openModal' })}
+          onFocus={() => dispatch({ type: "openModal" })}
           autoComplete="off"
         />
         <label htmlFor="description">Descripción</label>
@@ -103,7 +103,7 @@ export default function Ingreso() {
           id="description"
           value={description}
           onChange={(e) =>
-            dispatch({ type: 'setDescription', payload: e.target.value })
+            dispatch({ type: "setDescription", payload: e.target.value })
           }
           rows={2}
         />

@@ -1,5 +1,4 @@
 import React from "react";
-import { FaMoneyCheckAlt } from "react-icons/fa";
 import Icon from "@/components/Icon/Index";
 
 interface TransactionCardProps {
