@@ -17,6 +17,7 @@ const data = await response.json();
       {
         data.map((transaction: any) => (
           <TransactionCard
+            client:load
             categoryId={transaction.categoryId}
             date={transaction.createdAt}
             amount={transaction.amount}
