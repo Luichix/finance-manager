@@ -28,23 +28,33 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
   };
 
   return (
-    <div className="transaction-card flex items-center justify-between mx-4 p-4 shadow-md rounded">
-      <div className="column">
-        <Icon id={'finances'} />
+    <div className="transaction-card shadow-md rounded">
+      <div className="flex items-center justify-between mx-4 p-4 mb-0 pb-0">
+        <div className="column">
+          <Icon id={'finances'} />
+        </div>
+        <div className="column">
+          <p className="font-semibold">{`Categoria: ${categoryId}`}</p>
+          <p>{formattedDate}</p>
+        </div>
+        <div className="column text-lg font-bold">
+          <p>{amount !== null ? `$${amount.toFixed(2)}` : 'N/A'}</p>
+        </div>
       </div>
-      <div className="column">
-        <p className="font-semibold">{`Categoria: ${categoryId}`}</p>
-        <p>{formattedDate}</p>
-      </div>
-      <div className="column text-lg font-bold">
-        <p>{amount !== null ? `$${amount.toFixed(2)}` : 'N/A'}</p>
+      <div className="mt-0 pb-0 w-full flex flex-col items-end">
         {showDetails ? (
-          <div>
-            <p>{description}</p>
-            <button onClick={toggleDetails}>Ocultar Detalle</button>
+          <div className="w-full flex flex-col items-end">
+            <div className="w-4/6 border-2 border-secondary-700 p-2 rounded mx-2 my-2">
+              {description}
+            </div>
+            <button className="text-xl" onClick={toggleDetails}>
+              ⌃
+            </button>
           </div>
         ) : (
-          <button onClick={toggleDetails}>Ver Detalle</button>
+          <button className="text-xl" onClick={toggleDetails}>
+            ⌄
+          </button>
         )}
       </div>
     </div>
