@@ -2,10 +2,16 @@
 import { Tab } from "@/components/Index";
 import Base from "@/layouts/Base.astro";
 import TransactionCard from "@/components/TransactionCard";
-const response = await fetch(
-  "https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true",
+// Fetch INCOME transactions
+const incomeResponse = await fetch(
+  "https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true&type=INCOME",
 );
-const data = await response.json();
+const incomeData = await incomeResponse.json();
+// Fetch OUTCOME transactions
+const outcomeResponse = await fetch(
+  "https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true&type=OUTCOME",
+);
+const outcomeData = await outcomeResponse.json();
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
@@ -13,18 +19,35 @@ const data = await response.json();
     <div class="mx-4">
       <Tab client:load />
     </div>
-    <div class="text-black">
-      {
-        data.map((transaction: any) => (
-          <TransactionCard
-            client:load
-            categoryId={transaction.categoryId}
-            date={transaction.createdAt}
-            amount={transaction.amount}
-            description={transaction.description}
-          />
-        ))
-      }
+    <div class="flex flex-col lg:flex-row">
+      <div class="text-black lg:w-1/2 mx-4">
+        <h2 class="text-2xl font-bold my-5">Ingresos</h2>
+        {
+          incomeData.map((transaction: any) => (
+            <TransactionCard
+              client:load
+              categoryId={transaction.categoryId}
+              date={transaction.createdAt}
+              amount={transaction.amount}
+              description={transaction.description}
+            />
+          ))
+        }
+      </div>
+      <div class="text-black lg:w-1/2 m-4 mt-0">
+        <h2 class="text-2xl font-bold my-5">Egresos</h2>
+        {
+          outcomeData.map((transaction: any) => (
+            <TransactionCard
+              client:load
+              categoryId={transaction.categoryId}
+              date={transaction.createdAt}
+              amount={transaction.amount}
+              description={transaction.description}
+            />
+          ))
+        }
+      </div>
     </div>
   </section>
 </Base>
