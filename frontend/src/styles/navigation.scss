@@ -12,7 +12,7 @@ input#nav-toggle:checked ~ #nav-menu {
 
 // navbar items
 .navbar {
-  @apply relative flex  h-20 flex-wrap items-center justify-between;
+  @apply relative flex h-20 flex-wrap items-center justify-between;
 }
 
 .navbar-brand img {

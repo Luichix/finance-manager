@@ -1,5 +1,5 @@
 import React from "react";
-import { CATEGORIES } from "./categories";
+import { CATEGORIES } from "../FormDashboard/categories";
 import Icon from "@/components/Icon/Index";
 export default function Modal({
   selectedTab,

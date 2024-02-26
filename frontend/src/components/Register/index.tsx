@@ -1,5 +1,14 @@
+import Auth from "@/services/Auth";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  checkValidUser,
+  checkValirEmail,
+  checkValidPwd,
+  checkMathPwd,
+} from "@/utils/validators";
+import { Alert } from "@/components/Alert";
+import { useAlert } from "@/utils/hooks";
 
 const content = {
   welcome: "¡Bienvenido!",
@@ -10,242 +19,188 @@ const content = {
   register: "Registrar",
   haveAccount: "¿Ya tienes una cuenta?",
   login: "Iniciar Sesion",
-  emailNotValid: "El correo introducido no está informado o no es correcto",
-  userNotValid: "El usuario no está informado o no es correcto",
+  emailNotValid: "El correo no es correcto",
+  userNotValid: "El usuario no es correcto",
   passNotValid: "La contraseña no es válida",
-  passNotMatch: "La contraseña debe de ser igual a la introducida",
+  passNotMatch: "La confirmacion no valida",
   notValidLogin: "El usuario ya está registrado",
 };
 
 const Register = () => {
-  const [email, setEmail] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [matchPwd, setMatchPwd] = useState<string>("");
+  const [show, info, alert, showAlert] = useAlert();
 
-  const [ispasswordVisible, setPasswordVisble] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("lucho@gmail.com");
+  const [user, setUserName] = useState<string>("Lucho");
+  const [password, setPassword] = useState<string>("Lucho123!");
+  const [matchPwd, setMatchPwd] = useState<string>("Lucho123!");
+
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [passwordMatchVisible, setPasswordMatchVisible] =
+    useState<boolean>(false);
 
   const [emailError, setEmailError] = useState<boolean>(false);
-  const [userNameError, setuserNameError] = useState<boolean>(false);
-  const [passError, setPassError] = useState<boolean>(false);
-  const [loginError, setloginError] = useState<boolean>(false);
-  const [matchPassError, setmatchPassError] = useState<boolean>(false);
-  // const [isValidLogin, setValidLogin] = useState<boolean>(false);
+  const [userError, setUserError] = useState<boolean>(false);
+  const [passwordError, setPassError] = useState<boolean>(false);
+  const [matchPassError, setMatchPassError] = useState<boolean>(false);
 
-  // const navigate = useNavigate();
+  const register = new Auth().register;
 
-  const checkValirEmail = () => {
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-    // setValidLogin(true);
-
-    setEmailError(false);
-
-    if (typeof email === "undefined" || email == "") {
-      setEmailError(true);
-      return false;
-    } else if (!emailRegex.test(email)) {
-      setEmailError(true);
-      return false;
-    }
-
-    return true;
-  };
-
-  const checkValidUser = () => {
-    // setValidLogin(true);
-    const userRegex = /^[A-z][A-z0-9-_]{3,23}$/;
-
-    setuserNameError(false);
-
-    if (typeof userName === "undefined" || userName == "") {
-      setuserNameError(true);
-      return false;
-    } else if (!userRegex.test(userName)) {
-      setuserNameError(true);
-      return false;
-    }
-  };
-
-  const checkValidPwd = () => {
-    const passRegEx =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
-
-    // setValidLogin(true);
-
-    if (typeof password === "undefined" || password == "") {
-      setPassError(true);
-      return false;
-    } else if (!passRegEx.test(password)) {
-      setPassError(true);
-      return false;
-    }
-  };
-
-  const checkMathPwd = () => {
-    // setValidLogin(true);
-    const passRegEx =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
-
-    if (typeof matchPwd === "undefined" || matchPwd == "") {
-      console.log("validacion 1");
-      setmatchPassError(true);
-      return false;
-    } else if (matchPwd !== password) {
-      console.log("validacion 2");
-      setmatchPassError(true);
-      return false;
-    } else if (!passRegEx.test(matchPwd)) {
-      console.log("validacion 3 ");
-      setmatchPassError(true);
-    }
-  };
-
-  const handleSumbit = (e: { preventDefault: () => void }) => {
+  const handleSumbit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
+    const userValid = checkValidUser(user, setUserError);
+    const emailValid = checkValirEmail(email, setEmailError);
+    const passwordValid = checkValidPwd(password, setPassError);
+    const matchValid = checkMathPwd(password, matchPwd, setMatchPassError);
+
     console.log(
-      `Datos del formulario email: \n ${email} \n username: ${userName} \n password: ${password} \n matchPwd:  ${matchPwd}`,
+      `Datos del formulario \n email: ${emailValid} \n username: ${userValid} \n password: ${passwordValid} \n matchPwd:  ${matchValid}`,
     );
-
-    setEmailError(false);
-    setuserNameError(false);
-    setPassError(false);
-    setmatchPassError(false);
-
-    // setValidLogin(true);
-
-    // Validar email
-    let v1 = checkValirEmail();
-
-    // Validar usuario
-    let v2 = checkValidUser();
-
-    // Validar password
-    let v3 = checkValidPwd();
-
-    // check math password
-    let v4 = checkMathPwd();
-
-    if (!v1 || !v2 || !v3 || v4) {
-      //todo
-
+    if (userValid && emailValid && passwordValid && matchValid) {
       let data = {
-        username: userName,
-        password: password,
-        mail: email,
+        username: userValid,
+        mail: emailValid,
+        password: passwordValid,
       };
 
-      fetch("https://backend-finance-managegr.onrender.com/api/v1/users", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      })
-        .then((resp) => resp.json())
-        .then((response) => {
-          console.log("Respuesta ", response);
-          // window.location.href = '/';
-
-          if (response.status) {
-            setloginError(false);
-          }
-        })
-        .catch((err) => console.log(err));
+      await register(data).then((response) => {
+        if (response) {
+          window.location.href = "/login";
+        } else {
+          const message = "No se ha podido realizar el registro";
+          showAlert([message], "error");
+        }
+      });
     }
   };
-
-  const togglePassword = () => {
-    setPasswordVisble(!ispasswordVisible);
-  };
-
-  // DO
-  console.log("page register ln 165", loginError);
 
   return (
     <div
-      className="flex items-center justify-center h-screen bg-white md:grid md:grid-cols-2  md:place-items-center"
+      className=" flex flex-col items-center justify-center min-full bg-auth-back bg-contain py-12 bg-no-repeat lg:bg-none  bg-center lg:bg-white lg:grid md:grid-cols-2  lg:place-items-center"
       id="backgroud"
     >
-      <div className="bg-white p-8 rounded-lg shadow-lg w-9/12 ">
-        <h1 className="mb-8 font-bold text-secondary text-4xl ">
-          {content.welcome}
-        </h1>
+      <Alert show={show} alert={alert} message={info} />
+      <div className="bg-white bg-opacity-95  rounded-lg shadow-lg p-4 md:p-8 w-11/12 md:w-9/12 ">
         <form onSubmit={handleSumbit}>
+          <h1 className="mb-8 font-bold text-secondary text-2xl md:text-4xl ">
+            {content.welcome}
+          </h1>
           <div className="mb-2">
-            <label htmlFor="" className="block text-black-900 ">
+            <label
+              htmlFor=""
+              className="block text-black-900 text-sm md:text-md "
+            >
               {content.email}
             </label>
             <input
               type="email"
-              className="border w-full p-4 rounded-md text-lg text-black focus:outline-secondary"
+              value={email}
+              placeholder="Ingrese el correo electronico"
+              className="border w-full p-4 rounded-md text-md md:text-lg text-black focus:outline-secondary"
               onChange={({ target }) => setEmail(target.value)}
             />
             <p
-              className={`text-red-500 text-sm ${emailError ? "visible" : "invisible"}`}
+              className={`text-red-500 text-sm pl-2 ${emailError ? "visible" : "invisible"}`}
             >
               {content.emailNotValid}
             </p>
           </div>
 
           <div className="mb-2">
-            <label htmlFor="" className="block text-black-900 ">
+            <label
+              htmlFor=""
+              className="block text-black-900 text-sm md:text-md "
+            >
               {content.user}
             </label>
             <input
               type="text"
-              className="w-full p-4 rounded-md border text-lg text-black focus:outline-secondary"
+              value={user}
+              placeholder="Ingrese el nombre de usuario"
+              className="w-full p-4 rounded-md border text-md md:text-lg text-black focus:outline-secondary"
               onChange={({ target }) => setUserName(target.value)}
             />
             <p
-              className={`text-red-500 text-sm ${userNameError ? "visible" : "invisible"}`}
+              className={`text-red-500 text-sm pl-2 ${userError ? "visible" : "invisible"}`}
             >
               {content.userNotValid}
             </p>
           </div>
-          {/* Contraseña */}
           <div className="mb-2">
-            <label htmlFor="" className="block text-black-900 ">
+            <label
+              htmlFor=""
+              className="block text-black-900 text-sm md:text-md "
+            >
               {content.password}
             </label>
-            <div className="relative">
-              <input
-                type={ispasswordVisible ? "text" : "password"}
-                className="w-full p-4 rounded-md border text-lg text-black focus:outline-secondary"
-                onChange={({ target }) => setPassword(target.value)}
-              />
-
-              <div className="absolute inset-y-0 right-0 pr-3 flex">
-                <button
-                  type="button"
-                  onClick={togglePassword}
-                  className="rounded border-gray-300 "
-                >
-                  {ispasswordVisible ? (
-                    <FaEye color="#58378d" size={28} />
-                  ) : (
-                    <FaEyeSlash color="#58378d" size={28} />
-                  )}
-                </button>
+            <div>
+              <div className="relative">
+                <input
+                  value={password}
+                  placeholder="Ingrese una contraseña"
+                  type={passwordVisible ? "text" : "password"}
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$"
+                  title="Por favor, introduce una contraseña. Debe contener entre 8 y 15 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial como $, @, !, %, *, ?, &"
+                  className="w-full p-4 rounded-md border text-md md:text-lg text-black focus:outline-secondary"
+                  onChange={({ target }) => setPassword(target.value)}
+                />
+                <div className="absolute inset-y-0 right-0 pr-3 flex">
+                  <button
+                    tabIndex={-1}
+                    type="button"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    className="rounded border-gray-300 "
+                  >
+                    {passwordVisible ? (
+                      <FaEye color="#58378d" size={28} />
+                    ) : (
+                      <FaEyeSlash color="#58378d" size={28} />
+                    )}
+                  </button>
+                </div>
               </div>
 
               <p
-                className={`text-red-500 text-sm ${passError ? "visible" : "invisible"}`}
+                className={`text-red-500 text-sm pl-2 ${passwordError ? "visible" : "invisible"}`}
               >
                 {content.passNotValid}
               </p>
             </div>
           </div>
           <div className="mb-4">
-            <label htmlFor="" className="block text-black-900 ">
+            <label
+              htmlFor=""
+              className="block text-black-900 text-sm md:text-md "
+            >
               {content.confirmPassword}
             </label>
-            <input
-              type="password"
-              className="w-full p-4 rounded-md border text-lg text-black focus:outline-secondary"
-              onChange={({ target }) => setMatchPwd(target.value)}
-            />
+            <div className="relative">
+              <input
+                value={matchPwd}
+                type={passwordMatchVisible ? "text" : "password"}
+                placeholder="Reingrese la contraseña"
+                className="w-full p-4 rounded-md border text-md md:text-lg text-black focus:outline-secondary"
+                onChange={({ target }) => setMatchPwd(target.value)}
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$"
+                title="Por favor, introduce una contraseña. Debe contener entre 8 y 15 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial como $, @, !, %, *, ?, &"
+              />
+              <div className="absolute inset-y-0 right-0 pr-3 flex">
+                <button
+                  tabIndex={-1}
+                  type="button"
+                  onClick={() => setPasswordMatchVisible(!passwordMatchVisible)}
+                  className="rounded border-gray-300 "
+                >
+                  {passwordMatchVisible ? (
+                    <FaEye color="#58378d" size={28} />
+                  ) : (
+                    <FaEyeSlash color="#58378d" size={28} />
+                  )}
+                </button>
+              </div>
+            </div>
             <p
-              className={`text-red-500 text-sm ${matchPassError ? "visible" : "invisible"}`}
+              className={`text-red-500 text-sm pl-2 ${matchPassError ? "visible" : "invisible"}`}
             >
               {content.passNotMatch}
             </p>
@@ -253,20 +208,20 @@ const Register = () => {
 
           <button
             type="submit"
-            className="bg-secondary-500 text-white text-xl font-bold p-4 rounded-md w-full mb-4"
+            className="bg-secondary-500 text-white text-lg md:text-xl font-bold p-4 rounded-md w-full mb-4"
           >
             {content.register}
           </button>
 
-          <p className="text-center text-black">
+          <p className="text-center text-black text-sm md:text-md">
             {content.haveAccount} &nbsp;
-            <a className="font-bold" href="/login">
+            <a className="font-bold text-secondary" href="/login">
               {content.login}
             </a>
           </p>
         </form>
       </div>
-      <figure>
+      <figure className="hidden lg:flex">
         <img src="/images/authentication.jpg" alt="image authenticacion" />
       </figure>
     </div>

@@ -1,0 +1,81 @@
+.alert {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 410px);
+  grid-template-rows: minmax(60px, 1fr);
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  align-content: flex-end;
+  box-shadow: -4px 8px 10px rgba(0, 0, 0, 0.2);
+  padding-top: 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+.showAlert {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.hiddenAlert {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  z-index: 9999;
+}
+
+.iconAlert {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  padding: 12px;
+}
+.successIcon {
+  background-color: #01ad9f;
+  @apply text-white;
+}
+
+.errorIcon {
+  background-color: #e65252;
+  @apply text-white;
+}
+
+.infoIcon {
+  background-color: #173b6c;
+  @apply text-white;
+}
+
+.warningIcon {
+  background-color: #d4810d;
+  @apply text-white;
+}
+
+.messageAlert {
+  width: 100%;
+  font-weight: 600;
+  text-align: justify;
+  padding: 10px;
+}
+
+.successMessage {
+  background-color: #e6fff3;
+  color: #01ad9f;
+}
+
+.errorMessage {
+  background-color: #ffebe6;
+  color: #e65252;
+}
+
+.infoMessage {
+  background-color: #e6f4ff;
+  color: #173b6c;
+}
+
+.warningMessage {
+  background-color: #fff8e6;
+  color: #d4810d;
+}

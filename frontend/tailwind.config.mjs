@@ -8,7 +8,11 @@ export default {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'auth-back': "url('/images/authentication.jpg')",
+      },
+    },
   },
   darkMode: 'class',
   plugins: [

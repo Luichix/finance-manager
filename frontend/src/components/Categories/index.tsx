@@ -1,19 +1,25 @@
-import React from 'react';
-import { CATEGORIES } from './categories';
+import React from "react";
+import { CATEGORIES } from "../FormDashboard/categories";
+
+interface CategoriesProps {
+  selected: boolean;
+  setSelectedTab: (name: string) => void;
+  selectedCategory: string;
+  setSelectedCategory: () => void;
+}
 
 export default function Categories({
   selected,
   setSelectedTab,
   selectedCategory,
-  setSelectedCategory,
-}: any) {
+}: CategoriesProps) {
   return (
     <div className="categories">
       {CATEGORIES.map(
         ({ name, isIncome, id }, i: number) =>
           selected === isIncome && (
             <button
-              className={`categories__item${selectedCategory === name ? ' selected' : ''}`}
+              className={`categories__item${selectedCategory === name ? " selected" : ""}`}
               key={i}
               data-tab={i}
               onClick={() => {
@@ -25,7 +31,7 @@ export default function Categories({
               </svg>
               <span>{name}</span>
             </button>
-          )
+          ),
       )}
     </div>
   );

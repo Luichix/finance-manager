@@ -6,6 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './alert.scss';
 @import './navigation.scss';
+@import './form.scss';
 @import './components.scss';
 @import './footer.scss';

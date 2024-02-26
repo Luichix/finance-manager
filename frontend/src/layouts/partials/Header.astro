@@ -16,11 +16,11 @@ export interface NavigationLink {
 }
 ---
 
-<header class="header pt-3 shadow-lg bg-white">
+<header class="header pt-3 bg-white">
   <nav class="navbar px-4 md:px-8">
     <!-- logo -->
     <div class="order-0">
-      <img src="/svg/logo.svg" width="300px" height="54px" />
+      <img src="/svg/logo.svg" class="w-56 h-12 md:w-80 md:h-14" />
     </div>
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
@@ -48,7 +48,7 @@ export interface NavigationLink {
     </label>
     <!-- /navbar toggler -->
 
-    <ul id="nav-menu" class="navbar-nav hidden w-full md:flex md:w-auto">
+    <ul id="nav-menu" class="navbar-nav hidden w-full lg:flex lg:w-auto">
       <li class="nav-item">
         <a href={"/home"} class="nav-link block"> Inicio</a>
       </li>
