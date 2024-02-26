@@ -29,7 +29,7 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
 
   return (
     <div className="transaction-card shadow-md rounded">
-      <div className="flex items-center justify-between mx-4 p-4 mb-0 pb-0">
+      <div className="flex justify-between mx-auto p-4 mb-0 pb-0">
         <div className="column">
           <Icon id={'finances'} />
         </div>

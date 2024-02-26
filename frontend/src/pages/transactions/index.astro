@@ -2,16 +2,18 @@
 import { Tab } from "@/components/Index";
 import Base from "@/layouts/Base.astro";
 import TransactionCard from "@/components/TransactionCard";
-// Fetch INCOME transactions
-const incomeResponse = await fetch(
-  "https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true&type=INCOME",
-);
-const incomeData = await incomeResponse.json();
-// Fetch OUTCOME transactions
-const outcomeResponse = await fetch(
-  "https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true&type=OUTCOME",
-);
-const outcomeData = await outcomeResponse.json();
+// Function to fetch paginated data
+async function fetchPaginatedData(type: string, limit: number, offset: number) {
+  const response = await fetch(
+    `https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true&type=${type}&limit=${limit}&offset=${offset}`,
+  );
+  const data = await response.json();
+  return data;
+}
+
+// Fetch default data (first 5 records)
+const defaultIncomeData = await fetchPaginatedData("INCOME", 5, 0);
+const defaultOutcomeData = await fetchPaginatedData("OUTCOME", 5, 0);
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
@@ -23,7 +25,7 @@ const outcomeData = await outcomeResponse.json();
       <div class="text-black lg:w-1/2 mx-4">
         <h2 class="text-2xl font-bold my-5">Ingresos</h2>
         {
-          incomeData.map((transaction: any) => (
+          defaultIncomeData.map((transaction: any) => (
             <TransactionCard
               client:load
               categoryId={transaction.categoryId}
@@ -37,7 +39,7 @@ const outcomeData = await outcomeResponse.json();
       <div class="text-black lg:w-1/2 m-4 mt-0">
         <h2 class="text-2xl font-bold my-5">Egresos</h2>
         {
-          outcomeData.map((transaction: any) => (
+          defaultOutcomeData.map((transaction: any) => (
             <TransactionCard
               client:load
               categoryId={transaction.categoryId}
