@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Simple.astro";
+import Testimonial from "@/components/Testimonial/index.astro";
 ---
 
 <Layout title="Wellcome">
@@ -44,52 +45,24 @@ import Layout from "@/layouts/Simple.astro";
       </div>
     </section>
 
-    <section id="testimonial" class="grid grid-cols-3 gap-4">
-      <div id="testimonial-container" class="border">
-        <div class="flex border" id="box-container">
-          <div id="photo-name-rating">
-            <div id="photo-name-container" class="flex gap-4">
-              <img
-                src="./src/assets/testimonial.png"
-                alt="testimonial_photo"
-                class="relative inline-block h-[58px] w-[58px] !rounded-full object-cover object-center"
-              />
+    <div class="grid w-full sm:grid-cols-1 xl:grid-cols-3 gap-12">
+      <Testimonial />
+      <Testimonial />
+      <Testimonial />
+    </div>
 
-              <div>
-                <h3 class="text-black block">Leo</h3>
-                <p class="text-black">Lorem impsum</p>
-              </div>
-
-              <div id="rating" class="flex items-end">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  class="h-5 w-5 text-yellow-700"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <div id="opinion"></div>
-        </div>
+    <div id="test-nav-cont" class="flex justify-center mt-8">
+      <div id="test-nav" class="">
+        <a href="#" class="text-black text-2xl"> &lt; </a>
+        <button class="h-5 w-5 rounded-full bg-gray-500 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="text-black text-2xl"> &gt; </button>
+        <div></div>
       </div>
-    </section>
-  </div>
-
-  <div>
-    <a href="" class="text-black"> ❮ </a>
-    <a href="" class="text-black"> * </a>
-    <a href="" class="text-black"> * </a>
-    <a href="" class="text-black"> * </a>
-    <a href="" class="text-black"> * </a>
-    <a href="" class="text-black"> * </a>
-    <a href="" class="text-black"> ❯ </a>
-  </div>
-</Layout>
+    </div>
+  </div></Layout
+>
