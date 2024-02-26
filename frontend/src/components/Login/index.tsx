@@ -74,7 +74,8 @@ const Login = () => {
               {content.user}
             </label>
             <input
-              className="border w-full p-4 rounded-md text-md md:text-lg text-black focus:outline-secondary"
+              value={userId}
+              className="border w-full p-4 rounded-md text-sm md:text-base text-black focus:outline-secondary"
               type="text"
               placeholder="Ingrese su usuario o correo"
               onChange={({ target }) => setUserID(target.value)}
@@ -94,8 +95,9 @@ const Login = () => {
             </label>
             <div className="relative">
               <input
+                value={password}
                 type={passwordVisible ? "text" : "password"}
-                className="border w-full p-4 rounded-md text-md md:text-lg text-black focus:outline-secondary"
+                className="border w-full p-4 rounded-md text-sm md:text-base text-black focus:outline-secondary"
                 placeholder="Ingrese su contraseña"
                 onChange={({ target }) => setPassword(target.value)}
               />
@@ -126,7 +128,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="bg-secondary-500 text-white text-lg md:text-xl font-bold p-4 rounded-md w-full mb-4"
+            className="bg-secondary-500 text-white text-base md:text-lg font-bold p-4 rounded-md w-full mb-4"
           >
             {content.login}
           </button>

@@ -16,7 +16,7 @@ const content = {
   user: "Usuario",
   password: "Contraseña",
   confirmPassword: "Confirmar contraseña",
-  register: "Registrar",
+  register: "Registrarse",
   haveAccount: "¿Ya tienes una cuenta?",
   login: "Iniciar Sesion",
   emailNotValid: "El correo no es correcto",
@@ -29,10 +29,10 @@ const content = {
 const Register = () => {
   const [show, info, alert, showAlert] = useAlert();
 
-  const [email, setEmail] = useState<string>("lucho@gmail.com");
-  const [user, setUserName] = useState<string>("Lucho");
-  const [password, setPassword] = useState<string>("Lucho123!");
-  const [matchPwd, setMatchPwd] = useState<string>("Lucho123!");
+  const [email, setEmail] = useState<string>("");
+  const [user, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [matchPwd, setMatchPwd] = useState<string>("");
 
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [passwordMatchVisible, setPasswordMatchVisible] =
@@ -96,7 +96,7 @@ const Register = () => {
               type="email"
               value={email}
               placeholder="Ingrese el correo electronico"
-              className="border w-full p-4 rounded-md text-md md:text-lg text-black focus:outline-secondary"
+              className="border w-full p-4 rounded-md text-sm md:text-base text-black focus:outline-secondary"
               onChange={({ target }) => setEmail(target.value)}
             />
             <p
@@ -117,7 +117,7 @@ const Register = () => {
               type="text"
               value={user}
               placeholder="Ingrese el nombre de usuario"
-              className="w-full p-4 rounded-md border text-md md:text-lg text-black focus:outline-secondary"
+              className="w-full p-4 rounded-md border text-sm md:text-base text-black focus:outline-secondary"
               onChange={({ target }) => setUserName(target.value)}
             />
             <p
@@ -141,7 +141,7 @@ const Register = () => {
                   type={passwordVisible ? "text" : "password"}
                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$"
                   title="Por favor, introduce una contraseña. Debe contener entre 8 y 15 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial como $, @, !, %, *, ?, &"
-                  className="w-full p-4 rounded-md border text-md md:text-lg text-black focus:outline-secondary"
+                  className="w-full p-4 rounded-md border text-sm md:text-base text-black focus:outline-secondary"
                   onChange={({ target }) => setPassword(target.value)}
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex">
@@ -179,7 +179,7 @@ const Register = () => {
                 value={matchPwd}
                 type={passwordMatchVisible ? "text" : "password"}
                 placeholder="Reingrese la contraseña"
-                className="w-full p-4 rounded-md border text-md md:text-lg text-black focus:outline-secondary"
+                className="w-full p-4 rounded-md border text-sm md:text-base text-black focus:outline-secondary"
                 onChange={({ target }) => setMatchPwd(target.value)}
                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$"
                 title="Por favor, introduce una contraseña. Debe contener entre 8 y 15 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial como $, @, !, %, *, ?, &"
@@ -208,7 +208,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="bg-secondary-500 text-white text-lg md:text-xl font-bold p-4 rounded-md w-full mb-4"
+            className="bg-secondary-500 text-white text-base md:text-lg font-bold p-4 rounded-md w-full mb-4"
           >
             {content.register}
           </button>
