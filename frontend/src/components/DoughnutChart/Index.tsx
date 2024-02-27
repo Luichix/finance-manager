@@ -64,17 +64,18 @@ export default function DoughnutChart({ type = "INCOME" }) {
       const categoryLabelsSet = new Set<string>();
       const categoryValuesMap: Map<string, number> = new Map();
       const backgroundColors: string[] = COLORS.slice(0, expenses.length);
-      console.log(backgroundColors);
       expenses.forEach((expense) => {
-        const category = CATEGORIES.find((c) => c.id === expense.categoryId);
+        const category = CATEGORIES.find((c) => c.id == expense.categoryId);
         if (category) {
           const categoryName = category.name;
+          console.log(categoryLabelsSet, categoryName, category);
           if (!categoryLabelsSet.has(categoryName)) {
             expense.amount &&
               categoryValuesMap.set(categoryName, expense.amount || 0);
+            categoryLabelsSet.add(categoryName);
           } else {
+            console.log(categoryValuesMap.get(categoryName));
             const existingValues = categoryValuesMap.get(categoryName) || 0;
-            console.log(existingValues);
             categoryValuesMap.set(
               categoryName,
               existingValues + (expense.amount || 0),
