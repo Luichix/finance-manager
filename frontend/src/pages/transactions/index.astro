@@ -2,6 +2,7 @@
 import { Tab } from "@/components/Index";
 import Base from "@/layouts/Base.astro";
 import TransactionCard from "@/components/TransactionCard";
+import Icon from "@/components/Icon/Index";
 // Function to fetch paginated data
 async function fetchPaginatedData(type: string, limit: number, offset: number) {
   const response = await fetch(
@@ -23,7 +24,15 @@ const defaultOutcomeData = await fetchPaginatedData("OUTCOME", 5, 0);
     </div>
     <div class="flex flex-col lg:flex-row">
       <div class="text-black lg:w-1/2 mx-4">
-        <h2 class="text-2xl font-bold my-5">Ingresos</h2>
+        <div class="flex justify-between">
+          <h2 class="text-2xl font-bold my-5">Ingresos</h2>
+          <div class="my-4">
+            <a
+              href="/transactions/income"
+              class="bg-secondary-600 text-white px-4 py-2 rounded">Ver más</a
+            >
+          </div>
+        </div>
         {
           defaultIncomeData.map((transaction: any) => (
             <TransactionCard
@@ -37,7 +46,15 @@ const defaultOutcomeData = await fetchPaginatedData("OUTCOME", 5, 0);
         }
       </div>
       <div class="text-black lg:w-1/2 m-4 mt-0">
-        <h2 class="text-2xl font-bold my-5">Egresos</h2>
+        <div class="flex justify-between">
+          <h2 class="text-2xl font-bold my-5">Egresos</h2>
+          <div class="my-4">
+            <a
+              href="/transactions/outcome"
+              class="bg-secondary-600 text-white px-4 py-2 rounded">Ver más</a
+            >
+          </div>
+        </div>
         {
           defaultOutcomeData.map((transaction: any) => (
             <TransactionCard

@@ -1,0 +1,48 @@
+---
+import { Tab } from "@/components/Index";
+import Base from "@/layouts/Base.astro";
+import TransactionCard from "@/components/TransactionCard";
+// Function to fetch paginated data
+async function fetchPaginatedData(type: string) {
+  const response = await fetch(
+    `https://backend-finance-managegr.onrender.com/api/v1/expenses?demo=true&type=${type}`,
+  );
+  const data = await response.json();
+  return data;
+}
+
+// Fetch default data (first 5 records)
+const defaultIncomeData = await fetchPaginatedData("OUTCOME");
+---
+
+<Base title="Gestor de finanzas | DineroGestor">
+  <section class="dark pt-8 pb-4 bg-foreground">
+    <div class="mx-4">
+      <Tab client:load />
+    </div>
+    <div class="flex flex-col lg:flex-row">
+      <div class="text-black lg:w-1/2 mx-4">
+        <div class="flex justify-between">
+          <h2 class="text-2xl font-bold my-5">Egresos</h2>
+          <div class="my-4">
+            <a
+              href="/transactions/"
+              class="bg-secondary-600 text-white px-4 py-2 rounded">Volver</a
+            >
+          </div>
+        </div>
+        {
+          defaultIncomeData.map((transaction: any) => (
+            <TransactionCard
+              client:load
+              categoryId={transaction.categoryId}
+              date={transaction.createdAt}
+              amount={transaction.amount}
+              description={transaction.description}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
