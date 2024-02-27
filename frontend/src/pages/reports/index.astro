@@ -4,8 +4,8 @@ import Base from "@/layouts/Base.astro";
 ---
 
 <Base title="Reportes">
-  <section class="dark pt-8 pb-4 bg-foreground">
-    <div class="px-4 md:px-8">
+  <section class="section">
+    <div class="section__container">
       <BarChart client:load />
       <div class="mt-8 grid grid-cols-1 sm:grid-cols-2">
         <DoughnutChart type="OUTCOME" client:load />
@@ -14,3 +14,13 @@ import Base from "@/layouts/Base.astro";
     </div>
   </section>
 </Base>
+
+<style>
+  .section {
+    @apply dark pt-8 pb-4 bg-black;
+  }
+  .section__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>

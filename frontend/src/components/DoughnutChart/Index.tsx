@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
+import styles from "./Index.module.scss";
 
 import { CATEGORIES } from "../FormDashboard/categories";
 const COLORS = [
@@ -29,12 +30,6 @@ const COLORS = [
   "#9c9ede",
   "#637939",
 ];
-function getRandomNumber() {
-  return Math.floor(Math.random() * 256);
-}
-function getRandomColor() {
-  return `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
-}
 
 interface Expense {
   id: number;
@@ -63,6 +58,8 @@ export default function DoughnutChart({ type = "INCOME" }) {
   }, [type]);
 
   useEffect(() => {
+    console.log(expenses);
+
     if (chart.current && expenses.length > 0) {
       const categoryLabelsSet = new Set<string>();
       const categoryValuesMap: Map<string, number> = new Map();
@@ -93,6 +90,7 @@ export default function DoughnutChart({ type = "INCOME" }) {
             label: "Expenses",
             data: labels.map((label) => categoryValuesMap.get(label) || 0),
             backgroundColor: labels.map((label, i) => backgroundColors[i]),
+            borderColor: "#eae8d6",
           },
         ],
       };
@@ -117,19 +115,8 @@ export default function DoughnutChart({ type = "INCOME" }) {
   }, [expenses, type]);
 
   return (
-    <div
-      style={{
-        minHeight: "250px",
-        display: "flex",
-        justifyContent: "center",
-        width: "100%",
-      }}
-    >
-      <canvas
-        style={{ width: "100%", minHeight: "250px", height: "100%" }}
-        id="chart"
-        ref={chart}
-      ></canvas>
+    <div className={styles.chartContainer}>
+      <canvas className={styles.canvas} id="chart" ref={chart}></canvas>
     </div>
   );
 }

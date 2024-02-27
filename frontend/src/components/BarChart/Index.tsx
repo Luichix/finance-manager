@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
+import styles from "./Index.module.scss";
 import Chart from "chart.js/auto";
-Chart.defaults.color = "#58378d";
-Chart.defaults.borderColor = "rgba(31, 31, 27, 0.2)";
+Chart.defaults.color = "#fff";
+Chart.defaults.borderColor = "#58378d";
 Chart.defaults.backgroundColor = "#eae8d6";
 const DATA_COUNT = 7;
 const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
@@ -55,6 +56,7 @@ export default function BarChart({ isWeek = true }) {
             backgroundColor: "rgb(240, 62, 62)",
           },
         ],
+        borderColor: "#58378d",
         borderWidth: 1,
       };
 
@@ -69,9 +71,10 @@ export default function BarChart({ isWeek = true }) {
 
   return (
     <div
+      className={styles.chartContainer}
       style={{
-        width: "100%",
         minHeight: "350px",
+        width: "100%",
         display: "flex",
         justifyContent: "center",
       }}
