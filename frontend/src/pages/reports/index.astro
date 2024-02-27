@@ -1,0 +1,16 @@
+---
+import { BarChart, DoughnutChart } from "@/components/Index";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base title="Reportes">
+  <section class="dark pt-8 pb-4 bg-foreground">
+    <div class="px-4 md:px-8">
+      <BarChart client:load />
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2">
+        <DoughnutChart type="OUTCOME" client:load />
+        <DoughnutChart type="INCOME" client:load />
+      </div>
+    </div>
+  </section>
+</Base>

@@ -14,13 +14,13 @@ export default function Modal({
         <div className="modal__categories">
           <div className="categories">
             {CATEGORIES.map(
-              ({ name, type: isIncome, id }, i: number) =>
+              ({ name, typeCategory: isIncome, id }, i: number) =>
                 selectedTab === isIncome && (
                   <button
                     className={`categories__item${category === name ? ' selected' : ''}`}
                     key={i}
                     data-tab={name}
-                    onClick={(e) => {
+                    onClick={(e: any) => {
                       dispatch({
                         type: 'setCategory',
                         payload: e.currentTarget.dataset.tab,
