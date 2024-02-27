@@ -48,57 +48,57 @@ export interface NavigationLink {
     class="navbar-nav order-3 hidden w-full md:order-1 md:flex md:w-auto"
   >
     <li class="nav-item">
-      <a href={"/"} class="nav-link block"> Inicio</a>
+      <a href={'/'} class="nav-link block"> Inicio</a>
     </li>
     <li id="link-login" class="nav-item hidden">
-      <a href={"/login"} class="nav-link block"> Ingresar</a>
+      <a href={'/login'} class="nav-link block"> Ingresar</a>
     </li>
     <li id="link-register" class="nav-item hidden">
-      <a href={"/register"} class="nav-link block"> Registrarse</a>
+      <a href={'/register'} class="nav-link block"> Registrarse</a>
     </li>
     <li id="link-demo" class="nav-item-button">
-      <a href={"/transactions"} class="nav-link-button"> Demo</a>
+      <a href={'/transactions'} class="nav-link-button"> Demo</a>
     </li>
   </ul>
 </nav>
 
 <script>
-  import { STORAGE_KEY_LOGIN, userInfo } from "@/store";
-  import { loadFromStorage } from "@/utils/localStorage";
+  import { STORAGE_KEY_LOGIN, userInfo } from '@/store';
+  import { loadFromStorage } from '@/utils/localStorage';
 
   const user = loadFromStorage(STORAGE_KEY_LOGIN);
 
   userInfo.set(user);
 
-  const login = document.getElementById("link-login");
-  const register = document.getElementById("link-register");
-  const demo = document.getElementById("link-demo");
+  const login = document.getElementById('link-login');
+  const register = document.getElementById('link-register');
+  const demo = document.getElementById('link-demo');
 
   userInfo.subscribe((sesion) => {
     if (sesion.sesion) {
       if (login) {
-        login.style.display = "none";
+        login.style.display = 'none';
       }
       if (register) {
-        register.style.display = "none";
+        register.style.display = 'none';
       }
       if (demo) {
-        const element = demo.querySelector("a");
+        const element = demo.querySelector('a');
         if (element) {
-          element.textContent = "App";
+          element.textContent = 'App';
         }
       }
     } else {
       if (login) {
-        login.style.display = "block";
+        login.style.display = 'block';
       }
       if (register) {
-        register.style.display = "block";
+        register.style.display = 'block';
       }
       if (demo) {
-        const element = demo.querySelector("a");
+        const element = demo.querySelector('a');
         if (element) {
-          element.textContent = "Demo";
+          element.textContent = 'Demo';
         }
       }
     }

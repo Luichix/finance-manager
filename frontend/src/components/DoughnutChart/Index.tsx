@@ -1,8 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import Chart from "chart.js/auto";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import Chart, { type ChartOptions } from "chart.js/auto";
 import styles from "./Index.module.scss";
 
 import { CATEGORIES } from "../FormDashboard/categories";
+
+export interface Expense {
+  id: number;
+  amount: number;
+  description: string;
+  type: TypeExpense;
+  userId: number;
+  categoryId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const COLORS = [
   "#1f77b4",
   "#aec7e8",
@@ -31,20 +43,10 @@ const COLORS = [
   "#637939",
 ];
 
-interface Expense {
-  id: number;
-  amount: number;
-  description: string;
-  type: string;
-  userId: number;
-  categoryId: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export default function DoughnutChart({ type = "INCOME" }) {
   const chart = useRef<HTMLCanvasElement>(null);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -58,44 +60,40 @@ export default function DoughnutChart({ type = "INCOME" }) {
   }, [type]);
 
   useEffect(() => {
-    console.log(expenses);
-
-    if (chart.current && expenses.length > 0) {
-      const categoryLabelsSet = new Set<string>();
-      const categoryValuesMap: Map<string, number> = new Map();
-      const backgroundColors: string[] = COLORS.slice(0, expenses.length);
-      expenses.forEach((expense) => {
-        const category = CATEGORIES.find((c) => c.id == expense.categoryId);
-        if (category) {
-          const categoryName = category.name;
-          console.log(categoryLabelsSet, categoryName, category);
-          if (!categoryLabelsSet.has(categoryName)) {
-            expense.amount &&
-              categoryValuesMap.set(categoryName, expense.amount || 0);
-            categoryLabelsSet.add(categoryName);
-          } else {
-            console.log(categoryValuesMap.get(categoryName));
-            const existingValues = categoryValuesMap.get(categoryName) || 0;
-            categoryValuesMap.set(
-              categoryName,
-              existingValues + (expense.amount || 0),
-            );
-          }
-        }
+    if (chart.current && expenses.length) {
+      const newExpenses = expenses.reduce(
+        (acc: { [key: string]: number }, { categoryId, amount }) => {
+          acc[categoryId] = (acc[categoryId] || 0) + amount;
+          return acc;
+        },
+        {},
+      );
+      const filterByCategory = Object.keys(newExpenses).map((value) => {
+        const category = CATEGORIES.find(({ id }) => id === +value);
+        return {
+          category: category?.name || "Otros",
+          amount: newExpenses[value],
+          color: COLORS[+value],
+        };
       });
-      const labels = Array.from(categoryValuesMap.keys());
+
+      const labels = filterByCategory.map(({ category }) => category);
+      const dataSet = filterByCategory.map(({ amount }) => amount);
+      const backgroundColor = filterByCategory.map(({ color }) => color);
+
       const data = {
-        labels: labels,
+        labels,
         datasets: [
           {
             label: "Expenses",
-            data: labels.map((label) => categoryValuesMap.get(label) || 0),
-            backgroundColor: labels.map((label, i) => backgroundColors[i]),
+            data: dataSet,
+            backgroundColor,
             borderColor: "#eae8d6",
           },
         ],
       };
-      const options = {
+
+      const options: ChartOptions = {
         responsive: true,
         plugins: {
           legend: {
@@ -107,10 +105,11 @@ export default function DoughnutChart({ type = "INCOME" }) {
           },
         },
       };
+
       new Chart(chart.current, {
         type: "doughnut",
-        data: data,
-        options: options as any,
+        data,
+        options,
       });
     }
   }, [expenses, type]);

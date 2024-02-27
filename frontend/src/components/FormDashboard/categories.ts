@@ -7,6 +7,18 @@ interface Category {
 
 const CATEGORIES: Category[] = [
   {
+    id: 1,
+    name: 'Salario',
+    description: 'salary',
+    typeCategory: 'INCOME',
+  },
+  {
+    id: 2,
+    name: 'Bonus',
+    description: 'ribbon',
+    typeCategory: 'INCOME',
+  },
+  {
     id: 3,
     name: 'Suscripciones',
     description: 'subscriptions',
@@ -124,18 +136,6 @@ const CATEGORIES: Category[] = [
     id: 22,
     name: 'Donaciones',
     description: 'donations',
-    typeCategory: 'INCOME',
-  },
-  {
-    id: 23,
-    name: 'Salario',
-    description: 'salary',
-    typeCategory: 'INCOME',
-  },
-  {
-    id: 24,
-    name: 'Bonus',
-    description: 'ribbon',
     typeCategory: 'INCOME',
   },
 ];
