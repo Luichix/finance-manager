@@ -14,12 +14,14 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.1",
+    "@nanostores/react": "^0.7.2",
     "@nextui-org/react": "^2.2.9",
     "astro": "^4.3.5",
     "chart.js": "^4.4.1",
     "framer-motion": "^11.0.3",
     "github-slugger": "^2.0.0",
     "marked": "^12.0.0",
+    "nanostores": "^0.10.0",
     "react-icons": "^5.0.1"
   },
   "devDependencies": {

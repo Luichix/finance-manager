@@ -1,4 +1,5 @@
-navbar toggler input#nav-toggle:checked ~ label#show-button {
+// navbar toggler
+input#nav-toggle:checked ~ label#show-button {
   @apply hidden;
 }
 
@@ -12,7 +13,7 @@ input#nav-toggle:checked ~ #nav-menu {
 
 // navbar items
 .navbar {
-  @apply relative flex h-20 flex-wrap items-center justify-between;
+  @apply relative flex  flex-wrap items-center justify-between;
 }
 
 .navbar-brand img {
@@ -20,17 +21,19 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .navbar-nav {
-  @apply text-center;
+  @apply text-center md:text-left;
 }
 
 .nav-item {
-  @apply mx-2;
+  @apply mx-1;
+}
+.nav-item-button {
+  @apply ml-1 mr-4 mb-2 md:mb-0 flex items-center justify-center;
 }
 
 .nav-link {
-  @apply p-3 text-gray-400 text-xl transition  md:p-4;
+  @apply p-3 text-lg font-semibold text-gray-400 transition hover:text-primary md:p-4;
 }
-
 .nav-link::after {
   content: '**';
   color: transparent;
@@ -43,6 +46,10 @@ input#nav-toggle:checked ~ #nav-menu {
   text-underline-offset: 8px;
 }
 
+.nav-link-button {
+  @apply bg-secondary-900 text-white px-4 py-2 rounded-md font-bold hover:bg-secondary w-20 text-center;
+}
+
 .nav-dropdown-list {
   @apply z-10 rounded-lg bg-white px-6 py-3 shadow transition;
 }
@@ -52,7 +59,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .nav-dropdown-link {
-  @apply block min-w-[150px] py-1 text-[17px] font-semibold text-gray-400 transition hover:text-secondary;
+  @apply block min-w-[150px] py-1 text-[17px] font-semibold text-gray-400 transition hover:text-primary;
 }
 
 // search style
@@ -68,7 +75,6 @@ input#nav-toggle:checked ~ #nav-menu {
     @apply visible opacity-100;
   }
 }
-
 // Sidebar styles
 .sidebar {
   @apply flex-col justify-between w-56 gap-6 h-full p-8 hidden md:flex bg-gradient-to-b from-primary  to-secondary filter brightness-125;

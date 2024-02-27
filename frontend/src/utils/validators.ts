@@ -5,7 +5,7 @@ export const checkValidUser = (user: string, setError: Dispatch<boolean>) => {
 
   setError(false);
 
-  if (typeof user === "undefined" || user.trim() == "") {
+  if (!user || user.trim() == "") {
     setError(true);
   } else if (!userRegex.test(user)) {
     setError(true);
@@ -19,7 +19,7 @@ export const checkValirEmail = (email: string, setError: Dispatch<boolean>) => {
 
   setError(false);
 
-  if (typeof email === "undefined" || email.trim() == "") {
+  if (!email || email.trim() == "") {
     setError(true);
   } else if (!emailRegex.test(email)) {
     setError(true);
@@ -37,7 +37,7 @@ export const checkValidPwd = (
 
   setError(false);
 
-  if (typeof password === "undefined" || password.trim() == "") {
+  if (!password || password.trim() == "") {
     setError(true);
   } else if (!passRegEx.test(password)) {
     setError(true);
@@ -55,7 +55,7 @@ export const checkMathPwd = (
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
 
   setMatchError(false);
-  if (typeof matchPwd === "undefined" || matchPwd.trim() == "") {
+  if (!matchPwd || matchPwd.trim() == "") {
     setMatchError(true);
   } else if (matchPwd !== password) {
     setMatchError(true);
@@ -66,20 +66,12 @@ export const checkMathPwd = (
   }
 };
 
-export const checkValidUserEmail = (
-  userId: string,
-  setUserErr: Dispatch<boolean>,
-) => {
-  //   const userRegex = /^[a-z0-9_-]{3,15}$/;
-  //   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+export const checkValidEntry = (entry: string, setErr: Dispatch<boolean>) => {
+  setErr(false);
 
-  setUserErr(false);
-
-  //   if (typeof userId === 'undefined' || userId == '') {
-  //     setUserErr(true);
-  //   } else if (!emailRegex.test(userId) && !userRegex.test(userId)) {
-  //     setUserErr(true);
-  //   } else {
-  // }
-  return userId;
+  if (!entry || entry == "") {
+    setErr(true);
+  } else {
+    return entry;
+  }
 };

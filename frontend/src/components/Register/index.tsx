@@ -53,9 +53,6 @@ const Register = () => {
     const passwordValid = checkValidPwd(password, setPassError);
     const matchValid = checkMathPwd(password, matchPwd, setMatchPassError);
 
-    console.log(
-      `Datos del formulario \n email: ${emailValid} \n username: ${userValid} \n password: ${passwordValid} \n matchPwd:  ${matchValid}`,
-    );
     if (userValid && emailValid && passwordValid && matchValid) {
       let data = {
         username: userValid,
@@ -87,12 +84,14 @@ const Register = () => {
           </h1>
           <div className="mb-2">
             <label
-              htmlFor=""
+              htmlFor="input-email-register"
               className="block text-black-900 text-sm md:text-md "
             >
               {content.email}
             </label>
             <input
+              id="input-email-register"
+              autoComplete="off"
               type="email"
               value={email}
               placeholder="Ingrese el correo electronico"
@@ -108,12 +107,14 @@ const Register = () => {
 
           <div className="mb-2">
             <label
-              htmlFor=""
+              htmlFor="input-user-register"
               className="block text-black-900 text-sm md:text-md "
             >
               {content.user}
             </label>
             <input
+              id="input-user-register"
+              autoComplete="off"
               type="text"
               value={user}
               placeholder="Ingrese el nombre de usuario"
@@ -128,7 +129,7 @@ const Register = () => {
           </div>
           <div className="mb-2">
             <label
-              htmlFor=""
+              htmlFor="input-password-register"
               className="block text-black-900 text-sm md:text-md "
             >
               {content.password}
@@ -136,6 +137,7 @@ const Register = () => {
             <div>
               <div className="relative">
                 <input
+                  id="input-password-register"
                   value={password}
                   placeholder="Ingrese una contraseña"
                   type={passwordVisible ? "text" : "password"}
@@ -143,6 +145,7 @@ const Register = () => {
                   title="Por favor, introduce una contraseña. Debe contener entre 8 y 15 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial como $, @, !, %, *, ?, &"
                   className="w-full p-4 rounded-md border text-sm md:text-base text-black focus:outline-secondary"
                   onChange={({ target }) => setPassword(target.value)}
+                  autoComplete="new-password"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex">
                   <button
@@ -169,13 +172,14 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <label
-              htmlFor=""
+              htmlFor="input-match-register"
               className="block text-black-900 text-sm md:text-md "
             >
               {content.confirmPassword}
             </label>
             <div className="relative">
               <input
+                id="input-match-register"
                 value={matchPwd}
                 type={passwordMatchVisible ? "text" : "password"}
                 placeholder="Reingrese la contraseña"
@@ -183,6 +187,7 @@ const Register = () => {
                 onChange={({ target }) => setMatchPwd(target.value)}
                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$"
                 title="Por favor, introduce una contraseña. Debe contener entre 8 y 15 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial como $, @, !, %, *, ?, &"
+                autoComplete="new-password"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex">
                 <button

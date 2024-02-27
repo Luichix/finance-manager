@@ -1,12 +1,11 @@
 import Auth from "@/services/Auth";
 import { useAlert } from "@/utils/hooks";
-import { checkValidPwd, checkValidUserEmail } from "@/utils/validators";
+import { checkValidEntry } from "@/utils/validators";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Alert } from "../Alert";
 import { saveToStorage } from "@/utils/localStorage";
-
-const STORAGE_KEY_LOGIN = "DINERO_GESTOR_TOKEN";
+import { STORAGE_KEY_LOGIN, userInfo } from "@/store";
 
 const content = {
   welcome: "¡Bienvenido!",
@@ -17,8 +16,8 @@ const content = {
   register: "Registrarse",
   forgottPassword: "¿Olvidaste tu contraseña?",
   emailNotValid: "El correo introducido no es correcto",
-  userNotValid: "El usuario no es valido",
-  passNotValid: "La contraseña no es válida",
+  userNotValid: "Ingrese el usuario",
+  passNotValid: "Ingrese la contraseña",
 };
 
 const Login = () => {
@@ -36,23 +35,28 @@ const Login = () => {
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
 
-    const userValid = checkValidUserEmail(userId, setUserErr);
-    const userPassword = checkValidPwd(password, setPassErr);
+    const userValid = checkValidEntry(userId, setUserErr);
+    const userPassword = checkValidEntry(password, setPassErr);
 
     if (userValid && userPassword) {
       let data = {
-        username: userId,
-        password: password,
+        username: userValid,
+        password: userPassword,
       };
 
       await login(data).then((response) => {
         if (response) {
-          console.log(response);
-          saveToStorage(STORAGE_KEY_LOGIN, response.token);
+          const sesion = { sesion: true, ...response.token };
+          saveToStorage(STORAGE_KEY_LOGIN, sesion);
+          userInfo.set(sesion);
+
           window.location.href = "/home";
         } else {
           const message = "No se ha podido iniciar sesion";
-          showAlert([message], "error");
+          showAlert(
+            [message, "EL usuario o contraseña no es correcto"],
+            "error",
+          );
         }
       });
     }
@@ -68,12 +72,13 @@ const Login = () => {
           </h1>
           <div className="mb-4">
             <label
-              htmlFor=""
+              htmlFor="input-user-login"
               className="block text-black-900 text-sm md:text-md "
             >
               {content.user}
             </label>
             <input
+              id="input-user-login"
               value={userId}
               className="border w-full p-4 rounded-md text-sm md:text-base text-black focus:outline-secondary"
               type="text"
@@ -88,13 +93,14 @@ const Login = () => {
           </div>
           <div className="mb-4">
             <label
-              htmlFor=""
+              htmlFor="input-password-login"
               className="block text-black-900 text-sm md:text-md "
             >
               {content.password}
             </label>
             <div className="relative">
               <input
+                id="input-password-login"
                 value={password}
                 type={passwordVisible ? "text" : "password"}
                 className="border w-full p-4 rounded-md text-sm md:text-base text-black focus:outline-secondary"

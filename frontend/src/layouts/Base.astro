@@ -1,6 +1,5 @@
 ---
 import "@/styles/index.scss";
-import Header from "./partials/Header.astro";
 import Footer from "./partials/Footer.astro";
 import TwSizeIndicator from "./partials/TwSizeIndicator.astro";
 import config from "@/config/config.json";
@@ -135,7 +134,6 @@ const { title, meta_title, description, image, noindex, canonical } =
   </head>
   <body>
     <TwSizeIndicator />
-    <Header />
     <main id="main-content" class="container-main">
       <Sidebar />
       <slot />

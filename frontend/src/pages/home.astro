@@ -4,11 +4,9 @@ import Base from "@/layouts/Base.astro";
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
-  <section class="dark pt-8 pb-4 bg-foreground">
-    <div class="px-4 md:px-8">
-      <div class="flex flex-col gap-24 w-full lg:grid lg:grid-cols-12 lg:gap-8">
-        <FormDashboard client:load />
-      </div>
+  <section class="bg-white">
+    <div class="flex flex-1 p-16 h-full rounded-md bg-slate-100">
+      <FormDashboard client:load />
     </div>
   </section>
 </Base>

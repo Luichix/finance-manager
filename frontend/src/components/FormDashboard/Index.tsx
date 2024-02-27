@@ -2,6 +2,12 @@ import React, { useEffect, useReducer, useRef } from "react";
 import Modal from "../Modal";
 import Tabs from "../Switch";
 
+const content = {
+  amount: "Cantidad:",
+  category: "Categoria:",
+  description: "Descripción:",
+};
+
 const initialState = {
   ammount: "",
   category: "",
@@ -73,8 +79,9 @@ export default function FormDashboard() {
         className="income"
         onSubmit={(e) => e.preventDefault()}
       >
+        <legend>Registro de Transacciones</legend>
         <Tabs selectedTab={selectedTab} dispatch={dispatch} />
-        <label htmlFor="ammount">Cantidad</label>
+        <label htmlFor="ammount">{content.amount}</label>
         <input
           name="ammount"
           id="ammount"
@@ -85,7 +92,7 @@ export default function FormDashboard() {
           type="number"
           placeholder="1000000"
         />
-        <label htmlFor="category">Categoría</label>
+        <label htmlFor="category">{content.category}</label>
         <input
           ref={categoryRef}
           name="category"
@@ -97,7 +104,7 @@ export default function FormDashboard() {
           onFocus={() => dispatch({ type: "openModal" })}
           autoComplete="off"
         />
-        <label htmlFor="description">Descripción</label>
+        <label htmlFor="description">{content.description}</label>
         <textarea
           name="description"
           id="description"

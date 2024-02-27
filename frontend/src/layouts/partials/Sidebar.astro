@@ -3,39 +3,50 @@ import { AiOutlineAppstore } from "react-icons/ai";
 import { LuPieChart, LuBook } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
+import User from "@/components/User";
 ---
 
 <nav class="sidebar">
-  <div class="sidebar-profile gap-2">
-    <!-- <figure>
-      <img
-        src="https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/6.png"
-      />
-    </figure> -->
-    <div class="bg-secondary-300 p-5 border-secondary rounded-md">
-      <span class="text-white text-4xl">AF</span>
-    </div>
-    <span> Bienvenida Andrea!</span>
-  </div>
+  <User client:only />
   <ul class="sidebar-links">
     <li>
-      <a href="/" class="text-white"
-        ><AiOutlineAppstore size={30} /> Registrar</a
+      <a href="/home" class="text-white"
+        ><AiOutlineAppstore size={30} /> Tablero</a
       >
     </li>
     <li>
-      <a href="/" class="text-white"> <LuBook size={28} /> Transacciones</a>
+      <a href="/transactions" class="text-white">
+        <LuBook size={28} /> Transacciones</a
+      >
     </li>
     <li>
-      <a href="/" class="text-white"> <LuPieChart size={28} /> Reportes</a>
+      <a href="/reports" class="text-white">
+        <LuPieChart size={28} /> Reportes</a
+      >
     </li>
     <li>
-      <a href="/" class="text-white"> <CgProfile size={28} /> Account</a>
+      <a href="/account" class="text-white"> <CgProfile size={28} /> Account</a>
     </li>
     <li>
-      <a href="/">
-        <MdLogout size={28} />Logout
+      <a id="logout" href="/">
+        <MdLogout size={28} />Salir
       </a>
     </li>
   </ul>
 </nav>
+
+<script>
+  import { STORAGE_KEY_LOGIN, USER_INFO_DEFAULT, userInfo } from "@/store";
+  import { removeToStorage, saveToStorage } from "@/utils/localStorage";
+
+  const logout = () => {
+    removeToStorage(STORAGE_KEY_LOGIN);
+    userInfo.set(USER_INFO_DEFAULT);
+    saveToStorage(STORAGE_KEY_LOGIN, USER_INFO_DEFAULT);
+  };
+
+  const sesion = document.getElementById("logout");
+  if (sesion) {
+    sesion.addEventListener("click", logout);
+  }
+</script>
