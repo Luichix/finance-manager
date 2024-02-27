@@ -5,7 +5,7 @@ import styles from "./Icon.module.scss";
 export default function Icon({ id }: any) {
   return (
     <svg className={styles.icon}>
-      <use href={`Icons/sprite.svg#${id}`}></use>
+      <use href={`/Icons/sprite.svg#${id}`}></use>
     </svg>
   );
 }
