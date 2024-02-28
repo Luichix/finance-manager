@@ -1,19 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Chart, { type ChartOptions } from "chart.js/auto";
 import styles from "./Index.module.scss";
 
 import { CATEGORIES } from "../FormDashboard/categories";
-
-export interface Expense {
-  id: number;
-  amount: number;
-  description: string;
-  type: TypeExpense;
-  userId: number;
-  categoryId: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import type { ITransaction } from "@/interfaces/Transactions";
 
 const COLORS = [
   "#1f77b4",
@@ -45,7 +35,7 @@ const COLORS = [
 
 export default function DoughnutChart({ type = "INCOME" }) {
   const chart = useRef<HTMLCanvasElement>(null);
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [expenses, setExpenses] = useState<ITransaction[]>([]);
 
   useEffect(() => {
     async function fetchData() {

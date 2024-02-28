@@ -4,8 +4,8 @@ import Chart from "chart.js/auto";
 Chart.defaults.color = "#fff";
 Chart.defaults.borderColor = "#58378d";
 Chart.defaults.backgroundColor = "#eae8d6";
-const DATA_COUNT = 7;
-const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+// const DATA_COUNT = 7;
+// const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
 const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"];
 
 function obtenerUltimos7DiasAbreviados() {
