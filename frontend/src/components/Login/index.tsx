@@ -50,7 +50,7 @@ const Login = () => {
           saveToStorage(STORAGE_KEY_LOGIN, sesion);
           userInfo.set(sesion);
 
-          window.location.href = "/home";
+          window.location.href = "/transactions";
         } else {
           const message = "No se ha podido iniciar sesion";
           showAlert(

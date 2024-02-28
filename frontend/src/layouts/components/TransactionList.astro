@@ -1,0 +1,175 @@
+---
+import TransactionCard from "@/components/TransactionCard";
+import Transactions from "@/services/Transactions";
+import { cleanParams } from "@/utils/queryParams";
+import { type ITransaction } from "@/interfaces/Transactions";
+
+export const prerender = false;
+
+const searchParams = Astro.url.searchParams;
+
+const allParams = {
+  type: searchParams.get("type"),
+  limit: searchParams.get("limit"),
+  date: searchParams.get("date"),
+  offset: searchParams.get("offset"),
+};
+
+const getTransactions = new Transactions().fetchPaginatedData;
+
+const params = cleanParams(allParams);
+
+const data = await getTransactions({ ...params });
+
+const totalData = (data: ITransaction[]) => {
+  const incomeTotal = data
+    .filter((item) => item.type == "INCOME")
+    .map((item) => item.amount)
+    .reduce((previous, current) => previous + current, 0);
+  const outcomeTotal = data
+    .filter((item) => item.type == "OUTCOME")
+    .map((item) => item.amount)
+    .reduce((previous, current) => previous + current, 0);
+
+  data.sort((a: ITransaction, b: ITransaction) => {
+    const first = new Date(a.createdAt).getTime();
+    const second = new Date(b.createdAt).getTime();
+    return first - second;
+  });
+
+  const groupedByDate = data.reduce(
+    (accumulate: Record<string, ITransaction[]>, transaction: ITransaction) => {
+      const date = new Date(transaction.createdAt).toLocaleDateString();
+
+      if (!accumulate[date]) {
+        accumulate[date] = [];
+      }
+
+      accumulate[date].push(transaction);
+
+      return accumulate;
+    },
+    {},
+  );
+
+  const listByDate = Object.entries(groupedByDate).map(
+    ([date, transactions]) => {
+      const incomeTotal = data
+        .filter((item) => item.type == "INCOME")
+        .map((item) => item.amount)
+        .reduce((previous, current) => previous + current, 0);
+      const outcomeTotal = data
+        .filter((item) => item.type == "OUTCOME")
+        .map((item) => item.amount)
+        .reduce((previous, current) => previous + current, 0);
+      return {
+        date,
+        transactions,
+        incomeTotal,
+        outcomeTotal,
+      };
+    },
+  );
+
+  return {
+    incomeTotal,
+    outcomeTotal,
+    total: incomeTotal + outcomeTotal,
+    transactions: listByDate,
+  };
+};
+
+const transactions = totalData(data);
+---
+
+<div>
+  <div class="flex justify-between items-center px-8 py-4">
+    <div class="flex flex-col items-center text-lg text-gray-500">
+      <span>Ingresos</span>
+      <span class="text-xl font-bold text-primary"
+        >$ {transactions.incomeTotal.toFixed(2)}</span
+      >
+    </div>
+    <div class="flex flex-col items-center text-lg text-gray-500">
+      <span>Egresos</span>
+      <span class="text-xl font-bold text-secondary"
+        >$ {transactions.outcomeTotal.toFixed(2)}</span
+      >
+    </div>
+    <div class="flex flex-col items-center text-lg text-gray-500">
+      <span>Total</span>
+      <span class="text-xl font-bold text-black"
+        >$ {transactions.total.toFixed(2)}</span
+      >
+    </div>
+  </div>
+  {
+    transactions.transactions &&
+      transactions.transactions.map((item) => {
+        const date = new Date(item.date).getDate();
+        const period = new Date(item.date).toLocaleDateString("es-ES", {
+          month: "short",
+        });
+        const month = new Date(item.date).toLocaleDateString("es-ES", {
+          month: "2-digit",
+        });
+        const year = new Date(item.date).toLocaleDateString("es-ES", {
+          year: "2-digit",
+        });
+
+        return (
+          <>
+            <div class="mt-4 flex justify-between items-center px-8 py-4 bg-gray-200 rounded-md">
+              <div class="flex gap-2 items-center">
+                <span class="text-3xl font-bold">{date}</span>
+                <span class="bg-secondary-900 text-white font-bold text-md px-2 py-0 rounded-md first-letter:uppercase">
+                  {period}
+                </span>
+                <span class="text-md text-gray-500">
+                  {month}.{year}
+                </span>
+              </div>
+              <div class="flex gap-16 items-center">
+                <span class="text-lg font-bold text-primary">
+                  $ {item.incomeTotal.toFixed(2)}
+                </span>
+                <span class="text-lg font-bold text-secondary">
+                  $ {item.outcomeTotal.toFixed(2)}
+                </span>
+              </div>
+            </div>
+            {item.transactions &&
+              item.transactions.map((transaction: ITransaction) => (
+                <TransactionCard client:load {...transaction} />
+              ))}
+          </>
+        );
+      })
+  }
+</div>
+
+<script>
+  const select = document.getElementById("select-items") as HTMLSelectElement;
+  const date = document.getElementById("select-date") as HTMLSelectElement;
+
+  if (select) {
+    select.addEventListener("change", function (event: Event) {
+      const selectedValue = (event.target as HTMLSelectElement).value;
+      const currentUrl = window.location.href;
+      const url = new URL(currentUrl);
+
+      url.searchParams.set("limit", selectedValue);
+      window.location.href = url.toString();
+    });
+  }
+  if (date) {
+    date.addEventListener("change", function (event: Event) {
+      const selectedValue = (event.target as HTMLInputElement).value;
+      const currentUrl = window.location.href;
+      const url = new URL(currentUrl);
+
+      url.searchParams.set("date", selectedValue);
+      window.location.href = url.toString();
+    });
+  }
+</script>

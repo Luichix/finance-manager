@@ -136,8 +136,10 @@ const { title, meta_title, description, image, noindex, canonical } =
     <TwSizeIndicator />
     <main id="main-content" class="container-main">
       <Sidebar />
-      <slot />
+      <div>
+        <slot />
+        <Footer />
+      </div>
     </main>
-    <Footer />
   </body>
 </html>

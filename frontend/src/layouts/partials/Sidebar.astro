@@ -1,22 +1,17 @@
 ---
 import { AiOutlineAppstore } from "react-icons/ai";
-import { LuPieChart, LuBook } from "react-icons/lu";
+import { LuPieChart } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
 import User from "@/components/User";
 ---
 
 <nav class="sidebar">
-  <User client:only />
+  <User client:load />
   <ul class="sidebar-links">
     <li>
-      <a href="/home" class="text-white"
-        ><AiOutlineAppstore size={30} /> Tablero</a
-      >
-    </li>
-    <li>
-      <a href="/transactions" class="text-white">
-        <LuBook size={28} /> Transacciones</a
+      <a href="/transactions" class="text-white"
+        ><AiOutlineAppstore size={30} /> Transacciones</a
       >
     </li>
     <li>

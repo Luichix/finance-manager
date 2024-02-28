@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
-import Icon from '@/components/Icon/Index';
+import React, { useState } from "react";
+import Icon from "@/components/Icon/Index";
+import type { ITransaction } from "@/interfaces/Transactions";
+import { CATEGORIES } from "../FormDashboard/categories";
 
-interface TransactionCardProps {
-  categoryId: number;
-  date: string;
-  amount: number | null;
-  description: string;
-}
-
-const TransactionCard: React.FC<TransactionCardProps> = ({
-  categoryId,
-  date,
+const TransactionCard: React.FC<ITransaction> = ({
   amount,
   description,
+  type,
+  categoryId,
 }) => {
-  const formattedDate = new Date(date).toLocaleDateString('es-ES', {
-    day: 'numeric',
-    month: 'short',
-    year: '2-digit',
-  });
-
   const [showDetails, setShowDetails] = useState(false);
 
   const toggleDetails = () => {
@@ -27,20 +16,26 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
   };
 
   return (
-    <div className="transaction-card shadow-md rounded">
-      <div className="flex justify-between mx-auto p-4 mb-0 pb-0">
-        <div className="column">
-          <Icon id={'finances'} />
+    <div className="transaction-card border rounded px-8">
+      <div className="flex justify-between py-2 gap-4">
+        <div className="flex items-center justify-center gap-2">
+          <div
+            className={`${type == "INCOME" ? "bg-primary" : "bg-secondary"} flex items-center justify-center rounded-md p-3 `}
+          >
+            <Icon id={CATEGORIES[categoryId - 1].description} color="#fff" />
+          </div>
         </div>
-        <div className="column">
-          <p className="font-semibold">{`Categoria: ${categoryId}`}</p>
-          <p>{formattedDate}</p>
+        <div className="flex-1">
+          <p className="font-semibold">{CATEGORIES[categoryId - 1].name}</p>
+          <p>{description}</p>
         </div>
-        <div className="column text-lg font-bold">
-          <p>{amount !== null ? `$${amount.toFixed(2)}` : 'N/A'}</p>
+        <div className="flex items-center text-lg">
+          <p className={type == "INCOME" ? "text-primary" : "text-secondary"}>
+            {amount !== null ? `$${amount.toFixed(2)}` : "N/A"}
+          </p>
         </div>
       </div>
-      <div className="mt-0 pb-0 w-full flex flex-col items-end">
+      <div className=" hidden mt-0 pb-0 w-full  flex-col items-end">
         {showDetails ? (
           <div className="w-full flex flex-col items-end">
             <div className="w-4/6 border-2 border-secondary-700 p-2 rounded mx-2 my-2">
