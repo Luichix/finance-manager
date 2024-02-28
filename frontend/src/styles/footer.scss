@@ -1,7 +1,6 @@
 .footer {
 	background-color: hsl(var(--myapp-black));
-	font-size: calc(0.8rem + 0.5vw);
-	padding: 4.8rem 1.6rem 1.6rem;
+	font-size: 0.8rem;
 
 	&__sectionContainer {
 		justify-items: center;
@@ -13,14 +12,22 @@
 			display: flex;
 			gap: 0.2rem;
 
-			&:nth-child(2) {
-				@media screen and (min-width: 640px) {
-					margin-left: 50%;
+			@media screen and (min-width: 640px) {
+				&:nth-child(2) {
+					align-items: center;
 				}
+
+				&:nth-child(3) {
+					align-items: end;
+					text-align: end;
+				}
+			}
+			&:last-child {
+				justify-content: center;
 			}
 			h3 {
 				font-weight: 600;
-				font-size: calc(1.2rem + 1vw);
+				font-size: 1.2rem;
 			}
 		}
 	}
@@ -46,6 +53,7 @@
 		}
 	}
 	&__copy {
-		text-align: end;
+		width: 100%;
+		@apply text-center sm:text-end;
 	}
 }

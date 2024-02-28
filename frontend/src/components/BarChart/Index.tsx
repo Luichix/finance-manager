@@ -26,26 +26,28 @@ interface Expenses {
   outcomes: Expense[];
 }
 
-interface BarChartProps {
-  expenses: Expenses;
+interface Dates {
+  today: Date;
+  sevenDaysAgo: Date;
 }
 
-function obtenerUltimos7DiasAbreviados() {
-  const diasAbreviados = [];
-  const hoy = new Date();
-  console.log(hoy);
+interface BarChartProps {
+  expenses: Expenses;
+  dates: Dates;
+}
 
-  for (let i = 6; i >= 0; i--) {
-    const fecha = new Date(hoy);
-    fecha.setDate(hoy.getDate() - i);
+function obtenerUltimos7DiasAbreviados(today: Date) {
+  const diasAbreviados = [];
+
+  for (let i = 7; i >= 1; i--) {
+    const fecha = new Date(today);
+    fecha.setDate(today.getDate() - i);
     const diaAbreviado = DAYS[fecha.getDay()];
     diasAbreviados.push(diaAbreviado);
   }
 
   return diasAbreviados;
 }
-
-const labels = obtenerUltimos7DiasAbreviados();
 
 const options = {
   responsive: true,
@@ -60,22 +62,48 @@ const options = {
   },
 };
 
-export default function BarChart({ expenses }: BarChartProps) {
+export default function BarChart({ expenses, dates }: BarChartProps) {
   const chart = useRef<HTMLCanvasElement>(null);
 
   useEffect(
     function () {
       if (chart.current && expenses.incomes && expenses.outcomes) {
+        const labels = obtenerUltimos7DiasAbreviados(dates.today);
+        const incomesData: number[] = Array(7).fill(0); // Inicializar arreglo de ingresos con ceros
+        const outcomesData: number[] = Array(7).fill(0); // Inicializar arreglo de egresos con ceros
+
+        expenses.incomes.forEach((income) => {
+          const index = Math.floor(
+            (new Date(income.createdAt).getTime() -
+              dates.sevenDaysAgo.getTime()) /
+              (1000 * 3600 * 24),
+          );
+          if (index >= 0 && index < 7) {
+            incomesData[index] += income.amount;
+          }
+        });
+
+        expenses.outcomes.forEach((outcome) => {
+          const index = Math.floor(
+            (new Date(outcome.createdAt).getTime() -
+              dates.sevenDaysAgo.getTime()) /
+              (1000 * 3600 * 24),
+          );
+          if (index >= 0 && index < 7) {
+            outcomesData[index] += outcome.amount;
+          }
+        });
+
         const data = {
           labels: labels,
           datasets: [
             {
-              data: [65, 59, 80, 81, 56, 55, 40],
+              data: incomesData,
               label: "Ingresos",
               backgroundColor: "#5caa37",
             },
             {
-              data: [23, 51, 23, 521, 34, 1, 5],
+              data: outcomesData,
               label: "Egresos",
               backgroundColor: "rgb(240, 62, 62)",
             },
