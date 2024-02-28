@@ -1,266 +1,165 @@
+//! btn
+.btn-container {
+	position: absolute;
+	top: calc(100% + 0.8rem);
+	right: 0;
+	button {
+		padding: 0.8rem;
+		background-color: hsl(var(--myapp-primary));
+		border-radius: 11px;
+	}
+
+	&.open {
+		button {
+			background-color: #f03e3e;
+		}
+	}
+}
+
 //! form
 .form-container {
-  box-shadow: 0px 0px 4px #00000066;
-  border-radius: 6px;
-  padding: 32px;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-  grid-column: 1 / span 7;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	max-width: 400px;
+	width: 100%;
+	height: max-content;
+	box-shadow: 0px 0px 4px #00000066;
+	border-radius: 6px;
+	padding: 32px;
+	margin: 0 auto;
+	@apply text-gray-600;
+	transition: transform 0.3s 0.3s;
+	// oculto
+	transform: translate(50%, 50%);
+	opacity: 0;
+	visibility: hidden;
 
-  legend {
-    @apply text-xl text-secondary text-start font-bold;
-    grid-column: 1/3;
-  }
+	&:not(.open) {
+		transition: transform 0.3s 0.3s;
+		opacity: 0;
+		visibility: hidden;
+		transition:
+			transform 0.4s cubic-bezier(0.64, 0, 0.78, 0),
+			opacity 0.4s cubic-bezier(0.11, 0, 0.5, 0),
+			visibility 0.4s;
+	}
 
-  .tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-start: 2;
+	&.open {
+		opacity: 1;
+		visibility: visible;
 
-    &__btn {
-      padding: 0.4rem;
-      grid-column: auto !important;
-      border-radius: 6px;
-      background-color: hsl(var(--myapp-foreground));
-      @apply text-gray-400;
-      // text-transform: uppercase;
-      border: 1px solid hsl(var(--myapp-secondary-200));
-      background-color: hsl(var(--myapp-secondary-900));
-      color: hsl(var(--myapp-foreground));
+		transition:
+			transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.3s,
+			visibility 0.3s,
+			background-color 0.3s 0.03s cubic-bezier(0.55, 0, 1, 0.45);
+		transform: translate(-50%, -50%);
+	}
 
-      transition:
-        background-color 0.3s,
-        color 0.3s;
+	.tabs {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		margin-bottom: 0.4rem;
 
-      &:first-child {
-        border-end-end-radius: 0;
-        border-start-end-radius: 0;
-        border-right: none;
-      }
-      &:last-child {
-        border-end-start-radius: 0;
-        border-start-start-radius: 0;
-        border-left: 0;
-      }
+		&__btn {
+			padding: 0.4rem;
+			grid-column: auto !important;
+			border-radius: 6px;
+			background-color: hsl(var(--myapp-foreground));
+			@apply text-gray-400;
+			// text-transform: uppercase;
+			border: 1px solid hsl(var(--myapp-secondary-200));
+			background-color: hsl(var(--myapp-secondary-900));
+			color: hsl(var(--myapp-foreground));
 
-      &.active {
-        background-color: hsl(var(--myapp-secondary));
-        color: hsl(var(--myapp-foreground));
-      }
-    }
-  }
-  .income,
-  .outcome {
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    align-items: start;
-    text-align: right;
-    gap: 0.8rem;
-    row-gap: 1.6rem;
-  }
-  .income {
-    label {
-      font-size: calc(1rem + 0.1vw);
-      @apply text-gray-500;
-    }
-    textarea {
-      resize: none;
-    }
-    input,
-    textarea {
-      padding: 0.2rem 0rem 0.2rem 0.8rem;
-      width: 100%;
-      border-radius: 6px;
-      @apply border text-gray-400;
-      background: none;
-      font-size: calc(1rem + 0.15vw);
-      &:focus {
-        border-color: transparent;
-        outline: 2px solid hsl(var(--myapp-secondary));
-      }
-      &::placeholder {
-        @apply text-gray-400;
-      }
-    }
+			transition:
+				background-color 0.3s,
+				color 0.3s;
 
-    &__submit {
-      padding: 0.4rem 0.8rem;
-      grid-column: 2 / 3;
-      color: hsl(var(--myapp-foreground));
-      border-radius: 6px;
-      background-color: hsl(var(--myapp-secondary));
-      text-transform: uppercase;
-      font-weight: 600;
-      font-size: 1.2rem;
-      transition:
-        background-color 0.3s,
-        color 0.3s;
-      &:hover {
-        background-color: hsl(var(--myapp-secondary-400));
-      }
-    }
-  }
-}
+			&:first-child {
+				border-end-end-radius: 0;
+				border-start-end-radius: 0;
+				border-right: none;
+			}
+			&:last-child {
+				border-end-start-radius: 0;
+				border-start-start-radius: 0;
+				border-left: 0;
+			}
 
-//! modal
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.12);
-  // !oculto
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.2) translateY(100%);
+			&.active {
+				background-color: hsl(var(--myapp-secondary));
+				color: hsl(var(--myapp-foreground));
+			}
+		}
+	}
+	.income,
+	.outcome {
+		display: flex;
+		flex-direction: column;
+		text-align: left;
+		gap: 0.4rem;
+	}
+	.income {
+		label {
+			font-size: calc(1rem + 0.1vw);
+			@apply text-gray-500;
+		}
+		textarea {
+			resize: none;
+		}
+		input,
+		textarea,
+		select {
+			padding: 0.2rem 0rem 0.2rem 0.8rem;
+			width: 100%;
+			border-radius: 6px;
+			border: 1px solid hsl(var(--myapp-black-900));
+			background: none;
+			color: inherit;
+			font-size: calc(1rem + 0.15vw);
+			&:focus {
+				border-color: transparent;
+				outline: 2px solid hsl(var(--myapp-secondary));
+			}
+			&::placeholder {
+				@apply text-gray-400;
+			}
+		}
+		.input-icon {
+			position: relative;
 
-  .modal:not(&.open) {
-    transform: scale(0.2) translateY(300%);
-    opacity: 0;
-    visibility: hidden;
-    background-color: transparent;
+			& > i {
+				position: absolute;
+				display: block;
+				transform: translate(0, -50%);
+				top: 50%;
+				right: 12px;
+				pointer-events: none;
+				width: 25px;
+				text-align: center;
+				font-style: normal;
+			}
+			& > input {
+				padding-right: 25px;
+				padding-right: 0;
+			}
+		}
 
-    transition:
-      transform 0.4s cubic-bezier(0.64, 0, 0.78, 0),
-      opacity 0.4s cubic-bezier(0.11, 0, 0.5, 0),
-      visibility 0.4s;
-  }
-
-  &.open {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-
-    transition:
-      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.3s,
-      visibility 0.3s,
-      background-color 0.3s 0.03s cubic-bezier(0.55, 0, 1, 0.45);
-  }
-  &__container {
-    position: relative;
-    width: 100%;
-    padding: 20px;
-    max-width: 600px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    border-radius: 11px;
-    background-color: hsl(var(--myapp-foreground));
-    color: hsl(var(--myapp-black));
-    box-shadow: 0 8px 0.8rem rgba(0, 0, 0, 0.2);
-
-    @media only screen and (width >= 640px) {
-      max-width: 600px;
-    }
-
-    button {
-      span,
-      svg {
-        pointer-events: none;
-      }
-    }
-  }
-
-  &__header {
-    padding: 0.2rem 0.4rem;
-    color: hsl(var(--myapp-secondary));
-    font-weight: 600;
-    font-size: 1.4rem;
-  }
-
-  &__selected {
-    padding: 0.2rem 0.4rem;
-    color: hsl(var(--myapp-secondary));
-    font-weight: 600;
-    font-size: 1.6rem;
-
-    &.selected {
-      color: hsl(var(--myapp-primary));
-    }
-  }
-
-  &__actions {
-    margin-top: 0.6rem;
-    display: flex;
-    gap: 0.8rem;
-    color: hsl(var(--myapp-foreground));
-
-    button {
-      background-color: hsl(var(--myapp-secondary-900));
-      padding: 0.2rem 1rem;
-      border-radius: 6px;
-    }
-  }
-  &__close-btn {
-    position: absolute;
-    right: 10px;
-    top: 20px;
-    svg {
-      width: 2.4rem;
-      height: 2.4rem;
-    }
-  }
-}
-
-//! categorias
-
-.categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  flex-wrap: wrap;
-  column-gap: 0.8rem;
-  row-gap: 0.4rem;
-  font-size: calc(0.6rem + 0.5vw);
-
-  @media only screen and (width >= 640px) {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-
-  &__item {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.4rem;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    font-weight: 600;
-    @apply text-gray-400;
-    transition:
-      background-color 0.3s,
-      color 0.3s;
-    &:hover {
-      background-color: hsl(var(--myapp-secondary));
-      color: hsl(var(--myapp-foreground));
-      svg {
-        fill: hsl(var(--myapp-foreground));
-      }
-    }
-
-    &.selected {
-      background-color: hsl(var(--myapp-secondary));
-      color: hsl(var(--myapp-foreground));
-
-      svg {
-        fill: hsl(var(--myapp-foreground));
-      }
-    }
-
-    svg {
-      min-height: 1.2rem;
-      min-width: 1.2rem;
-      height: 1.2rem;
-      width: 1.2rem;
-      @apply fill-gray-400;
-      transition: fill 0.3s;
-    }
-  }
+		&__submit {
+			padding: 0.4rem 0.8rem;
+			margin-top: 0.8rem;
+			color: hsl(var(--myapp-foreground));
+			border-radius: 6px;
+			background-color: hsl(var(--myapp-primary));
+			text-transform: uppercase;
+			transition:
+				background-color 0.3s,
+				color 0.3s;
+			&:hover {
+				background-color: hsl(var(--myapp-secondary-400));
+			}
+		}
+	}
 }

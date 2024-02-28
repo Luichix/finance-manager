@@ -6,7 +6,9 @@ import Base from "@/layouts/Base.astro";
 <Base title="Gestor de finanzas | DineroGestor">
   <section class="bg-white">
     <div class="flex flex-1 p-16 h-full rounded-md bg-slate-100">
-      <FormDashboard client:load />
+      <div class="relative h-screen w-full bg-slate-100">
+        <FormDashboard client:load />
+      </div>
     </div>
   </section>
 </Base>

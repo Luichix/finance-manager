@@ -1,9 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Chart, { type ChartOptions } from "chart.js/auto";
 import styles from "./Index.module.scss";
 
 import { CATEGORIES } from "../FormDashboard/categories";
-import type { ITransaction } from "@/interfaces/Transactions";
+
+type TypeExpense = "INCOME" | "OUTCOME";
+
+interface Expense {
+  id: number;
+  amount: number;
+  description: string;
+  type: TypeExpense;
+  userId: number;
+  categoryId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface DoughnutChartProps {
+  type: string;
+  expenses: Expense[];
+}
 
 const COLORS = [
   "#1f77b4",
@@ -33,21 +50,11 @@ const COLORS = [
   "#637939",
 ];
 
-export default function DoughnutChart({ type = "INCOME" }) {
+export default function DoughnutChart({
+  type = "INCOME",
+  expenses,
+}: DoughnutChartProps) {
   const chart = useRef<HTMLCanvasElement>(null);
-  const [expenses, setExpenses] = useState<ITransaction[]>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(
-        `https://backend-finance-managegr.onrender.com/api/v1/expenses?type=${type}&limit=10&offset=0&demo=true`,
-      );
-      const data = await response.json();
-      setExpenses(data);
-    }
-
-    fetchData();
-  }, [type]);
 
   useEffect(() => {
     if (chart.current && expenses.length) {
@@ -78,7 +85,7 @@ export default function DoughnutChart({ type = "INCOME" }) {
             label: "Expenses",
             data: dataSet,
             backgroundColor,
-            borderColor: "#eae8d6",
+            borderColor: "#1f1f1b",
           },
         ],
       };
@@ -91,7 +98,7 @@ export default function DoughnutChart({ type = "INCOME" }) {
           },
           title: {
             display: true,
-            text: `Grafica de ${type === "INCOME" ? "ingresos" : "egresos"}`,
+            text: `${type === "INCOME" ? "Ingresos" : "Egresos"}`,
           },
         },
       };
@@ -106,7 +113,7 @@ export default function DoughnutChart({ type = "INCOME" }) {
 
   return (
     <div className={styles.chartContainer}>
-      <canvas className={styles.canvas} id="chart" ref={chart}></canvas>
+      <canvas className={styles.canvas} ref={chart}></canvas>
     </div>
   );
 }
