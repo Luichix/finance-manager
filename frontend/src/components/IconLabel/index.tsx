@@ -18,6 +18,7 @@ export const IconLabel = ({
     <div className={styles.iconLabel}>
       <span className={styles.label}>{label}</span>
       <button
+        type="button"
         className={`${styles.icon} ${styles[iconType]}`}
         onClick={handleClick}
       >

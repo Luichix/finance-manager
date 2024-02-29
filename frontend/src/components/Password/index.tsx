@@ -19,8 +19,14 @@ function Password(props: InputProps) {
   return (
     <div className={styles.password}>
       <Input {...props} type={see ? "text" : "password"} />
-      <button onClick={() => setSee(!see)} className={styles.view}>
-        <i>{see ? <AiFillEye /> : <AiFillEyeInvisible />}</i>
+      <button
+        type="button"
+        onClick={() => setSee(!see)}
+        className={styles.view}
+      >
+        <i>
+          {see ? <AiFillEye size={32} /> : <AiFillEyeInvisible size={32} />}
+        </i>
       </button>
     </div>
   );
