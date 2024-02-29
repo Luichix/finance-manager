@@ -1,0 +1,88 @@
+---
+import Layout from "@/layouts/Simple.astro";
+import Testimonial from "@/components/Testimonial/index.astro";
+---
+
+<Layout title="Wellcome">
+  <div class="flex flex-col items-center justify-center py-5 pl-10 pr-10">
+    <h1 class="text-black text-center font-bold text-4xl font-bold">
+      ¡Bienvenidos al nuevo mundo financiero!
+    </h1>
+    <h2 class="text-black text-xl font-medium mt-3.5">
+      Bienvenidos a DINERO GESTOR, tu nuevo amigo que te acompañara a mantener
+      registro de tus gastos y tu economía.
+    </h2>
+
+    <div class="flex justify-center items-center mt-3.5 h-[300px] w-[700px]">
+      <img src="./src/assets/hero.jpg" alt="hero" class="h-[300px] w-[600px]" />
+    </div>
+    <main class="mt-16">
+      <p class="text-black text-base text-left">
+        ¡Controla tus finanzas como nunca antes con nuestra aplicación de
+        gestión de gastos personales! Con nuestra intuitiva interfaz y potentes
+        herramientas, administrar tu dinero nunca ha sido tan fácil.
+      </p>
+      <p class="text-black text-base text-left">
+        ¿Te preocupa no saber exactamente en qué estás gastando tu dinero? Con
+        nuestra aplicación, puedes realizar un seguimiento detallado de cada
+        transacción, categorizar tus gastos y visualizar gráficos claros y
+        concisos que te permiten comprender mejor tus patrones de gasto.
+      </p>
+
+      <p class="text-black text-base text-left">
+        ¡No esperes más para tomar el control de tu dinero! Descarga nuestra
+        aplicación de gestión de gastos personales hoy mismo y comienza a
+        construir un futuro financiero más sólido.
+      </p>
+    </main>
+
+    <section
+      id="mockups"
+      class="flex flex-row gap-28 w-full mt-16 mb-16 justify-center"
+    >
+      <div class="w-[280px] h-[200px]">
+        <img
+          src="./src/assets/mockup app 1.jpg"
+          class="w-[280px] h-[200px]"
+          alt=""
+        />
+      </div>
+
+      <div class="w-[280px] h-[200px]">
+        <img
+          src="./src/assets/mockup app 2.jpg"
+          class="w-[280px] h-[200px]"
+          alt=""
+        />
+      </div>
+      <div class="w-[280px] h-[200px]">
+        <img
+          src="./src/assets/mockup app 3.jpg"
+          class="w-[280px] h-[200px]"
+          alt=""
+        />
+      </div>
+    </section>
+
+    <!-- <div class="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-12"> -->
+    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+      <Testimonial />
+      <Testimonial />
+      <Testimonial />
+    </div>
+
+    <div id="test-nav-cont" class="flex justify-center mt-8">
+      <div id="test-nav" class="">
+        <a href="#" class="text-black text-2xl"> &lt; </a>
+        <button class="h-5 w-5 rounded-full bg-gray-500 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
+        <button class="text-black text-2xl"> &gt; </button>
+        <div></div>
+      </div>
+    </div>
+  </div></Layout
+>

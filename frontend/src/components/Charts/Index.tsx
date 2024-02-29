@@ -79,12 +79,17 @@ export default function Charts() {
   }, []);
 
   return (
-    <div className="charts">
-      <h2 className="charts__title">Reportes</h2>
+    <div className="charts relative">
+      <div>
+        <h2 className="charts__title">Reportes</h2>
+        <hr className="text-black w-full h-1" />
+      </div>
       {isLoading ? (
-        <Spinner />
+        <div className="text-black absolute right-2 top-2 ">
+          <Spinner />
+        </div>
       ) : fetchFailed ? (
-        <p className="text-black">
+        <p className="text-black block ">
           Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.
         </p>
       ) : (
