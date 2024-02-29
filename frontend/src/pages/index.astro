@@ -1,94 +1,37 @@
 ---
 import Layout from "@/layouts/Landing.astro";
-import Testimonial from "@/components/Testimonial/index.astro";
 ---
 
 <Layout title="Gestor de finanzas | DineroGestor">
-  <section class="min-h-screen">
-    <div class="flex flex-col items-center justify-center py-5 pl-10 pr-10">
-      <h1 class="text-black text-center font-bold text-4xl">
-        ¡Bienvenidos al nuevo mundo financiero!
-      </h1>
-      <h2 class="text-black text-xl font-medium mt-3.5">
-        Bienvenidos a DINERO GESTOR, tu nuevo amigo que te acompañara a mantener
-        registro de tus gastos y tu economía.
-      </h2>
-
-      <div class="flex justify-center items-center mt-3.5 h-[300px] w-[700px]">
+  <div class="flex flex-col items-center justify-center">
+    <section
+      class="container min-h-screen grid md:grid-cols-2 place-items-center bg-red gap-4"
+    >
+      <div class="flex flex-col p-8 gap-2">
+        <h1
+          class="hero-title text-secondary text-6xl font-bold leading-relaxed"
+        >
+          Simplifica tus Finanzas
+        </h1>
+        <p class="text-black-600 text-2xl leading-loose">
+          Con <b class="text-secondary">Dinero Gestor</b> puedes administrar tu vida
+          financiera de manera simple, controlar tus finanzas de forma fácil y eficiente
+          con nuestra herramienta web.
+        </p>
+        <a
+          href="/transactions"
+          class="text-white bg-secondary px-8 py-4 rounded-lg font-bold self-start text-2xl mt-8 hover:bg-secondary-900"
+        >
+          Pruebalo Gratis</a
+        >
+      </div>
+      <div class="flex justify-center items-center">
         <img
-          src="./src/assets/hero.jpg"
+          src="/images/hero/hero-image-2.png"
           alt="hero"
-          class="h-[300px] w-[600px]"
+          class="rounded-md"
         />
       </div>
-      <main class="mt-16">
-        <p class="text-black text-base text-left">
-          ¡Controla tus finanzas como nunca antes con nuestra aplicación de
-          gestión de gastos personales! Con nuestra intuitiva interfaz y
-          potentes herramientas, administrar tu dinero nunca ha sido tan fácil.
-        </p>
-        <p class="text-black text-base text-left">
-          ¿Te preocupa no saber exactamente en qué estás gastando tu dinero? Con
-          nuestra aplicación, puedes realizar un seguimiento detallado de cada
-          transacción, categorizar tus gastos y visualizar gráficos claros y
-          concisos que te permiten comprender mejor tus patrones de gasto.
-        </p>
-
-        <p class="text-black text-base text-left">
-          ¡No esperes más para tomar el control de tu dinero! Descarga nuestra
-          aplicación de gestión de gastos personales hoy mismo y comienza a
-          construir un futuro financiero más sólido.
-        </p>
-      </main>
-
-      <section
-        id="mockups"
-        class="flex flex-row gap-28 w-full mt-16 mb-16 justify-center"
-      >
-        <div class="w-[280px] h-[200px]">
-          <img
-            src="./src/assets/mockup app 1.jpg"
-            class="w-[280px] h-[200px]"
-            alt=""
-          />
-        </div>
-
-        <div class="w-[280px] h-[200px]">
-          <img
-            src="./src/assets/mockup app 2.jpg"
-            class="w-[280px] h-[200px]"
-            alt=""
-          />
-        </div>
-        <div class="w-[280px] h-[200px]">
-          <img
-            src="./src/assets/mockup app 3.jpg"
-            class="w-[280px] h-[200px]"
-            alt=""
-          />
-        </div>
-      </section>
-
-      <!-- <div class="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-12"> -->
-      <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
-        <Testimonial />
-        <Testimonial />
-        <Testimonial />
-      </div>
-
-      <div id="test-nav-cont" class="flex justify-center mt-8">
-        <div id="test-nav" class="">
-          <a href="#" class="text-black text-2xl"> &lt;</a>
-          <button class="h-5 w-5 rounded-full bg-gray-500 m-1"></button>
-          <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
-          <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
-          <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
-          <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
-          <button class="h-5 w-5 rounded-full bg-gray-300 m-1"></button>
-          <button class="text-black text-2xl"> &gt;</button>
-          <div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Layout>

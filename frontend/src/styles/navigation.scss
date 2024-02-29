@@ -47,7 +47,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .nav-link-button {
-  @apply bg-secondary-900 text-white px-4 py-2 rounded-md font-bold hover:bg-secondary w-20 text-center;
+  @apply bg-secondary text-white px-4 py-2 rounded-md font-bold hover:bg-secondary-800 w-44 text-center;
 }
 
 .nav-dropdown-list {

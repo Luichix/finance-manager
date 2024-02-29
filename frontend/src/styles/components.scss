@@ -8,3 +8,11 @@
     grid-template-columns: 224px 1fr;
   }
 }
+
+.hero-title {
+  color: hsl(var(--myapp-secondary));
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
