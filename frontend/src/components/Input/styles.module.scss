@@ -1,0 +1,11 @@
+.input {
+  width: 100%;
+  font-size: hsl(var(--font-size-base));
+  outline: none;
+  padding: 16px 24px 16px 24px;
+  @apply text-base rounded-md border-2 border-secondary text-black bg-white;
+}
+
+.input:disabled {
+  background-color: hsl(var(--color-gray-100));
+}

@@ -1,51 +1,59 @@
 .footer {
-  background-color: hsl(var(--myapp-black));
-  font-size: calc(0.8rem + 0.5vw);
-  padding: 4.8rem 1.6rem 1.6rem;
+	background-color: hsl(var(--myapp-black));
+	font-size: 0.8rem;
 
-  &__sectionContainer {
-    justify-items: center;
-    gap: 1.6rem;
-    width: 100%;
+	&__sectionContainer {
+		justify-items: center;
+		gap: 1.6rem;
+		width: 100%;
 
-    section {
-      width: 100%;
-      display: flex;
-      gap: 0.2rem;
+		section {
+			width: 100%;
+			display: flex;
+			gap: 0.2rem;
 
-      &:nth-child(2) {
-        @media screen and (min-width: 640px) {
-          margin-left: 50%;
-        }
-      }
-      h3 {
-        font-weight: 600;
-        font-size: calc(1.2rem + 1vw);
-      }
-    }
-  }
+			@media screen and (min-width: 640px) {
+				&:nth-child(2) {
+					align-items: center;
+				}
 
-  &__social {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.8rem;
-    a:link,
-    a:visited {
-      padding: 0.6rem;
-      background-color: hsl(var(--myapp-black-600));
-      border-radius: 100px;
-    }
-    a:hover,
-    a:focus {
-    }
+				&:nth-child(3) {
+					align-items: end;
+					text-align: end;
+				}
+			}
+			&:last-child {
+				justify-content: center;
+			}
+			h3 {
+				font-weight: 600;
+				font-size: 1.2rem;
+			}
+		}
+	}
 
-    svg {
-      width: 1.2rem;
-      height: 1.2rem;
-      fill: hsl(var(--myapp-foreground));
-    }
-  }
-  &__copy {
-    text-align: end;
-  }
+	&__social {
+		display: flex;
+		justify-content: space-between;
+		gap: 0.8rem;
+		a:link,
+		a:visited {
+			padding: 0.6rem;
+			background-color: hsl(var(--myapp-black-600));
+			border-radius: 100px;
+		}
+		a:hover,
+		a:focus {
+		}
+
+		svg {
+			width: 1.2rem;
+			height: 1.2rem;
+			fill: hsl(var(--myapp-foreground));
+		}
+	}
+	&__copy {
+		width: 100%;
+		@apply text-center sm:text-end;
+	}
 }

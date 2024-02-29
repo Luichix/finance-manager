@@ -1,26 +1,10 @@
 ---
-import { BarChart, DoughnutChart } from "@/components/Index";
+import { Charts } from "@/components/Index";
 import Base from "@/layouts/Base.astro";
 ---
 
 <Base title="Reportes">
-  <section class="section">
-    <div class="section__container">
-      <BarChart client:load />
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2">
-        <DoughnutChart type="OUTCOME" client:load />
-        <DoughnutChart type="INCOME" client:load />
-      </div>
-    </div>
+  <section class="container px-2 py-8 min-h-screen flex gap-8 flex-col sm:px-4">
+    <Charts client:load />
   </section>
 </Base>
-
-<style>
-  .section {
-    @apply dark pt-8 pb-4 bg-black;
-  }
-  .section__container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>

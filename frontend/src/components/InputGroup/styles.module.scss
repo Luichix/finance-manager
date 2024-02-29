@@ -1,0 +1,39 @@
+.inputGroup {
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  white-space: wrap;
+  min-width: 175px;
+  text-align: right;
+}
+
+.label::after {
+  content: ':';
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input {
+  position: relative;
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .inputGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}

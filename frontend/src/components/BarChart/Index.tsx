@@ -1,89 +1,55 @@
 import React, { useEffect, useRef } from "react";
+import type { BarChartProps, dataSet } from "@/interfaces/Charts";
+import type { ITransaction } from "@/interfaces/Transactions";
+import {
+  getLastSevenDays,
+  getBarChartData,
+  barChartOptions as options,
+} from "@/components/Charts/utils";
 import styles from "./Index.module.scss";
 import Chart from "chart.js/auto";
-Chart.defaults.color = "#fff";
-Chart.defaults.borderColor = "#58378d";
-Chart.defaults.backgroundColor = "#eae8d6";
-// const DATA_COUNT = 7;
-// const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"];
 
-function obtenerUltimos7DiasAbreviados() {
-  const diasAbreviados = [];
-  const hoy = new Date();
-
-  for (let i = 6; i >= 0; i--) {
-    const fecha = new Date(hoy);
-    fecha.setDate(hoy.getDate() - i);
-    const diaAbreviado = DAYS[fecha.getDay()];
-    diasAbreviados.push(diaAbreviado);
-  }
-
-  return diasAbreviados;
-}
-
-const labels = obtenerUltimos7DiasAbreviados();
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Grafica",
-    },
-  },
-};
-
-export default function BarChart({ isWeek = true }) {
+export default function BarChart({ incomes, outcomes, dates }: BarChartProps) {
   const chart = useRef<HTMLCanvasElement>(null);
 
   useEffect(
     function () {
-      const data = {
-        labels: labels,
-        datasets: [
-          {
-            data: [65, 59, 80, 81, 56, 55, 40],
-            label: "Ingresos",
-            backgroundColor: "#5caa37",
-          },
-          {
-            data: [23, 51, 23, 521, 34, 1, 5],
-            label: "Egresos",
-            backgroundColor: "rgb(240, 62, 62)",
-          },
-        ],
-        borderColor: "#58378d",
-        borderWidth: 1,
-      };
+      if (chart.current && incomes && outcomes) {
+        const labels = getLastSevenDays(dates.today);
+        const valuesDataSets: dataSet = {
+          dataIncome: Array(7).fill(0) as number[],
+          dataOutcome: Array(7).fill(0) as number[],
+        };
+        function processData(registers: ITransaction[], data: number[]) {
+          registers.forEach((register) => {
+            const index = Math.floor(
+              (new Date(register.createdAt).getTime() -
+                dates.daysAgo.getTime()) /
+                (1000 * 3600 * 24),
+            );
+            if (index >= 0 && index < 7) {
+              data[index] += register.amount;
+            }
+          });
+        }
+        processData(incomes, valuesDataSets.dataIncome);
+        processData(outcomes, valuesDataSets.dataOutcome);
 
-      new Chart(chart.current as HTMLCanvasElement, {
-        type: "bar",
-        data: data,
-        options: options as any,
-      });
+        const data = getBarChartData(labels, valuesDataSets);
+
+        new Chart(chart.current as HTMLCanvasElement, {
+          type: "bar",
+          data: data,
+          options,
+        });
+      }
     },
-    [isWeek],
+    [incomes, outcomes],
   );
 
   return (
-    <div
-      className={styles.chartContainer}
-      style={{
-        minHeight: "350px",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <canvas
-        style={{ width: "100%", minHeight: "350px", height: "100%" }}
-        id="chart"
-        ref={chart}
-      ></canvas>
+    <div className={styles.chartContainer}>
+      <canvas id="barchart" ref={chart}></canvas>
     </div>
   );
 }
