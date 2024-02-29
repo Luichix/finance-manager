@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, type Dispatch, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { FaSave } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
@@ -7,93 +7,55 @@ import InputGroup from "@/components/InputGroup";
 import Input from "@/components/Input";
 import IconLabel from "@/components/IconLabel";
 import Password from "@/components/Password";
+import { STORAGE_KEY_LOGIN, userInfo } from "@/store";
+import { useStore } from "@nanostores/react";
+import { loadFromStorage } from "@/utils/localStorage";
 
-export const userEmptyState = {
-  uid: null,
-  name: "",
-  email: "",
-  phoneNumber: "",
-  industry: "",
-  company: "",
-  country: "",
-  city: "",
-  address: "",
-  employeeCount: "",
-  user: "",
-  emailVerified: null,
-  photoURL: null,
-  accessToken: null,
-  assistantAsigned: null,
-  assistantCreated: null,
-};
+interface Available {
+  visibility: string;
+  disabled: boolean;
+}
+
 const Account = () => {
-  const [form, setForm] = useState(userEmptyState);
-  const [input, setInput] = useState("");
-  const [basic, setBasic] = useState({
+  /** State */
+  const $userInfo = useStore(userInfo);
+
+  const [user, setUser] = useState($userInfo.username);
+  const [email, setEmail] = useState($userInfo.mail);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [matchpassword, setMatchPassword] = useState("");
+
+  useEffect(() => {
+    const userSesion = loadFromStorage(STORAGE_KEY_LOGIN);
+    userInfo.set(userSesion);
+  }, []);
+
+  /** Visibility*/
+
+  const [infoEditable, setUserInfo] = useState({
     visibility: "invisible",
     disabled: true,
   });
-  const refSaveBas = useRef(null);
+  const [passwordReset, setPasswordReset] = useState({
+    visibility: "invisible",
+    disabled: true,
+  });
 
-  useEffect(() => {
-    setForm({ ...form, phoneNumber: input });
-  }, [input]);
-
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmitBasic = async (event: any) => {
-    event.preventDefault();
-  };
-
-  const handleCancelBasic = (event: any) => {
-    event.preventDefault();
-    // setForm({ ...form, ...userState });
-    displayBasic();
-  };
-
-  const displayBasic = () => {
-    if (basic.visibility === "visible") {
-      setBasic({ visibility: "invisible", disabled: true });
+  const handlerVisibility = (
+    state: Available,
+    setState: Dispatch<Available>,
+  ) => {
+    if (state.visibility === "visible") {
+      setState({ visibility: "invisible", disabled: true });
     } else {
-      setBasic({ visibility: "visible", disabled: false });
+      setState({ visibility: "visible", disabled: false });
     }
   };
 
-  const [reset, setReset] = useState({ display: "hidden", disabled: true });
-  // const [confirmState, setConfirmState] = useState('');
-  // const [confirmMessage, setConfirmMessage] = useState('');
-  // const [confirmValid, setConfirmValid] = useState(false);
-  // const [confirmInfo, setConfirmInfo] = useState(null);
-  const [passwordState, setPasswordState] = useState("");
-  // const [passwordMessage, setPasswordMessage] = useState('');
-  // const [passwordValid, setPasswordValid] = useState(false);
-  // const [passwordInfo, setPasswordInfo] = useState(null);
-
-  const displayReset = () => {
-    if (reset.display === "visible") {
-      setReset({ display: "hidden", disabled: true });
-    } else {
-      setReset({ display: "visible", disabled: false });
-    }
-  };
-
-  const handleCancel = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setPasswordState("");
-    // setPasswordValid(false);
-    // setPasswordInfo(null);
-    // setPasswordMessage('');
-    // setConfirmState('');
-    // setConfirmValid(false);
-    // setConfirmInfo(null);
-    displayReset();
   };
-
-  // const handleClick = (event: any) => {
-  //   event.preventDefault();
-  // };
 
   return (
     <div className="flex min-h-screen  py-8" id="backgroud">
@@ -103,15 +65,15 @@ const Account = () => {
             <div className="mb-4 text-center w-56 h-56 ">
               <div className=" bg-secondary rounded-full w-full h-full mx-auto mb-4 flex items-center justify-center">
                 <span className="text-6xl font-bold text-center   text-white">
-                  D
+                  {$userInfo.username.charAt(0).toUpperCase()}
                 </span>
               </div>
             </div>
           </div>
-          <form className={styles.group}>
+          <form className={styles.group} onSubmit={handleSubmit}>
             <IconLabel
               label="Información del Usuario"
-              handleClick={handleCancelBasic}
+              handleClick={() => handlerVisibility(infoEditable, setUserInfo)}
               iconType="normal"
             >
               <BsPencilSquare />
@@ -119,25 +81,14 @@ const Account = () => {
             <hr className="text-black w-full h-1" />
 
             <fieldset className={styles.fields}>
-              <InputGroup label="Nombre Completo" name="name">
-                <Input
-                  name="name"
-                  type="text"
-                  placeholder="Ingrese un nombre completo"
-                  value={form.name}
-                  changeHandler={handleChange}
-                  disabled={basic.disabled}
-                  required={false}
-                />
-              </InputGroup>
               <InputGroup label="Usuario" name="user">
                 <Input
                   name="user"
                   type="text"
                   placeholder="Ingrese un nombre de usuario"
-                  value={form.name}
-                  changeHandler={handleChange}
-                  disabled={basic.disabled}
+                  value={user}
+                  changeHandler={({ target }) => setUser(target.value)}
+                  disabled={infoEditable.disabled}
                   required={false}
                 />
               </InputGroup>
@@ -146,52 +97,38 @@ const Account = () => {
                   name="email"
                   type="email"
                   placeholder="Ingrese su correo electronico"
-                  value={form.email}
-                  changeHandler={handleChange}
-                  disabled={basic.disabled}
-                  required={false}
-                />
-              </InputGroup>
-              <InputGroup label="Telefono" name="phoneNumber">
-                <Input
-                  value={input}
-                  changeHandler={({ target }) => setInput(target.value)}
-                  name="phone"
-                  type="phone"
-                  placeholder="Ingrese su número de telefono"
-                  disabled={basic.disabled}
+                  value={email}
+                  changeHandler={({ target }) => setEmail(target.value)}
+                  disabled={infoEditable.disabled}
                   required={false}
                 />
               </InputGroup>
             </fieldset>
             <div
-              className={`${styles.actions} ${styles[basic.visibility]} `}
-              ref={refSaveBas}
+              className={`${styles.actions} ${styles[infoEditable.visibility]} `}
             >
               <button
                 className="bg-secondary-900 text-white flex items-center gap-2 justify-center text-sm md:text-lg font-bold px-4 py-2 rounded-md w-36 "
-                onClick={(event) => {
-                  handleCancelBasic(event);
-                }}
+                onClick={() => {}}
               >
                 <GiCancel />
                 Cancel
               </button>
               <button
                 className="bg-secondary-500 text-white flex items-center gap-2 justify-center text-sm md:text-lg font-bold px-4 py-2 rounded-md w-36"
-                onClick={(event) => {
-                  handleSubmitBasic(event);
-                }}
+                type="submit"
               >
                 <FaSave />
                 Save
               </button>
             </div>
           </form>
-          <form className={styles.group}>
+          <form className={styles.group} onSubmit={handleSubmit}>
             <IconLabel
               label="Actualizar Contraseña"
-              handleClick={handleCancel}
+              handleClick={() =>
+                handlerVisibility(passwordReset, setPasswordReset)
+              }
               iconType="normal"
             >
               <BsPencilSquare />
@@ -199,58 +136,58 @@ const Account = () => {
             <hr className="text-black w-full h-1" />
 
             <fieldset className={styles.fields}>
-              <InputGroup name="security" label="Current Password">
+              <InputGroup name="security" label="Contraseña Actual">
                 <Password
                   name="newPassword"
                   type="password"
-                  placeholder="Entry your new password"
-                  value={passwordState}
-                  changeHandler={({ target }) => setPasswordState(target.value)}
-                  disabled={reset.disabled}
+                  placeholder="Ingresa tu contraseña actual"
+                  value={currentPassword}
+                  changeHandler={({ target }) =>
+                    setCurrentPassword(target.value)
+                  }
+                  disabled={passwordReset.disabled}
                   required
                 />
               </InputGroup>
-              <InputGroup name="newPassword" label="New Password">
+              <InputGroup name="newPassword" label="Nueva Contraseña">
                 <Password
                   name="newPassword"
                   type="password"
-                  placeholder="Entry your new password"
-                  value={passwordState}
-                  changeHandler={({ target }) => setPasswordState(target.value)}
+                  placeholder="Ingresa tu nueva contraseña"
+                  value={newpassword}
+                  changeHandler={({ target }) => setNewPassword(target.value)}
                   required
-                  disabled={reset.disabled}
+                  disabled={passwordReset.disabled}
                 />
               </InputGroup>
-              <InputGroup name="confirmPassword" label="Confirm New Password">
+              <InputGroup
+                name="confirmPassword"
+                label="Confirmar Nueva Contraseña"
+              >
                 <Password
                   name="newPassword"
                   type="password"
-                  placeholder="Entry your new password"
-                  value={passwordState}
-                  changeHandler={({ target }) => setPasswordState(target.value)}
+                  placeholder="Confima la nueva contraseña"
+                  value={matchpassword}
+                  changeHandler={({ target }) => setMatchPassword(target.value)}
                   required
-                  disabled={reset.disabled}
+                  disabled={passwordReset.disabled}
                 />
               </InputGroup>
             </fieldset>
             <div
-              className={`${styles.actions} ${styles[basic.visibility]} `}
-              ref={refSaveBas}
+              className={`${styles.actions} ${styles[passwordReset.visibility]} `}
             >
               <button
                 className="bg-secondary-900 text-white flex items-center gap-2 justify-center text-sm md:text-lg font-bold px-4 py-2 rounded-md w-36 "
-                onClick={(event) => {
-                  handleCancelBasic(event);
-                }}
+                onClick={() => {}}
               >
                 <GiCancel />
                 Cancel
               </button>
               <button
                 className="bg-secondary-500 text-white flex items-center gap-2 justify-center text-sm md:text-lg font-bold px-4 py-2 rounded-md w-36"
-                onClick={(event) => {
-                  handleSubmitBasic(event);
-                }}
+                type="submit"
               >
                 <FaSave />
                 Save

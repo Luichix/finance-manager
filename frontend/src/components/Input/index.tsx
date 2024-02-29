@@ -7,8 +7,8 @@ interface InputProps {
   placeholder: string;
   value: string;
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled: boolean;
-  required: boolean;
+  disabled?: boolean;
+  required?: boolean;
 }
 
 const Input = ({

@@ -10,8 +10,8 @@ interface UserInfo {
 
 export const USER_INFO_DEFAULT: UserInfo = {
   id: 0,
-  username: "Demo",
-  mail: "",
+  username: "User Demo",
+  mail: "user@example.com",
   token: "",
   sesion: false,
 };
