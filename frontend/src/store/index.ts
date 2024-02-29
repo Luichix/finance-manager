@@ -16,7 +16,7 @@ interface TransactionParams {
 
 export const USER_INFO_DEFAULT: UserInfo = {
   id: 0,
-  username: "User Demo",
+  username: "User",
   mail: "user@example.com",
   token: "",
   sesion: false,
