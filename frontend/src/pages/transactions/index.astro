@@ -1,49 +1,12 @@
 ---
 import Base from "@/layouts/Base.astro";
 import TransactionList from "@/layouts/components/TransactionList.astro";
+import Selectors from "@/components/Selectors";
 ---
 
 <Base title="Gestor de finanzas | DineroGestor">
   <section class="container pt-8 pb-4 min-h-screen flex gap-8 flex-col">
-    <div class="flex items-center justify-end gap-8">
-      <label class="text-gray-400">
-        Registros:
-        <select
-          id="select-items"
-          class="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
-        >
-          <option>10</option>
-          <option>15</option>
-          <option>25</option>
-          <option>50</option>
-        </select>
-      </label>
-      <label class="text-gray-400">
-        Transaccion:
-        <select
-          id="select-type"
-          class="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
-        >
-          <option>Seleccione</option>
-          <option>Ingresos</option>
-          <option>Egresos</option>
-        </select>
-      </label>
-      <label class="text-gray-400">
-        Fecha:
-        <input
-          id="select-date"
-          type="date"
-          class="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
-        />
-      </label>
-      <button
-        id="clean-select"
-        class="bg-secondary-900 hover:bg-secondary px-4 py-2 rounded-md border-1 border-secondary-900 font-semibold text-sm text-white"
-      >
-        Limpiar Todos</button
-      >
-    </div>
+    <Selectors client:load />
     <div
       class="flex flex-col shadow-md border-border border rounded-md h-full flex-1 py-8 px-4 lg:flex-row bg-white"
     >

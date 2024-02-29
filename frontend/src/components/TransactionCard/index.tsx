@@ -30,7 +30,7 @@ const TransactionCard: React.FC<ITransaction> = ({
           <p>{description}</p>
         </div>
         <div className="flex items-center text-lg">
-          <p className={type == "INCOME" ? "text-primary" : "text-[#ff3b3b]"}>
+          <p className={type == "INCOME" ? "text-[#477beb]" : "text-[#f35252]"}>
             {type == "INCOME" ? "" : "-"}{" "}
             {amount !== null ? `$${amount.toFixed(2)}` : "N/A"}
           </p>

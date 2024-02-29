@@ -3,8 +3,8 @@ import TransactionCard from "@/components/TransactionCard";
 import Transactions from "@/services/Transactions";
 import { cleanParams } from "@/utils/queryParams";
 import { type ITransaction } from "@/interfaces/Transactions";
-import Paginate from "@/layouts/components/Paginate.astro";
-import config from "@/config/config.json";
+// import Paginate from '@/layouts/components/Paginate.astro';
+// import config from '@/config/config.json';
 
 export const prerender = false;
 
@@ -26,11 +26,11 @@ const data = await getTransactions(params);
 
 const { limit, offset, ...restParams } = params;
 
-const getAllTransactions = await getTransactions(restParams);
+// const getAllTransactions = await getTransactions(restParams);
 
-const itemsPerPage = parseInt(limit) || config.settings.pagination;
+// const itemsPerPage = parseInt(limit) || config.settings.pagination;
 
-const totalPages = Math.ceil(getAllTransactions.length / itemsPerPage);
+// const totalPages = Math.ceil(getAllTransactions.length / itemsPerPage);
 
 const totalData = (data: ITransaction[]) => {
   const incomeTotal = data
@@ -65,11 +65,11 @@ const totalData = (data: ITransaction[]) => {
 
   const listByDate = Object.entries(groupedByDate).map(
     ([date, transactions]) => {
-      const incomeTotal = data
+      const incomeTotal = transactions
         .filter((item) => item.type == "INCOME")
         .map((item) => item.amount)
         .reduce((previous, current) => previous + current, 0);
-      const outcomeTotal = data
+      const outcomeTotal = transactions
         .filter((item) => item.type == "OUTCOME")
         .map((item) => item.amount)
         .reduce((previous, current) => previous + current, 0);
@@ -97,14 +97,14 @@ const transactions = totalData(data);
   <div class="flex justify-between items-center px-8 py-4">
     <div class="flex flex-col items-center text-lg text-gray-500">
       <span>Ingresos</span>
-      <span class="text-xl font-bold text-primary"
+      <span class="text-xl font-bold text-[#477beb]"
         >$ {transactions.incomeTotal.toFixed(2)}</span
       >
     </div>
     <div class="flex flex-col items-center text-lg text-gray-500">
       <span>Egresos</span>
-      <span class="text-xl font-bold text-secondary"
-        >$ {transactions.outcomeTotal.toFixed(2)}</span
+      <span class="text-xl font-bold text-[#f35252]">
+        $ {transactions.outcomeTotal.toFixed(2)}</span
       >
     </div>
     <div class="flex flex-col items-center text-lg text-gray-500">
@@ -141,10 +141,10 @@ const transactions = totalData(data);
                 </span>
               </div>
               <div class="flex gap-16 items-center">
-                <span class="text-lg font-bold text-primary">
+                <span class="text-lg font-bold text-[#477beb]">
                   $ {item.incomeTotal.toFixed(2)}
                 </span>
-                <span class="text-lg font-bold text-secondary">
+                <span class="text-lg font-bold text-[#f35252]">
                   $ {item.outcomeTotal.toFixed(2)}
                 </span>
               </div>
@@ -158,32 +158,52 @@ const transactions = totalData(data);
       })
   }
 </div>
-<div class="pt-10">
+<!-- <div class="pt-10">
   <Paginate currentPage={1} totalPages={totalPages} />
-</div>
+</div> -->
 
-<script>
-  const select = document.getElementById("select-items") as HTMLSelectElement;
-  const date = document.getElementById("select-date") as HTMLSelectElement;
+<!-- <script>
+  const select = document.getElementById('select-items') as HTMLSelectElement;
+  const date = document.getElementById('select-date') as HTMLSelectElement;
+  const type = document.getElementById('select-type') as HTMLSelectElement;
+  const clean = document.getElementById('clean-select') as HTMLButtonElement;
 
   if (select) {
-    select.addEventListener("change", function (event: Event) {
+    select.addEventListener('change', function (event: Event) {
       const selectedValue = (event.target as HTMLSelectElement).value;
       const currentUrl = window.location.href;
       const url = new URL(currentUrl);
 
-      url.searchParams.set("limit", selectedValue);
+      url.searchParams.set('limit', selectedValue);
+      window.location.href = url.toString();
+    });
+  }
+  if (type) {
+    type.addEventListener('change', function (event: Event) {
+      const selectedValue = (event.target as HTMLSelectElement).value;
+      const currentUrl = window.location.href;
+      const url = new URL(currentUrl);
+
+      url.searchParams.set('type', selectedValue);
       window.location.href = url.toString();
     });
   }
   if (date) {
-    date.addEventListener("change", function (event: Event) {
+    date.addEventListener('change', function (event: Event) {
       const selectedValue = (event.target as HTMLInputElement).value;
       const currentUrl = window.location.href;
       const url = new URL(currentUrl);
 
-      url.searchParams.set("date", selectedValue);
+      url.searchParams.set('date', selectedValue);
       window.location.href = url.toString();
     });
   }
-</script>
+  if (clean) {
+    clean.addEventListener('click', function () {
+      const currentUrl = window.location.href;
+      const url = new URL(currentUrl);
+      url.search = '';
+      window.location.href = url.toString();
+    });
+  }
+</script> -->
