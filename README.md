@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-
 # personal-finance-manager
 
-=======
+Project Management Finance
 
 # Gestor de Finanzas Personales
 
@@ -61,4 +59,4 @@ Todos los comandos se ejecutan desde la raíz del proyecto, desde una terminal:
 - @astrojs/tailwind
 - tailwind (^3.4.1)
 - framer-motion (^11.0.3)
-  > > > > > > > 4cfc561573430b8f0dc479b0f56c2c4cdc29cccb
+ 
