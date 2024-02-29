@@ -77,7 +77,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 // Sidebar styles
 .sidebar {
-  @apply flex-col justify-between w-56 gap-6 h-full p-8 hidden md:flex bg-gradient-to-b from-primary  to-secondary filter brightness-125;
+  @apply flex-col justify-between w-56 gap-6 sticky top-0 left-0 min-h-screen p-8 hidden md:flex bg-gradient-to-b from-primary  to-secondary filter brightness-125;
 }
 
 .sidebar-profile {

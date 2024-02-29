@@ -1,0 +1,46 @@
+.iconLabel {
+  display: flex;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.25rem;
+  border-bottom: 1px solid hsl(var(--color-gray-300));
+  padding: 1rem 0;
+}
+
+.isClickable {
+  cursor: pointer;
+}
+
+.icon {
+  cursor: pointer;
+  padding: 0 0.5rem;
+  align-self: center;
+}
+
+.label {
+  @apply text-black;
+}
+
+.icon:hover {
+  color: hsl(var(--color-primary));
+}
+
+.normal {
+  color: hsl(var(--color-gray-600));
+}
+
+.info {
+  color: hsl(var(--color-info));
+}
+
+.warning {
+  color: hsl(var(--color-warning));
+}
+
+.error {
+  color: hsl(var(--color-error));
+}
+
+.success {
+  color: hsl(var(--color-success));
+}

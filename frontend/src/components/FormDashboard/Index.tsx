@@ -1,8 +1,8 @@
 import React, {
   useEffect,
   useReducer,
-  useRef,
-  type KeyboardEventHandler,
+  // useRef,
+  // type KeyboardEventHandler,
 } from "react";
 import Tabs from "../Switch";
 
@@ -63,7 +63,7 @@ export default function FormDashboard() {
       ammount,
       category,
       description,
-      isCategoriesModalOpen,
+      // isCategoriesModalOpen,
       selectedTab,
     },
     dispatch,
@@ -78,7 +78,7 @@ export default function FormDashboard() {
   function validateNumberChange(e: React.KeyboardEvent<HTMLInputElement>) {
     const value = parseInt(e.key);
     const isNan = isNaN(value);
-    console.log(isNan);
+    // console.log(isNan);
     if (e.code === "Slash" || isNan) {
       e.preventDefault();
     }

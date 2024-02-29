@@ -73,7 +73,7 @@ export default function Charts() {
       dispatch({ type: "SET_ISLOADING", payload: false });
       dispatch({ type: "SET_DATES", payload: getDates(isWeek) });
 
-      console.log();
+      // console.log();
     }
     getData();
   }, []);
