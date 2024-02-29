@@ -1,6 +1,6 @@
 # personal-finance-manager
 
-Project Management Finance
+Project Management Finance - App Project No Country
 
 # Gestor de Finanzas Personales
 
