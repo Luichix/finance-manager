@@ -1,4 +1,4 @@
-import React, { useState, type Dispatch } from "react";
+import React, { useState, type Dispatch, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { FaSave } from "react-icons/fa";
 import { GiCancel } from "react-icons/gi";
@@ -7,6 +7,9 @@ import InputGroup from "@/components/InputGroup";
 import Input from "@/components/Input";
 import IconLabel from "@/components/IconLabel";
 import Password from "@/components/Password";
+import { STORAGE_KEY_LOGIN, userInfo } from "@/store";
+import { useStore } from "@nanostores/react";
+import { loadFromStorage } from "@/utils/localStorage";
 
 interface Available {
   visibility: string;
@@ -15,15 +18,22 @@ interface Available {
 
 const Account = () => {
   /** State */
-  const [user, setUser] = useState("");
-  const [email, setEmail] = useState("");
+  const $userInfo = useStore(userInfo);
+
+  const [user, setUser] = useState($userInfo.username);
+  const [email, setEmail] = useState($userInfo.mail);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [matchpassword, setMatchPassword] = useState("");
 
+  useEffect(() => {
+    const userSesion = loadFromStorage(STORAGE_KEY_LOGIN);
+    userInfo.set(userSesion);
+  }, []);
+
   /** Visibility*/
 
-  const [userInfo, setUserInfo] = useState({
+  const [infoEditable, setUserInfo] = useState({
     visibility: "invisible",
     disabled: true,
   });
@@ -55,7 +65,7 @@ const Account = () => {
             <div className="mb-4 text-center w-56 h-56 ">
               <div className=" bg-secondary rounded-full w-full h-full mx-auto mb-4 flex items-center justify-center">
                 <span className="text-6xl font-bold text-center   text-white">
-                  D
+                  {$userInfo.username.charAt(0).toUpperCase()}
                 </span>
               </div>
             </div>
@@ -63,7 +73,7 @@ const Account = () => {
           <form className={styles.group} onSubmit={handleSubmit}>
             <IconLabel
               label="Información del Usuario"
-              handleClick={() => handlerVisibility(userInfo, setUserInfo)}
+              handleClick={() => handlerVisibility(infoEditable, setUserInfo)}
               iconType="normal"
             >
               <BsPencilSquare />
@@ -78,7 +88,7 @@ const Account = () => {
                   placeholder="Ingrese un nombre de usuario"
                   value={user}
                   changeHandler={({ target }) => setUser(target.value)}
-                  disabled={userInfo.disabled}
+                  disabled={infoEditable.disabled}
                   required={false}
                 />
               </InputGroup>
@@ -89,13 +99,13 @@ const Account = () => {
                   placeholder="Ingrese su correo electronico"
                   value={email}
                   changeHandler={({ target }) => setEmail(target.value)}
-                  disabled={userInfo.disabled}
+                  disabled={infoEditable.disabled}
                   required={false}
                 />
               </InputGroup>
             </fieldset>
             <div
-              className={`${styles.actions} ${styles[userInfo.visibility]} `}
+              className={`${styles.actions} ${styles[infoEditable.visibility]} `}
             >
               <button
                 className="bg-secondary-900 text-white flex items-center gap-2 justify-center text-sm md:text-lg font-bold px-4 py-2 rounded-md w-36 "
