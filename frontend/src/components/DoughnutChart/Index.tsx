@@ -1,54 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import Chart, { type ChartOptions } from "chart.js/auto";
+import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import { CATEGORIES } from "@/components/FormDashboard/categories";
 import styles from "./Index.module.scss";
-
-import { CATEGORIES } from "../FormDashboard/categories";
-
-type TypeExpense = "INCOME" | "OUTCOME";
-
-interface Expense {
-  id: number;
-  amount: number;
-  description: string;
-  type: TypeExpense;
-  userId: number;
-  categoryId: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface DoughnutChartProps {
-  type: string;
-  expenses: Expense[];
-}
-
-const COLORS = [
-  "#1f77b4",
-  "#aec7e8",
-  "#ff7f0e",
-  "#ffbb78",
-  "#2ca02c",
-  "#98df8a",
-  "#d62728",
-  "#ff9896",
-  "#9467bd",
-  "#c5b0d5",
-  "#8c564b",
-  "#c49c94",
-  "#e377c2",
-  "#f7b6d2",
-  "#7f7f7f",
-  "#c7c7c7",
-  "#bcbd22",
-  "#dbdb8d",
-  "#17becf",
-  "#9edae5",
-  "#393b79",
-  "#5254a3",
-  "#6b6ecf",
-  "#9c9ede",
-  "#637939",
-];
+import type { DoughnutChartProps } from "@/interfaces/Charts";
+import {
+  COLORS,
+  getDoughnutChartData,
+  getDoughnutChartOptions,
+} from "@/components/Charts/utils";
 
 export default function DoughnutChart({
   type = "INCOME",
@@ -78,30 +37,8 @@ export default function DoughnutChart({
       const dataSet = filterByCategory.map(({ amount }) => amount);
       const backgroundColor = filterByCategory.map(({ color }) => color);
 
-      const data = {
-        labels,
-        datasets: [
-          {
-            label: "Expenses",
-            data: dataSet,
-            backgroundColor,
-            borderColor: "#1f1f1b",
-          },
-        ],
-      };
-
-      const options: ChartOptions = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "bottom",
-          },
-          title: {
-            display: true,
-            text: `${type === "INCOME" ? "Ingresos" : "Egresos"}`,
-          },
-        },
-      };
+      const data = getDoughnutChartData(labels, dataSet, backgroundColor);
+      const options = getDoughnutChartOptions(type);
 
       new Chart(chart.current, {
         type: "doughnut",

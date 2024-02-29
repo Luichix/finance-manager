@@ -1,47 +1,14 @@
-import React, { useEffect, useReducer, useState } from "react";
-import "./Index.scss";
+import React, { useEffect, useReducer } from "react";
 import { BarChart, DoughnutChart } from "../Index";
+import { getDates } from "./utils";
 import { Spinner } from "@nextui-org/react";
-
-interface Expense {
-  id: number;
-  amount: number;
-  description: string;
-  type: TypeExpense;
-  userId: number;
-  categoryId: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface Action {
-  type: string;
-  payload: any; // Puedes definir un tipo específico para el payload si es necesario
-}
-
-interface State {
-  income: Expense[];
-  outcome: Expense[];
-  isLoading: boolean;
-  dates: Object;
-  isWeek: boolean;
-}
-
-const initialState: State = {
-  income: [],
-  outcome: [],
-  isLoading: true,
-  dates: {},
-  isWeek: true,
-};
-
-function getDates(isWeek = true) {
-  const today = new Date();
-  const sevenDaysAgo = new Date(today);
-  isWeek && sevenDaysAgo.setDate(today.getDate() - 7);
-  !isWeek && sevenDaysAgo.setDate(today.getDate() - 30);
-  return { today, sevenDaysAgo };
-}
+import { initialState } from "@/store/chartReducer";
+import type { State, Action } from "@/interfaces/Charts"; //FIXME
+import Chart from "chart.js/auto";
+import "./Index.scss";
+Chart.defaults.color = "#1f1f1b";
+Chart.defaults.borderColor = "#58378d";
+Chart.defaults.backgroundColor = "#1f1f1b";
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
@@ -55,54 +22,75 @@ function reducer(state: State, action: Action) {
       return { ...state, dates: action.payload };
     case "SET_ISWEEK":
       return { ...state, isWeek: action.payload };
+    case "SET_FETCHFAILED":
+      return { ...state, fetchFailed: true };
     default:
       return state;
   }
 }
-
-export type TypeExpense = "INCOME" | "OUTCOME";
-
 export default function Charts() {
-  const [{ income, outcome, isWeek, isLoading, dates }, dispatch] = useReducer(
-    reducer,
-    initialState,
-  );
+  const [{ income, outcome, isWeek, isLoading, dates, fetchFailed }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(() => {
     async function getIncomes() {
-      const response = await fetch(
+      const data = await fetch(
         `https://backend-finance-managegr.onrender.com/api/v1/expenses?type=INCOME&limit=50&offset=0&demo=true`,
-      );
-      const incomes = await response.json();
-      dispatch({ type: "SET_INCOME", payload: incomes });
+      )
+        .then((res) => {
+          if (!res.ok) {
+            dispatch({ type: "SET_FETCHFAILED" });
+            throw new Error(`Fetch failed with status ${res.status}`);
+          }
+
+          return res.json();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      dispatch({ type: "SET_INCOME", payload: data });
     }
     async function getOutcomes() {
-      const response = await fetch(
+      const data = await fetch(
         `https://backend-finance-managegr.onrender.com/api/v1/expenses?type=OUTCOME&limit=50&offset=0&demo=true`,
-      );
-      const outcomes = await response.json();
-      dispatch({ type: "SET_OUTCOME", payload: outcomes });
+      )
+        .then((res) => {
+          if (!res.ok) {
+            dispatch({ type: "SET_FETCHFAILED" });
+            throw new Error(`Fetch failed with status ${res.status}`);
+          }
+
+          return res.json();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      dispatch({ type: "SET_OUTCOME", payload: data });
     }
     async function getData() {
       await getIncomes();
       await getOutcomes();
       dispatch({ type: "SET_ISLOADING", payload: false });
       dispatch({ type: "SET_DATES", payload: getDates(isWeek) });
-    }
 
+      console.log();
+    }
     getData();
   }, []);
 
   return (
     <div className="charts">
       <h2 className="charts__title">Reportes</h2>
-      {!isLoading ? (
+      {isLoading ? (
+        <Spinner />
+      ) : fetchFailed ? (
+        <p className="text-black">
+          Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.
+        </p>
+      ) : (
         <>
           <div className="charts__item-main bar">
-            <BarChart
-              expenses={{ incomes: income, outcomes: outcome }}
-              dates={dates}
-            />
+            <BarChart incomes={income} outcomes={outcome} dates={dates} />
           </div>
           <div className="charts__item">
             <DoughnutChart type="INCOME" expenses={income} />
@@ -111,8 +99,6 @@ export default function Charts() {
             <DoughnutChart type="OUTCOME" expenses={outcome} />
           </div>
         </>
-      ) : (
-        <Spinner />
       )}
     </div>
   );
