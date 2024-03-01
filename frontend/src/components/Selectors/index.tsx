@@ -1,4 +1,8 @@
-import { STORAGE_KEY_TRANSACTION, transactionParams } from "@/store";
+import {
+  STORAGE_KEY_TRANSACTION,
+  TRANSACTION_PARAMS_DEFAULT,
+  transactionParams,
+} from "@/store";
 import { loadFromStorage, saveToStorage } from "@/utils/localStorage";
 import { useStore } from "@nanostores/react";
 import React, { type ChangeEvent, useEffect } from "react";
@@ -13,56 +17,41 @@ const Selectors = () => {
 
   const handleChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
-    const currentUrl = window.location.href;
-    const url = new URL(currentUrl);
 
-    url.searchParams.set("limit", selectedValue);
+    transactionParams.setKey("limit", selectedValue);
 
     saveToStorage(STORAGE_KEY_TRANSACTION, {
       ...$transactionParams,
       limit: selectedValue,
     });
-
-    window.location.href = url.toString();
   };
 
   const handleChangeType = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
-    const currentUrl = window.location.href;
-    const url = new URL(currentUrl);
 
-    url.searchParams.set("type", selectedValue);
+    transactionParams.setKey("type", selectedValue);
+
     saveToStorage(STORAGE_KEY_TRANSACTION, {
       ...$transactionParams,
       type: selectedValue,
     });
-
-    window.location.href = url.toString();
   };
 
   const handleChangeDate = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedValue = event.target.value;
-    const currentUrl = window.location.href;
-    const url = new URL(currentUrl);
 
-    url.searchParams.set("date", selectedValue);
+    transactionParams.setKey("date", selectedValue);
     saveToStorage(STORAGE_KEY_TRANSACTION, {
       ...$transactionParams,
       date: selectedValue,
     });
-
-    window.location.href = url.toString();
   };
 
   const handleCleanSelect = () => {
-    const currentUrl = window.location.href;
-    const url = new URL(currentUrl);
-    url.search = "";
-    transactionParams.set({});
-    saveToStorage(STORAGE_KEY_TRANSACTION, {});
-
-    window.location.href = url.toString();
+    transactionParams.set(TRANSACTION_PARAMS_DEFAULT);
+    saveToStorage(STORAGE_KEY_TRANSACTION, TRANSACTION_PARAMS_DEFAULT);
   };
+
   return (
     <div className="flex items-center justify-end gap-8">
       <label className="text-gray-400">

@@ -23,7 +23,7 @@ export const USER_INFO_DEFAULT: UserInfo = {
 };
 
 export const TRANSACTION_PARAMS_DEFAULT: TransactionParams = {
-  date: new Date().toISOString().split("T")[0],
+  date: "",
 };
 
 export const STORAGE_KEY_LOGIN = "DINERO_GESTOR_TOKEN";

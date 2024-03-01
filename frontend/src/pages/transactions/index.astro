@@ -1,6 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
-import TransactionList from "@/layouts/components/TransactionList.astro";
+import TransactionList from "@/components/TransactionList";
 import Selectors from "@/components/Selectors";
 ---
 
@@ -15,7 +15,7 @@ import Selectors from "@/components/Selectors";
           <h2 class="text-3xl font-bold text-primary my-4">Transacciones</h2>
         </div>
         <hr class="text-black w-full h-1" />
-        <TransactionList />
+        <TransactionList client:load />
       </div>
     </div>
   </section>
