@@ -52,8 +52,9 @@
 
 ### Construido con 🛠️
 
-![Selenium](https://img.shields.io/badge/Selenium-000.svg?style=for-the-badge&logo=selenium&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-000.svg?style=for-the-badge&logo=selenium&logoColor=white) ![Mocha](https://img.shields.io/badge/mocha-000.svg?&style=for-the-badge&logo=mocha&logoColor=white)
+
 
 ### Comunicación 📣​
 
-[![](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=fff)](https://discord.gg/dyxDxw8w) [![](https://img.shields.io/badge/Trello-095ED8?style=for-the-badge&logo=Trello&logoColor=fff)](https://trello.com/b/BbJrA9Gq/no-country-s4-11) [![](https://img.shields.io/badge/Slack-%23ED8B00?style=for-the-badge&logo=Slack&logoColor=fff)](https://slack.com/intl/es-pe/) [![](https://img.shields.io/badge/Miro-%fcdc35?style=for-the-badge&logo=miro&logoColor=fff)](https://slack.com/intl/es-pe/)
+[![](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=fff)](https://discord.gg/dyxDxw8w) [![](https://img.shields.io/badge/Trello-095ED8?style=for-the-badge&logo=Trello&logoColor=fff)](https://trello.com/b/BbJrA9Gq/no-country-s4-11) [![](https://img.shields.io/badge/Slack-%23ED8B00?style=for-the-badge&logo=Slack&logoColor=fff)](https://slack.com/intl/es-pe/) [![](https://img.shields.io/badge/Miro-%fcdc35?style=for-the-badge&logo=miro&logoColor=fff)](https://miro.com/)

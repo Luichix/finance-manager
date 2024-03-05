@@ -1,0 +1,17 @@
+{
+  "name": "qa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests/*.spec.js --no-timeouts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^10.3.0",
+    "selenium-webdriver": "^4.18.1",
+    "webdriver-manager": "^12.1.9"
+  }
+}
