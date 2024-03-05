@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import { CATEGORIES } from "@/components/FormDashboard/categories";
 import styles from "./Index.module.scss";
@@ -14,7 +14,7 @@ export default function DoughnutChart({
   expenses,
 }: DoughnutChartProps) {
   const chart = useRef<HTMLCanvasElement>(null);
-
+  const [actualChart, setActualChart] = useState<Chart | null>(null);
   useEffect(() => {
     if (chart.current && expenses.length) {
       const newExpenses = expenses.reduce(
@@ -40,17 +40,29 @@ export default function DoughnutChart({
       const data = getDoughnutChartData(labels, dataSet, backgroundColor);
       const options = getDoughnutChartOptions(type);
 
-      new Chart(chart.current, {
-        type: "doughnut",
-        data,
-        options,
-      });
+      if (actualChart) {
+        actualChart.data = data;
+        actualChart.update();
+      } else {
+        const myChart = new Chart(chart.current, {
+          type: "doughnut",
+          data,
+          options,
+        });
+        setActualChart(myChart);
+      }
     }
   }, [expenses, type]);
 
   return (
     <div className={styles.chartContainer}>
-      <canvas className={styles.canvas} ref={chart}></canvas>
+      {expenses.length ? (
+        <canvas className={styles.canvas} ref={chart}></canvas>
+      ) : (
+        <a href={"/transactions"}>
+          Agregar {`${type === "INCOME" ? "ingresos" : "egresos"}`}
+        </a>
+      )}
     </div>
   );
 }

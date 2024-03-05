@@ -5,8 +5,9 @@ export const initialState: State = {
   outcome: [],
   isLoading: true,
   dates: {},
-  isWeek: true,
+  limit: 15,
   fetchFailed: false,
+  selectedLimit: 1,
 };
 
 //FIXME

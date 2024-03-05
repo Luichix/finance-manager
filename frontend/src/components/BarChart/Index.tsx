@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { BarChartProps, dataSet } from "@/interfaces/Charts";
 import type { ITransaction } from "@/interfaces/Transactions";
 import {
@@ -11,7 +11,7 @@ import Chart from "chart.js/auto";
 
 export default function BarChart({ incomes, outcomes, dates }: BarChartProps) {
   const chart = useRef<HTMLCanvasElement>(null);
-
+  const [actualChart, setActualChart] = useState<Chart | null>(null);
   useEffect(
     function () {
       if (chart.current && incomes && outcomes) {
@@ -37,11 +37,17 @@ export default function BarChart({ incomes, outcomes, dates }: BarChartProps) {
 
         const data = getBarChartData(labels, valuesDataSets);
 
-        new Chart(chart.current as HTMLCanvasElement, {
-          type: "bar",
-          data: data,
-          options,
-        });
+        if (actualChart) {
+          actualChart.data = data;
+          actualChart.update();
+        } else {
+          const myChart = new Chart(chart.current, {
+            type: "bar",
+            data: data,
+            options,
+          });
+          setActualChart(myChart);
+        }
       }
     },
     [incomes, outcomes],
@@ -49,7 +55,7 @@ export default function BarChart({ incomes, outcomes, dates }: BarChartProps) {
 
   return (
     <div className={styles.chartContainer}>
-      <canvas id="barchart" ref={chart}></canvas>
+      <canvas ref={chart}></canvas>
     </div>
   );
 }

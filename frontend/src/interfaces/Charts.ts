@@ -9,8 +9,9 @@ export interface State {
   outcome: ITransaction[];
   isLoading: boolean;
   dates: Object;
-  isWeek: boolean;
+  limit: number;
   fetchFailed: boolean;
+  selectedLimit: number;
 }
 
 export interface Action {
