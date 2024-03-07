@@ -1,35 +1,6 @@
 import type { dataSet } from "@/interfaces/Charts";
 import type { ChartOptions } from "chart.js/auto";
-
-export const COLORS = [
-  "#1f77b4",
-  "#aec7e8",
-  "#9467bd",
-  "#393b79",
-  "#e377c2",
-  "#17becf",
-  "#ff7f0e",
-  "#ffbb78",
-  "#98df8a",
-  "#c5b0d5",
-  "#2ca02c",
-  "#dbdb8d",
-  "#d62728",
-  "#ff9896",
-  "#8c564b",
-  "#c49c94",
-  "#f7b6d2",
-  "#7f7f7f",
-  "#c7c7c7",
-  "#9edae5",
-  "#5254a3",
-  "#bcbd22",
-  "#6b6ecf",
-  "#9c9ede",
-  "#637939",
-];
-
-export const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"];
+import { DAYS } from "@/store/charts";
 
 export const barChartOptions: ChartOptions = {
   responsive: true,
@@ -71,12 +42,14 @@ export function getLastSevenDays(today: Date) {
   return diasAbreviados;
 }
 
-export function getDates(isWeek = true) {
-  const today = new Date();
-  const daysAgo = new Date(today);
-  isWeek && daysAgo.setDate(today.getDate() - 7);
-  !isWeek && daysAgo.setDate(today.getDate() - 30);
-  return { today, daysAgo };
+export function getLastSevenMonths(today: Date) {}
+
+export function getQueryDate(date: Date) {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+
+  return `${year}-${month < 10 ? "0" : ""}${month}-${day < 10 ? "0" : ""}${day}`;
 }
 
 export function getBarChartData(labels: string[], data: dataSet) {

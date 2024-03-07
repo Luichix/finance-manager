@@ -4,10 +4,10 @@ import { CATEGORIES } from "@/components/FormTransactions/categories";
 import styles from "./Index.module.scss";
 import type { DoughnutChartProps } from "@/interfaces/Charts";
 import {
-  COLORS,
   getDoughnutChartData,
   getDoughnutChartOptions,
 } from "@/components/Charts/utils";
+import { COLORS } from "@/store/charts";
 
 export default function DoughnutChart({
   type = "INCOME",
