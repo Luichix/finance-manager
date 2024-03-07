@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Icon from "@/components/Icon/Index";
 import type { ITransaction } from "@/interfaces/Transactions";
-import { CATEGORIES } from "../FormDashboard/categories";
+import { CATEGORIES } from "../FormTransactions/categories";
 
 const TransactionCard: React.FC<ITransaction> = ({
   amount,

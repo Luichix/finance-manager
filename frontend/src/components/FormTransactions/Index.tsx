@@ -1,46 +1,29 @@
-import React, {
-  useEffect,
-  useReducer,
-  // useRef,
-  // type KeyboardEventHandler,
-} from "react";
-import Tabs from "../Switch";
-
-const content = {
-  amount: "Cantidad:",
-  category: "Categoria:",
-  description: "Descripción:",
-};
-
+import React, { useEffect, useReducer } from "react";
+import { loadFromStorage } from "@/utils/localStorage";
 import { CATEGORIES } from "./categories";
-
-const initialState = {
-  isOpen: false,
-  ammount: "",
-  category: "",
-  description: "",
-  isCategoriesModalOpen: false,
-  selectedTab: "INCOME",
-};
+import Tabs from "../Switch";
+import {
+  initialState,
+  labelsList,
+  submitTransaction,
+} from "@/utils/formTransactions";
 
 function reducer(state: any, action: any) {
   switch (action.type) {
     case "toggleModal":
-      return { ...state, isOpen: !state.isOpen };
+      return { ...initialState, isOpen: !state.isOpen };
     case "closeModal":
       return { ...state, isOpen: false };
-    case "openModal":
-      return { ...state, isOpen: false };
-    case "closeCategoriesModal":
-      return { ...state, isCategoriesModalOpen: false };
-    case "openCategoriesModal":
-      return { ...state, isCategoriesModalOpen: true };
+    case "setIsLoged":
+      return { ...state, isLoged: action.payload };
     case "setAmmount":
       return { ...state, ammount: action.payload };
     case "setCategory":
       return { ...state, category: action.payload };
     case "setDescription":
       return { ...state, description: action.payload };
+    case "setCreatedAt":
+      return { ...state, createdAt: action.payload };
     case "setTabIncome":
       return {
         ...state,
@@ -51,37 +34,45 @@ function reducer(state: any, action: any) {
       return {
         ...state,
         selectedTab: "OUTCOME",
-        category: initialState.category,
+        category: "3",
       };
   }
 }
 
-export default function FormDashboard() {
+export default function FormTransactions() {
   const [
-    {
-      isOpen,
-      ammount,
-      category,
-      description,
-      // isCategoriesModalOpen,
-      selectedTab,
-    },
+    { isOpen, isLoged, ammount, category, description, createdAt, selectedTab },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   function handleKeyUp(e: any) {
     if (e.key === "Escape") {
-      dispatch({ type: "closeCategoriesModal" });
+      dispatch({ type: "closeModal" });
     }
   }
 
   function validateNumberChange(e: React.KeyboardEvent<HTMLInputElement>) {
     const value = parseInt(e.key);
     const isNan = isNaN(value);
-    // console.log(isNan);
-    if (e.code === "Slash" || isNan) {
+    if (e.code === "Slash" || (isNan && e.code !== "Backspace")) {
       e.preventDefault();
     }
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const token = loadFromStorage("DINERO_GESTOR_TOKEN").token;
+    submitTransaction(token, {
+      ammount,
+      description,
+      category,
+      selectedTab,
+      createdAt,
+    })
+      .then((res) => {
+        if (res.ok) dispatch({ type: "toggleModal" });
+      })
+      .catch((error) => console.error(error));
   }
 
   useEffect(() => {
@@ -106,14 +97,9 @@ export default function FormDashboard() {
         </button>
       </div>
       <div className={`form-container${isOpen ? " open" : ""}`}>
-        <form
-          action="#"
-          method="POST"
-          className="income"
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <form method="POST" className="income" onSubmit={handleSubmit}>
           <Tabs selectedTab={selectedTab} dispatch={dispatch} />
-          <label htmlFor="ammount">{content.amount}</label>
+          <label htmlFor="ammount">{labelsList.amount}</label>
           <div className="input-icon">
             <input
               name="ammount"
@@ -125,11 +111,12 @@ export default function FormDashboard() {
               onKeyDown={validateNumberChange}
               type="number"
               placeholder="1000000"
+              required
             />
             <i>$</i>
           </div>
 
-          <label htmlFor="category">{content.category}</label>
+          <label htmlFor="category">{labelsList.category}</label>
           <select
             name="category"
             id="category"
@@ -137,6 +124,7 @@ export default function FormDashboard() {
             onChange={(e) =>
               dispatch({ type: "setCategory", payload: e.target.value })
             }
+            required
           >
             {CATEGORIES.map(
               ({ typeCategory, name, id }) =>
@@ -147,7 +135,17 @@ export default function FormDashboard() {
                 ),
             )}
           </select>
-          <label htmlFor="description">{content.description}</label>
+          <label className="text-gray-400">{labelsList.date}</label>
+          <input
+            value={createdAt}
+            onChange={(e) =>
+              dispatch({ type: "setCreatedAt", payload: e.target.value })
+            }
+            id="select-date"
+            type="date"
+            className="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
+          />
+          <label htmlFor="description">{labelsList.description}</label>
           <textarea
             name="description"
             id="description"

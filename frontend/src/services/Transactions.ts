@@ -12,7 +12,6 @@ class Transactions {
   }) {
     try {
       const { accessToken, ...restParams } = params;
-
       const urlWithParams =
         Transactions.URL +
         "?" +

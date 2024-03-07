@@ -1,5 +1,5 @@
 import React from "react";
-import { CATEGORIES } from "../FormDashboard/categories";
+import { CATEGORIES } from "../FormTransactions/categories";
 
 interface CategoriesProps {
   selected: boolean;

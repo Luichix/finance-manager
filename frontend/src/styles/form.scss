@@ -1,12 +1,14 @@
 //! btn
 .btn-container {
-	position: absolute;
-	top: calc(100% + 0.8rem);
-	right: 0;
-	button {
+	position: relative;
+
+	button,
+	a:link,
+	a:visited {
 		padding: 0.8rem;
 		background-color: hsl(var(--myapp-primary));
 		border-radius: 11px;
+		color: hsl(var(--myapp-foreground));
 	}
 
 	&.open {
@@ -18,20 +20,12 @@
 
 //! form
 .form-container {
-	position: absolute;
+	@apply fixed text-gray-600 w-full h-full mx-auto;
 	left: 50%;
 	top: 50%;
-	max-width: 400px;
-	width: 100%;
-	height: max-content;
-	box-shadow: 0px 0px 4px #00000066;
-	border-radius: 6px;
-	padding: 32px;
-	margin: 0 auto;
-	@apply text-gray-600;
 	transition: transform 0.3s 0.3s;
-	// oculto
-	transform: translate(50%, 50%);
+	// ?oculto
+	transform: translate(-50%, -50%);
 	opacity: 0;
 	visibility: hidden;
 
@@ -48,13 +42,22 @@
 	&.open {
 		opacity: 1;
 		visibility: visible;
-
 		transition:
 			transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 0.3s,
 			visibility 0.3s,
 			background-color 0.3s 0.03s cubic-bezier(0.55, 0, 1, 0.45);
 		transform: translate(-50%, -50%);
+
+		&::after {
+			content: '';
+			@apply absolute top-0 left-0 w-full h-full;
+			background: linear-gradient(
+				to bottom,
+				rgba(0, 0, 0, 0.1),
+				rgba(0, 0, 0, 0.1)
+			);
+		}
 	}
 
 	.tabs {
@@ -96,10 +99,15 @@
 	}
 	.income,
 	.outcome {
-		display: flex;
-		flex-direction: column;
-		text-align: left;
+		@apply absolute flex flex-col text-left w-full bg-foreground shadow-md;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
 		gap: 0.4rem;
+		max-width: 450px;
+		border-radius: 6px;
+		padding: 24px;
+		z-index: 500;
 	}
 	.income {
 		label {
