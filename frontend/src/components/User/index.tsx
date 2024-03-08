@@ -13,16 +13,14 @@ const User = () => {
   }, []);
 
   return (
-    <>
-      <div className="sidebar-profile gap-2">
-        <div className="bg-secondary-300 p-5 border-secondary rounded-md">
-          <span className="text-white text-4xl">
-            {$userInfo.username.charAt(0).toUpperCase()}
-          </span>
-        </div>
+    <div className="sidebar-profile gap-6">
+      <div className="bg-secondary-300 p-5 border-secondary rounded-md">
+        <span className="text-white text-4xl text-center">
+          {$userInfo.username.charAt(0).toUpperCase()}
+        </span>
       </div>
-      <span> Bienvenido {$userInfo.username}!</span>
-    </>
+      <span> Bienvenido {$userInfo.username}</span>
+    </div>
   );
 };
 

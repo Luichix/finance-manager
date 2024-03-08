@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Icon from "@/components/Icon/Index";
 import type { ITransaction } from "@/interfaces/Transactions";
 import { CATEGORIES } from "../FormTransactions/categories";

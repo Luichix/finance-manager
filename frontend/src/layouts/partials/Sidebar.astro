@@ -4,9 +4,15 @@ import { LuPieChart } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
 import User from "@/components/User";
+import { FaBars } from "react-icons/fa";
 ---
 
-<nav class="sidebar">
+<div class="fixed top-1 right-3 md:hidden">
+  <button type="button" id="button-sidebar">
+    <FaBars size={28} className="text-primary" /></button
+  >
+</div>
+<nav class="sidebar sidebar-show">
   <User transition:persist client:load />
   <ul class="sidebar-links">
     <li>
@@ -41,7 +47,14 @@ import User from "@/components/User";
   };
 
   const sesion = document.getElementById("logout");
+  const button = document.getElementById("button-sidebar");
   if (sesion) {
     sesion.addEventListener("click", logout);
+  }
+
+  if (button) {
+    button.addEventListener("click", () => {
+      console.log("Hello");
+    });
   }
 </script>

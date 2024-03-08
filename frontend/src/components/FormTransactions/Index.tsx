@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { loadFromStorage } from "@/utils/localStorage";
 import { CATEGORIES } from "./categories";
 import type {
   TSubmitTransaction,
@@ -7,6 +6,7 @@ import type {
 } from "@/interfaces/Transactions";
 import { initialStateFormTransaction } from "@/store";
 import Transactions from "@/services/Transactions";
+import { loadFromStorage } from "@/utils/localStorage";
 
 const labelsList = {
   amount: "Cantidad:",
@@ -45,9 +45,9 @@ export default function FormTransactions() {
     e: React.FormEvent<HTMLFormElement | HTMLSelectElement>,
   ) {
     e.preventDefault();
-    // const token = loadFromStorage('DINERO_GESTOR_TOKEN').token;
+    const token = loadFromStorage("DINERO_GESTOR_TOKEN").token;
 
-    await sendTransaction(form).then((response) => {
+    await sendTransaction(form, token).then((response) => {
       console.log(response);
     });
   }
@@ -70,13 +70,13 @@ export default function FormTransactions() {
           <div className="tabs">
             <button
               className={`tabs__btn${form.type === "INCOME" ? " active" : ""}`}
-              onClick={(e) => handleButtons("INCOME", "type")}
+              onClick={() => handleButtons("INCOME", "type")}
             >
               Ingreso
             </button>
             <button
               className={`tabs__btn${form.type === "OUTCOME" ? " active" : ""}`}
-              onClick={(e) => handleButtons("OUTCOME", "type")}
+              onClick={() => handleButtons("OUTCOME", "type")}
             >
               Egreso
             </button>

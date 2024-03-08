@@ -1,6 +1,6 @@
-import { EFilters, type IChartsState } from "@/interfaces/Charts";
+import { EFilters, type IChartsState, type IDates } from "@/interfaces/Charts";
 
-export function getDates(days: EFilters) {
+export function getDates(days: EFilters): IDates {
   const today = new Date();
   const daysAgo = new Date(today);
   daysAgo.setDate(today.getDate() - days);

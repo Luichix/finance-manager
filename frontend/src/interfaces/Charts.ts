@@ -19,12 +19,13 @@ export interface IChartsState {
 }
 
 export enum EFilters {
+  Year = 360,
   Month = 30,
   Week = 7,
   SixMonths = 180,
 }
 
-interface IDates {
+export interface IDates {
   daysAgo: Date;
   today: Date;
 }

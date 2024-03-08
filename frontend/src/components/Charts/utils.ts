@@ -42,7 +42,7 @@ export function getLastSevenDays(today: Date) {
   return diasAbreviados;
 }
 
-export function getLastSevenMonths(today: Date) {}
+export function getLastSevenMonths() {}
 
 export function getQueryDate(date: Date) {
   const year = date.getFullYear();

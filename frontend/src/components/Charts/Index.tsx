@@ -6,9 +6,9 @@ import { type IChartsState, EKEYS, EFilters } from "@/interfaces/Charts";
 import { loadFromStorage } from "@/utils/localStorage";
 import { BarChart, DoughnutChart } from "../Index";
 import { STORAGE_KEY_LOGIN } from "@/store";
-import { type ITransaction } from "../../interfaces/Transactions";
 import Chart from "chart.js/auto";
 import "./Index.scss";
+import { convertStringToFilter } from "@/utils/chartsTransform";
 Chart.defaults.color = "#1f1f1b";
 Chart.defaults.borderColor = "#58378d";
 Chart.defaults.backgroundColor = "#1f1f1b";
@@ -70,11 +70,13 @@ export default function Charts() {
     key: EKEYS,
   ) {
     if (key === EKEYS.SET_FILTER_BY_INPUT)
-      setChartsData((data) => {
+      setChartsData((previousData) => {
+        const filter = convertStringToFilter(e.target.value);
+
         return {
-          ...data,
-          filterByInput: e.target.value as string,
-          dates: getDates(e.target.value),
+          ...previousData,
+          filterByInput: filter,
+          dates: getDates(filter),
         };
       });
   }
