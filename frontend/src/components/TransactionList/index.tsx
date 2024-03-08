@@ -64,21 +64,21 @@ const TransactionList = () => {
       ) : (
         <>
           <div className="flex justify-between items-center px-8 py-4 delay-300">
-            <div className="flex flex-col items-center text-lg text-gray-500">
+            <div className="flex flex-col items-center text-md md:text-lg text-gray-500">
               <span>Ingresos</span>
-              <span className="text-xl font-bold text-[#477beb]">
+              <span className="text-lg md:text-xl font-bold text-[#477beb]">
                 $ {data.incomeTotal.toFixed(2)}
               </span>
             </div>
-            <div className="flex flex-col items-center text-lg text-gray-500">
+            <div className="flex flex-col items-center text-md md:text-lg text-gray-500">
               <span>Egresos</span>
-              <span className="text-xl font-bold text-[#f35252]">
+              <span className="text-lg md:text-xl font-bold text-[#f35252]">
                 $ {data.outcomeTotal.toFixed(2)}
               </span>
             </div>
-            <div className="flex flex-col items-center text-lg text-gray-500">
+            <div className="flex flex-col items-center text-md md:text-lg text-gray-500">
               <span>Total</span>
-              <span className="text-xl font-bold text-black">
+              <span className="text-lg md:text-xl font-bold text-black">
                 $ {data.total.toFixed(2)}
               </span>
             </div>
@@ -109,10 +109,10 @@ const TransactionList = () => {
                       </span>
                     </div>
                     <div className="flex gap-16 items-center">
-                      <span className="text-lg font-bold text-[#477beb]">
+                      <span className=" text-md md:text-lg font-bold text-[#477beb]">
                         $ {item.incomeTotal.toFixed(2)}
                       </span>
-                      <span className="text-lg font-bold text-[#f35252]">
+                      <span className=" text-md md:text-lg font-bold text-[#f35252]">
                         $ {item.outcomeTotal.toFixed(2)}
                       </span>
                     </div>

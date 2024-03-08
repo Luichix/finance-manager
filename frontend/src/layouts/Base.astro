@@ -4,7 +4,7 @@ import Footer from "./partials/Footer.astro";
 import TwSizeIndicator from "./partials/TwSizeIndicator.astro";
 import config from "@/config/config.json";
 import { plainify } from "@/utils/textConverter";
-import Sidebar from "./partials/Sidebar.astro";
+import Sidebar from "@/components/Sidebar";
 
 // types for frontmatters
 export interface Props {
@@ -136,7 +136,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     <TwSizeIndicator />
     <main id="main-content" class="container-main">
       <div>
-        <Sidebar />
+        <Sidebar client:load />
       </div>
       <div>
         <div class="bg-slate-100 flex flex-col items-center">
@@ -147,3 +147,19 @@ const { title, meta_title, description, image, noindex, canonical } =
     </main>
   </body>
 </html>
+
+<script>
+  import { STORAGE_KEY_LOGIN, USER_INFO_DEFAULT, userInfo } from "@/store";
+  import { removeToStorage, saveToStorage } from "@/utils/localStorage";
+
+  const logout = () => {
+    removeToStorage(STORAGE_KEY_LOGIN);
+    userInfo.set(USER_INFO_DEFAULT);
+    saveToStorage(STORAGE_KEY_LOGIN, USER_INFO_DEFAULT);
+  };
+  const sesion = document.getElementById("logout");
+
+  if (sesion) {
+    sesion.addEventListener("click", logout);
+  }
+</script>

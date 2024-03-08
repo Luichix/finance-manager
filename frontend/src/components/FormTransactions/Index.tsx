@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CATEGORIES } from "./categories";
 import type {
   ITransaction,
-  TSubmitTransaction,
+  TFormTransaction,
   TransactionType,
 } from "@/interfaces/Transactions";
 import { initialStateFormTransaction, transaction_update } from "@/store";
@@ -18,13 +18,13 @@ const labelsList = {
 
 export default function FormTransactions() {
   const [modal, setModal] = useState<boolean>(false);
-  const [form, setForm] = useState<TSubmitTransaction>(
+  const [form, setForm] = useState<TFormTransaction>(
     initialStateFormTransaction,
   );
 
   const handleButtons = (
     value: TransactionType,
-    key: keyof TSubmitTransaction,
+    key: keyof TFormTransaction,
   ) => {
     setForm({ ...form, [key]: value });
   };
@@ -35,7 +35,7 @@ export default function FormTransactions() {
     }: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >,
-    key: keyof TSubmitTransaction,
+    key: keyof TFormTransaction,
   ) => {
     const { value, type } = target;
     const newValue = ["number", "select-one"].includes(type) ? +value : value;
@@ -49,16 +49,24 @@ export default function FormTransactions() {
   ) {
     e.preventDefault();
     const token = loadFromStorage("DINERO_GESTOR_TOKEN");
-    await sendTransaction(form, token).then(({ id }: ITransaction) => {
-      transaction_update.set(id);
-      setForm(initialStateFormTransaction);
-      setModal(false);
-    });
+
+    if (parseFloat(form.amount)) {
+      const values = {
+        ...form,
+        amount: parseFloat(form.amount),
+      };
+
+      await sendTransaction(values, token).then(({ id }: ITransaction) => {
+        transaction_update.set(id);
+        setForm(initialStateFormTransaction);
+        setModal(false);
+      });
+    }
   }
 
   return (
     <>
-      <div>
+      <div className="px-2 lg:p-0">
         <button
           className="px-2 py-2 bg-primary-700 hover:bg-primary rounded-md text-white"
           onClick={() => setModal(true)}

@@ -1,4 +1,4 @@
-import type { TSubmitTransaction } from "@/interfaces/Transactions";
+import type { TFormTransaction } from "@/interfaces/Transactions";
 import { atom, map } from "nanostores";
 
 interface UserInfo {
@@ -15,8 +15,8 @@ interface TransactionParams {
   date?: string;
 }
 
-export const initialStateFormTransaction: TSubmitTransaction = {
-  amount: 0,
+export const initialStateFormTransaction: TFormTransaction = {
+  amount: "",
   categoryId: 1,
   description: "",
   createdAt: "",
@@ -30,6 +30,8 @@ export const USER_INFO_DEFAULT: UserInfo = {
   token: "",
   sesion: false,
 };
+
+export const isOpenSidebar = atom<boolean>(true);
 
 export const TRANSACTION_PARAMS_DEFAULT: TransactionParams = {
   date: "",

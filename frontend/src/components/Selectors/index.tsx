@@ -53,8 +53,8 @@ const Selectors = () => {
   };
 
   return (
-    <div className="flex items-center justify-end gap-8">
-      <label className="text-gray-400">
+    <div className="grid grid-cols-3 md:flex items-center justify-end gap-8">
+      <label className="text-gray-400 flex flex-col md:flex-row">
         Registros:
         <select
           value={$transactionParams.limit}
@@ -68,7 +68,7 @@ const Selectors = () => {
           <option>20</option>
         </select>
       </label>
-      <label className="text-gray-400">
+      <label className="text-gray-400 flex flex-col md:flex-row">
         Transaccion:
         <select
           value={$transactionParams.type}
@@ -80,7 +80,7 @@ const Selectors = () => {
           <option value="OUTCOME">Egresos</option>
         </select>
       </label>
-      <label className="text-gray-400">
+      <label className="text-gray-400 flex flex-col md:flex-row">
         Fecha:
         <input
           value={$transactionParams.date}
@@ -94,7 +94,7 @@ const Selectors = () => {
         onClick={handleCleanSelect}
         id="clean-select"
         type="button"
-        className="bg-secondary-900 hover:bg-secondary px-4 py-2 rounded-md border-1 border-secondary-900 font-semibold text-sm text-white"
+        className="col-start-3 bg-secondary-900 hover:bg-secondary px-4 py-2 rounded-md border-1 border-secondary-900 font-semibold text-sm text-white"
       >
         Limpiar Todos
       </button>

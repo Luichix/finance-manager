@@ -28,11 +28,11 @@ const TransactionCard = ({
   };
 
   return (
-    <div className="transaction-card border rounded px-8 relative">
+    <div className="transaction-card border rounded px-2 md:px-8 relative">
       <div className="flex justify-between py-2 gap-4 ">
         <div className="flex items-center justify-center gap-2">
           <div
-            className={`${type == "INCOME" ? "bg-primary" : "bg-secondary"} flex items-center justify-center rounded-md p-3 `}
+            className={`${type == "INCOME" ? "bg-primary" : "bg-secondary"} flex items-center justify-center rounded-md p-2 md:p-3 `}
           >
             <Icon id={CATEGORIES[categoryId - 1].description} color="#fff" />
           </div>
@@ -41,7 +41,7 @@ const TransactionCard = ({
           <p className="font-semibold">{CATEGORIES[categoryId - 1].name}</p>
           <p>{description}</p>
         </div>
-        <div className="flex items-center text-lg">
+        <div className="flex items-center text-md md:text-lg">
           <p className={type == "INCOME" ? "text-[#477beb]" : "text-[#f35252]"}>
             {type == "INCOME" ? "" : "-"}{" "}
             {amount !== null ? `$${amount.toFixed(2)}` : "N/A"}

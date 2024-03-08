@@ -34,6 +34,8 @@ class Transactions {
     date?: string;
   }) {
     try {
+      Transactions.configHeaders();
+
       const { accessToken, ...restParams } = params;
 
       const urlWithParams =
@@ -51,6 +53,7 @@ class Transactions {
         throw new Error(`Fetch failed with status ${response.status}`);
       }
 
+      Transactions.deleteHeaders();
       const data = await response.json();
       return data;
     } catch (error) {
@@ -81,8 +84,10 @@ class Transactions {
 
   async deleteTransaction(id: number, accessToken?: string) {
     try {
+      Transactions.configHeaders();
+
       const urlWithExtraPath = Transactions.configURL(accessToken, `/${id}`);
-      console.log(urlWithExtraPath);
+
       if (accessToken && accessToken.length) {
         Transactions.headers.append("Authorization", `Bearer ${accessToken}`);
       }
@@ -91,7 +96,7 @@ class Transactions {
         method: "DELETE",
         headers: Transactions.headers,
       });
-
+      Transactions.deleteHeaders();
       if (!response.ok) {
         throw new Error(`Fetch failed with status ${response.status}`);
       }
