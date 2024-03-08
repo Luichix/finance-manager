@@ -1,3 +1,4 @@
+import type { TSubmitTransaction } from "@/interfaces/Transactions";
 import { map } from "nanostores";
 
 interface UserInfo {
@@ -13,6 +14,14 @@ interface TransactionParams {
   offset?: string;
   date?: string;
 }
+
+export const initialStateFormTransaction: TSubmitTransaction = {
+  amount: 0,
+  categoryId: 0,
+  description: "",
+  createdAt: "",
+  type: "INCOME",
+};
 
 export const USER_INFO_DEFAULT: UserInfo = {
   id: 0,

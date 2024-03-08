@@ -1,173 +1,175 @@
 //! btn
 .btn-container {
-	position: relative;
+  position: relative;
 
-	button,
-	a:link,
-	a:visited {
-		padding: 0.8rem;
-		background-color: hsl(var(--myapp-primary));
-		border-radius: 11px;
-		color: hsl(var(--myapp-foreground));
-	}
+  button,
+  a:link,
+  a:visited {
+    padding: 0.5rem 1rem;
+    background-color: hsl(var(--myapp-primary));
+    border-radius: 11px;
+    color: hsl(var(--myapp-foreground));
+  }
 
-	&.open {
-		button {
-			background-color: #f03e3e;
-		}
-	}
+  &.open {
+    button {
+      background-color: #f03e3e;
+    }
+  }
 }
 
 //! form
 .form-container {
-	@apply fixed text-gray-600 w-full h-full mx-auto;
-	left: 50%;
-	top: 50%;
-	transition: transform 0.3s 0.3s;
-	// ?oculto
-	transform: translate(-50%, -50%);
-	opacity: 0;
-	visibility: hidden;
+  position: absolute;
+  z-index: 1000;
+  @apply fixed text-gray-600 w-full h-full mx-auto;
+  left: 50%;
+  top: 50%;
+  transition: transform 0.3s 0.3s;
+  // ?oculto
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
 
-	&:not(.open) {
-		transition: transform 0.3s 0.3s;
-		opacity: 0;
-		visibility: hidden;
-		transition:
-			transform 0.4s cubic-bezier(0.64, 0, 0.78, 0),
-			opacity 0.4s cubic-bezier(0.11, 0, 0.5, 0),
-			visibility 0.4s;
-	}
+  &:not(.open) {
+    transition: transform 0.3s 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform 0.4s cubic-bezier(0.64, 0, 0.78, 0),
+      opacity 0.4s cubic-bezier(0.11, 0, 0.5, 0),
+      visibility 0.4s;
+  }
 
-	&.open {
-		opacity: 1;
-		visibility: visible;
-		transition:
-			transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.3s,
-			visibility 0.3s,
-			background-color 0.3s 0.03s cubic-bezier(0.55, 0, 1, 0.45);
-		transform: translate(-50%, -50%);
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s,
+      visibility 0.3s,
+      background-color 0.3s 0.03s cubic-bezier(0.55, 0, 1, 0.45);
+    transform: translate(-50%, -50%);
 
-		&::after {
-			content: '';
-			@apply absolute top-0 left-0 w-full h-full;
-			background: linear-gradient(
-				to bottom,
-				rgba(0, 0, 0, 0.1),
-				rgba(0, 0, 0, 0.1)
-			);
-		}
-	}
+    &::after {
+      content: '';
+      @apply absolute top-0 left-0 w-full h-full;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1)
+      );
+    }
+  }
 
-	.tabs {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		margin-bottom: 0.4rem;
+  .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 0.4rem;
 
-		&__btn {
-			padding: 0.4rem;
-			grid-column: auto !important;
-			border-radius: 6px;
-			background-color: hsl(var(--myapp-foreground));
-			@apply text-gray-400;
-			// text-transform: uppercase;
-			border: 1px solid hsl(var(--myapp-secondary-200));
-			background-color: hsl(var(--myapp-secondary-900));
-			color: hsl(var(--myapp-foreground));
+    &__btn {
+      padding: 0.4rem;
+      grid-column: auto !important;
+      border-radius: 6px;
+      background-color: hsl(var(--myapp-foreground));
+      @apply text-gray-400;
+      // text-transform: uppercase;
+      border: 1px solid hsl(var(--myapp-secondary-200));
+      background-color: hsl(var(--myapp-secondary-900));
+      color: hsl(var(--myapp-foreground));
 
-			transition:
-				background-color 0.3s,
-				color 0.3s;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
 
-			&:first-child {
-				border-end-end-radius: 0;
-				border-start-end-radius: 0;
-				border-right: none;
-			}
-			&:last-child {
-				border-end-start-radius: 0;
-				border-start-start-radius: 0;
-				border-left: 0;
-			}
+      &:first-child {
+        border-end-end-radius: 0;
+        border-start-end-radius: 0;
+        border-right: none;
+      }
+      &:last-child {
+        border-end-start-radius: 0;
+        border-start-start-radius: 0;
+        border-left: 0;
+      }
 
-			&.active {
-				background-color: hsl(var(--myapp-secondary));
-				color: hsl(var(--myapp-foreground));
-			}
-		}
-	}
-	.income,
-	.outcome {
-		@apply absolute flex flex-col text-left w-full bg-foreground shadow-md;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		gap: 0.4rem;
-		max-width: 450px;
-		border-radius: 6px;
-		padding: 24px;
-		z-index: 500;
-	}
-	.income {
-		label {
-			font-size: calc(1rem + 0.1vw);
-			@apply text-gray-500;
-		}
-		textarea {
-			resize: none;
-		}
-		input,
-		textarea,
-		select {
-			padding: 0.2rem 0rem 0.2rem 0.8rem;
-			width: 100%;
-			border-radius: 6px;
-			border: 1px solid hsl(var(--myapp-black-900));
-			background: none;
-			color: inherit;
-			font-size: calc(1rem + 0.15vw);
-			&:focus {
-				border-color: transparent;
-				outline: 2px solid hsl(var(--myapp-secondary));
-			}
-			&::placeholder {
-				@apply text-gray-400;
-			}
-		}
-		.input-icon {
-			position: relative;
+      &.active {
+        background-color: hsl(var(--myapp-secondary));
+        color: hsl(var(--myapp-foreground));
+      }
+    }
+  }
+  .income,
+  .outcome {
+    @apply absolute flex flex-col text-left w-full bg-foreground shadow-md;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    gap: 1rem;
+    max-width: 650px;
+    border-radius: 6px;
+    padding: 36px;
+    z-index: 100;
+  }
+  .income {
+    label {
+      font-size: calc(1rem + 0.1vw);
+      @apply text-gray-500;
+    }
+    textarea {
+      resize: none;
+    }
+    input,
+    textarea,
+    select {
+      padding: 0.5rem 0.75rem;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid hsl(var(--myapp-black-900));
+      background: none;
+      color: inherit;
+      font-size: calc(1rem + 0.15vw);
+      &:focus {
+        border-color: transparent;
+        outline: 2px solid hsl(var(--myapp-secondary));
+      }
+      &::placeholder {
+        @apply text-gray-400;
+      }
+    }
+    .input-icon {
+      position: relative;
 
-			& > i {
-				position: absolute;
-				display: block;
-				transform: translate(0, -50%);
-				top: 50%;
-				right: 12px;
-				pointer-events: none;
-				width: 25px;
-				text-align: center;
-				font-style: normal;
-			}
-			& > input {
-				padding-right: 25px;
-				padding-right: 0;
-			}
-		}
+      & > i {
+        position: absolute;
+        display: block;
+        transform: translate(0, -50%);
+        top: 50%;
+        right: 12px;
+        pointer-events: none;
+        width: 25px;
+        text-align: center;
+        font-style: normal;
+      }
+      & > input {
+        padding-right: 25px;
+        padding-right: 0;
+      }
+    }
 
-		&__submit {
-			padding: 0.4rem 0.8rem;
-			margin-top: 0.8rem;
-			color: hsl(var(--myapp-foreground));
-			border-radius: 6px;
-			background-color: hsl(var(--myapp-primary));
-			text-transform: uppercase;
-			transition:
-				background-color 0.3s,
-				color 0.3s;
-			&:hover {
-				background-color: hsl(var(--myapp-secondary-400));
-			}
-		}
-	}
+    &__submit {
+      padding: 0.4rem 0.8rem;
+      margin-top: 0.8rem;
+      color: hsl(var(--myapp-foreground));
+      border-radius: 6px;
+      background-color: hsl(var(--myapp-primary));
+      text-transform: uppercase;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+      &:hover {
+        background-color: hsl(var(--myapp-secondary-400));
+      }
+    }
+  }
 }

@@ -2,22 +2,34 @@ import React, { useState } from "react";
 import Icon from "@/components/Icon/Index";
 import type { ITransaction } from "@/interfaces/Transactions";
 import { CATEGORIES } from "../FormTransactions/categories";
+import { FaTrash } from "react-icons/fa";
+import Transactions from "@/services/Transactions";
 
-const TransactionCard: React.FC<ITransaction> = ({
+interface TransactionCardProps extends ITransaction {
+  updateData: React.Dispatch<number>;
+}
+
+const TransactionCard = ({
+  id,
   amount,
   description,
   type,
   categoryId,
-}) => {
-  const [showDetails, setShowDetails] = useState(false);
+  updateData,
+}: TransactionCardProps) => {
+  const deleteTransaction = new Transactions().deleteTransaction;
 
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
+  const handleDelete = async (id: number) => {
+    await deleteTransaction(id).then((response) => {
+      if (response) {
+        updateData(id);
+      }
+    });
   };
 
   return (
-    <div className="transaction-card border rounded px-8">
-      <div className="flex justify-between py-2 gap-4">
+    <div className="transaction-card border rounded px-8 relative">
+      <div className="flex justify-between py-2 gap-4 ">
         <div className="flex items-center justify-center gap-2">
           <div
             className={`${type == "INCOME" ? "bg-primary" : "bg-secondary"} flex items-center justify-center rounded-md p-3 `}
@@ -36,22 +48,12 @@ const TransactionCard: React.FC<ITransaction> = ({
           </p>
         </div>
       </div>
-      <div className=" hidden mt-0 pb-0 w-full  flex-col items-end">
-        {showDetails ? (
-          <div className="w-full flex flex-col items-end">
-            <div className="w-4/6 border-2 border-secondary-700 p-2 rounded mx-2 my-2">
-              {description}
-            </div>
-            <button className="text-xl" onClick={toggleDetails}>
-              ⌃
-            </button>
-          </div>
-        ) : (
-          <button className="text-xl" onClick={toggleDetails}>
-            ⌄
-          </button>
-        )}
-      </div>
+      <button
+        onClick={() => handleDelete(id)}
+        className="absolute -right-5 inset-y-2"
+      >
+        <FaTrash className="text-gray-300 hover:text-secondary-900" />
+      </button>
     </div>
   );
 };

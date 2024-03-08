@@ -7,6 +7,11 @@ export interface ITransaction {
   type: TransactionType;
   userId: number;
   categoryId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
+
+export type TSubmitTransaction = Pick<
+  ITransaction,
+  "amount" | "description" | "categoryId" | "type" | "createdAt"
+>;

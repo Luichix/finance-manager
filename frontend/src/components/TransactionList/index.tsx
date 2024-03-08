@@ -21,6 +21,7 @@ interface TransactionsData {
 
 const TransactionList = () => {
   /** State */
+  const [update, setUpdate] = useState<number>(0);
   const [data, setData] = useState<TransactionsData>({
     incomeTotal: 0,
     outcomeTotal: 0,
@@ -37,7 +38,7 @@ const TransactionList = () => {
 
   useEffect(() => {
     fetchTransactions();
-  }, [$transactionsParams]);
+  }, [$transactionsParams, update]);
 
   const fetchTransactions = async () => {
     await getTransactions(params).then((response) => {
@@ -106,7 +107,11 @@ const TransactionList = () => {
               </div>
               {item.transactions &&
                 item.transactions.map((transaction: ITransaction, index) => (
-                  <TransactionCard key={index} {...transaction} />
+                  <TransactionCard
+                    key={index}
+                    {...transaction}
+                    updateData={setUpdate}
+                  />
                 ))}
             </div>
           );

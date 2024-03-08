@@ -1,163 +1,157 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useState } from "react";
 import { loadFromStorage } from "@/utils/localStorage";
 import { CATEGORIES } from "./categories";
-import Tabs from "../Switch";
-import {
-  initialState,
-  labelsList,
-  submitTransaction,
-} from "@/utils/formTransactions";
+import type {
+  TSubmitTransaction,
+  TransactionType,
+} from "@/interfaces/Transactions";
+import { initialStateFormTransaction } from "@/store";
+import Transactions from "@/services/Transactions";
 
-function reducer(state: any, action: any) {
-  switch (action.type) {
-    case "toggleModal":
-      return { ...initialState, isOpen: !state.isOpen };
-    case "closeModal":
-      return { ...state, isOpen: false };
-    case "setIsLoged":
-      return { ...state, isLoged: action.payload };
-    case "setAmmount":
-      return { ...state, ammount: action.payload };
-    case "setCategory":
-      return { ...state, category: action.payload };
-    case "setDescription":
-      return { ...state, description: action.payload };
-    case "setCreatedAt":
-      return { ...state, createdAt: action.payload };
-    case "setTabIncome":
-      return {
-        ...state,
-        selectedTab: "INCOME",
-        category: initialState.category,
-      };
-    case "setTabOutcome":
-      return {
-        ...state,
-        selectedTab: "OUTCOME",
-        category: "3",
-      };
-  }
-}
+const labelsList = {
+  amount: "Cantidad:",
+  category: "Categoria:",
+  description: "Descripción:",
+  date: "Fecha:",
+};
 
 export default function FormTransactions() {
-  const [
-    { isOpen, isLoged, ammount, category, description, createdAt, selectedTab },
-    dispatch,
-  ] = useReducer(reducer, initialState);
+  const [modal, setModal] = useState<boolean>(false);
+  const [form, setForm] = useState<TSubmitTransaction>(
+    initialStateFormTransaction,
+  );
 
-  function handleKeyUp(e: any) {
-    if (e.key === "Escape") {
-      dispatch({ type: "closeModal" });
-    }
-  }
+  const handleButtons = (
+    value: TransactionType,
+    key: keyof TSubmitTransaction,
+  ) => {
+    setForm({ ...form, [key]: value });
+  };
 
-  function validateNumberChange(e: React.KeyboardEvent<HTMLInputElement>) {
-    const value = parseInt(e.key);
-    const isNan = isNaN(value);
-    if (e.code === "Slash" || (isNan && e.code !== "Backspace")) {
-      e.preventDefault();
-    }
-  }
+  const handleForm = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+    key: keyof TSubmitTransaction,
+  ) => {
+    const value = e.target.value;
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    setForm({ ...form, [key]: value });
+  };
+
+  const sendTransaction = new Transactions().submitTransactions;
+
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement | HTMLSelectElement>,
+  ) {
     e.preventDefault();
-    const token = loadFromStorage("DINERO_GESTOR_TOKEN").token;
-    submitTransaction(token, {
-      ammount,
-      description,
-      category,
-      selectedTab,
-      createdAt,
-    })
-      .then((res) => {
-        if (res.ok) dispatch({ type: "toggleModal" });
-      })
-      .catch((error) => console.error(error));
+    // const token = loadFromStorage('DINERO_GESTOR_TOKEN').token;
+
+    await sendTransaction(form).then((response) => {
+      console.log(response);
+    });
   }
-
-  useEffect(() => {
-    function handleKeyUpWrapper(e: any) {
-      handleKeyUp(e);
-    }
-
-    if (isOpen) {
-      document.addEventListener("keyup", handleKeyUpWrapper);
-    }
-
-    return () => {
-      document.removeEventListener("keyup", handleKeyUpWrapper);
-    };
-  }, [isOpen]);
 
   return (
     <>
-      <div className={`btn-container${isOpen ? " open" : ""}`}>
-        <button onClick={() => dispatch({ type: "toggleModal" })}>
-          {isOpen ? "Cancelar" : "Agregar transacción"}
+      <div>
+        <button
+          className="px-2 py-2 bg-primary-700 hover:bg-primary rounded-md text-white"
+          onClick={() => setModal(true)}
+        >
+          Agregar Transacción
         </button>
       </div>
-      <div className={`form-container${isOpen ? " open" : ""}`}>
+      <div className={`form-container${modal ? " open" : ""}`}>
         <form method="POST" className="income" onSubmit={handleSubmit}>
-          <Tabs selectedTab={selectedTab} dispatch={dispatch} />
-          <label htmlFor="ammount">{labelsList.amount}</label>
-          <div className="input-icon">
-            <input
-              name="ammount"
-              id="ammount"
-              value={ammount}
-              onChange={(e) => {
-                dispatch({ type: "setAmmount", payload: e.target.value });
-              }}
-              onKeyDown={validateNumberChange}
-              type="number"
-              placeholder="1000000"
-              required
-            />
-            <i>$</i>
+          <span className="text-secondary font-bold text-3xl">
+            Registro de Transacciones
+          </span>
+          <div className="tabs">
+            <button
+              className={`tabs__btn${form.type === "INCOME" ? " active" : ""}`}
+              onClick={(e) => handleButtons("INCOME", "type")}
+            >
+              Ingreso
+            </button>
+            <button
+              className={`tabs__btn${form.type === "OUTCOME" ? " active" : ""}`}
+              onClick={(e) => handleButtons("OUTCOME", "type")}
+            >
+              Egreso
+            </button>
           </div>
-
-          <label htmlFor="category">{labelsList.category}</label>
-          <select
-            name="category"
-            id="category"
-            value={category}
-            onChange={(e) =>
-              dispatch({ type: "setCategory", payload: e.target.value })
-            }
-            required
-          >
-            {CATEGORIES.map(
-              ({ typeCategory, name, id }) =>
-                typeCategory === selectedTab && (
-                  <option value={id} key={id}>
-                    {name}
-                  </option>
-                ),
-            )}
-          </select>
-          <label className="text-gray-400">{labelsList.date}</label>
-          <input
-            value={createdAt}
-            onChange={(e) =>
-              dispatch({ type: "setCreatedAt", payload: e.target.value })
-            }
-            id="select-date"
-            type="date"
-            className="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
-          />
-          <label htmlFor="description">{labelsList.description}</label>
-          <textarea
-            name="description"
-            id="description"
-            value={description}
-            onChange={(e) =>
-              dispatch({ type: "setDescription", payload: e.target.value })
-            }
-            rows={2}
-          />
-          <button className="income__submit" type="submit">
-            Registrar
-          </button>
+          <label htmlFor="amount">
+            {labelsList.amount}
+            <div className="input-icon">
+              <input
+                name="amount"
+                id="amount"
+                value={form.amount}
+                onChange={(e) => handleForm(e, "amount")}
+                type="number"
+                placeholder="1000000"
+                required
+                step={0.0}
+                min={0}
+              />
+              <i>$</i>
+            </div>
+          </label>
+          <label htmlFor="category">
+            {labelsList.category}
+            <select
+              name="category"
+              id="category"
+              value={form.categoryId}
+              onChange={(e) => handleForm(e, "categoryId")}
+              required
+            >
+              {CATEGORIES.map(
+                ({ typeCategory, name, id }) =>
+                  typeCategory === form.type && (
+                    <option value={id} key={id}>
+                      {name}
+                    </option>
+                  ),
+              )}
+            </select>
+          </label>
+          <label className="text-gray-400">
+            {labelsList.date}
+            <input
+              value={form.createdAt}
+              onChange={(e) => handleForm(e, "createdAt")}
+              id="select-date"
+              type="date"
+              className="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
+            />
+          </label>
+          <label htmlFor="description">
+            {labelsList.description}
+            <textarea
+              name="description"
+              id="description"
+              value={form.description}
+              onChange={(e) => handleForm(e, "description")}
+              rows={2}
+            />
+          </label>
+          <div className="flex gap-4 items-center">
+            <button
+              className=" px-6 py-3 rounded-md text-white text-lg bg-primary"
+              type="submit"
+            >
+              Registrar
+            </button>
+            <button
+              onClick={() => setModal(false)}
+              className=" px-6 py-3 rounded-md text-white text-lg bg-[#f35252]"
+              type="submit"
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </>
