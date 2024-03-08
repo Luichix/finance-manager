@@ -21,6 +21,11 @@
 	&__item {
 		background-color: rgba(0, 0, 0, 0.01);
 		@apply py-4 rounded-md shadow-lg sm:px-4;
+
+		h3 {
+			text-align: center;
+			margin-bottom: 10px;
+		}
 	}
 
 	&__item-main {

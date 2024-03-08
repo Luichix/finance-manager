@@ -110,7 +110,9 @@ export default function Charts() {
             </label>
           </div>
           <div className="charts__item-main bar">
-            <h3 className="charts__item-heading">Egresos</h3>
+            <h3 className="charts__item-heading text-xl font-bold text-[#477beb]">
+              Reporte semanal
+            </h3>
             <BarChart
               incomes={ChartsData.incomes}
               outcomes={ChartsData.outcomes}
