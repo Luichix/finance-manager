@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { CATEGORIES } from "./categories";
 import type {
+  ITransaction,
   TSubmitTransaction,
   TransactionType,
 } from "@/interfaces/Transactions";
-import { initialStateFormTransaction } from "@/store";
+import { initialStateFormTransaction, transaction_update } from "@/store";
 import Transactions from "@/services/Transactions";
 import { loadFromStorage } from "@/utils/localStorage";
 
@@ -29,14 +30,16 @@ export default function FormTransactions() {
   };
 
   const handleForm = (
-    e: React.ChangeEvent<
+    {
+      target,
+    }: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >,
     key: keyof TSubmitTransaction,
   ) => {
-    const value = e.target.value;
-
-    setForm({ ...form, [key]: value });
+    const { value, type } = target;
+    const newValue = ["number", "select-one"].includes(type) ? +value : value;
+    setForm({ ...form, [key]: newValue });
   };
 
   const sendTransaction = new Transactions().submitTransactions;
@@ -45,10 +48,11 @@ export default function FormTransactions() {
     e: React.FormEvent<HTMLFormElement | HTMLSelectElement>,
   ) {
     e.preventDefault();
-    const token = loadFromStorage("DINERO_GESTOR_TOKEN").token;
-
-    await sendTransaction(form, token).then((response) => {
-      console.log(response);
+    const token = loadFromStorage("DINERO_GESTOR_TOKEN");
+    await sendTransaction(form, token).then(({ id }: ITransaction) => {
+      transaction_update.set(id);
+      setForm(initialStateFormTransaction);
+      setModal(false);
     });
   }
 
@@ -71,12 +75,14 @@ export default function FormTransactions() {
             <button
               className={`tabs__btn${form.type === "INCOME" ? " active" : ""}`}
               onClick={() => handleButtons("INCOME", "type")}
+              type="button"
             >
               Ingreso
             </button>
             <button
               className={`tabs__btn${form.type === "OUTCOME" ? " active" : ""}`}
               onClick={() => handleButtons("OUTCOME", "type")}
+              type="button"
             >
               Egreso
             </button>
@@ -147,7 +153,7 @@ export default function FormTransactions() {
             <button
               onClick={() => setModal(false)}
               className=" px-6 py-3 rounded-md text-white text-lg bg-[#f35252]"
-              type="submit"
+              type="button"
             >
               Cancelar
             </button>

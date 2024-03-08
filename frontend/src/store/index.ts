@@ -1,5 +1,5 @@
 import type { TSubmitTransaction } from "@/interfaces/Transactions";
-import { map } from "nanostores";
+import { atom, map } from "nanostores";
 
 interface UserInfo {
   id: number;
@@ -17,7 +17,7 @@ interface TransactionParams {
 
 export const initialStateFormTransaction: TSubmitTransaction = {
   amount: 0,
-  categoryId: 0,
+  categoryId: 1,
   description: "",
   createdAt: "",
   type: "INCOME",
@@ -34,6 +34,9 @@ export const USER_INFO_DEFAULT: UserInfo = {
 export const TRANSACTION_PARAMS_DEFAULT: TransactionParams = {
   date: "",
 };
+
+export const transaction_update = atom<number>(0);
+export const loading_screen = atom<boolean>(false);
 
 export const STORAGE_KEY_LOGIN = "DINERO_GESTOR_TOKEN";
 export const STORAGE_KEY_TRANSACTION = "DINERO_GESTOR_TRANSACTION";

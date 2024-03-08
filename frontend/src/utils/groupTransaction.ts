@@ -13,7 +13,7 @@ export const groupTransactions = (data: ITransaction[]) => {
   data.sort((a: ITransaction, b: ITransaction) => {
     const first = new Date(a.createdAt).getTime();
     const second = new Date(b.createdAt).getTime();
-    return first - second;
+    return second - first;
   });
 
   const groupedByDate = data.reduce(

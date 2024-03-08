@@ -4,20 +4,21 @@ import { queryString } from "@/utils/queryParams";
 class Transactions {
   private static URL =
     "https://backend-finance-managegr.onrender.com/api/v1/transactions";
-  private static headers = new Headers();
+  public static headers: Headers = new Headers();
 
-  constructor() {
-    this.configHeaders();
-  }
-
-  private configHeaders() {
+  public static configHeaders() {
     Transactions.headers.append("Content-Type", "application/json");
     Transactions.headers.append("Access-Control-Allow-Origin", "");
   }
 
+  public static deleteHeaders() {
+    Transactions.headers.delete("Content-Type");
+    Transactions.headers.delete("Access-Control-Allow-Origin");
+    Transactions.headers.delete("Authorization");
+  }
+
   private static configURL(accessToken?: string, extraPath?: string): string {
     const demo = `?demo=${accessToken && accessToken.length ? false : true}`;
-
     if (extraPath) {
       const newURL = `${Transactions.URL}${extraPath}${demo}`;
       return newURL;
@@ -57,24 +58,22 @@ class Transactions {
     }
   }
 
-  async submitTransactions(body: TSubmitTransaction, accessToken?: string) {
+  async submitTransactions(data: TSubmitTransaction, accessToken?: string) {
     try {
+      Transactions.configHeaders();
       if (accessToken && accessToken.length) {
         Transactions.headers.append("Authorization", `Bearer ${accessToken}`);
       }
-
+      const body = JSON.stringify(data);
       const response = await fetch(Transactions.configURL(accessToken), {
         method: "POST",
         headers: Transactions.headers,
-        body: JSON.stringify(body),
+        body,
       });
-
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(`Fetch failed with status ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
+      Transactions.deleteHeaders();
+      return await response.json();
     } catch (error) {
       console.error("Fetch error:", error);
     }
