@@ -81,13 +81,9 @@ export default function Charts() {
 
   return (
     <div className="charts relative">
-      <div className="charts__heading">
-        <h2 className="charts__title">Reportes</h2>
-        <hr className="text-black w-full h-1" />
-      </div>
       {ChartsData.isLoading ? (
-        <div className="text-black self-center justify-self-center col-span-2 row-start-2">
-          <Spinner />
+        <div className="text-black self-center justify-self-center col-span-4 row-span-4 row-start-1">
+          <Spinner size="lg" />
         </div>
       ) : ChartsData.fetchFailed ? (
         <p className="text-black block ">
@@ -105,6 +101,7 @@ export default function Charts() {
                 }
                 id="select-type"
                 className="px-4 py-2 border-1 border-secondary rounded-md text-secondary text-sm focus:outline-secondary"
+                disabled
               >
                 <option value={EFilters.Week}>Semana</option>
                 <option value={EFilters.Month}>Mes</option>
@@ -113,6 +110,7 @@ export default function Charts() {
             </label>
           </div>
           <div className="charts__item-main bar">
+            <h3 className="charts__item-heading">Egresos</h3>
             <BarChart
               incomes={ChartsData.incomes}
               outcomes={ChartsData.outcomes}
@@ -120,9 +118,11 @@ export default function Charts() {
             />
           </div>
           <div className="charts__item">
+            <h3 className="charts__item-heading">Ingresos</h3>
             <DoughnutChart type="INCOME" expenses={ChartsData.incomes} />
           </div>
           <div className="charts__item">
+            <h3 className="charts__item-heading">Egresos</h3>
             <DoughnutChart type="OUTCOME" expenses={ChartsData.outcomes} />
           </div>
         </>

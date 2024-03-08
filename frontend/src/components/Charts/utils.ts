@@ -9,7 +9,7 @@ export const barChartOptions: ChartOptions = {
       position: "top",
     },
     title: {
-      display: true,
+      display: false,
       text: "Movimientos",
     },
   },
@@ -23,7 +23,7 @@ export function getDoughnutChartOptions(type: string): ChartOptions {
         position: "bottom",
       },
       title: {
-        display: true,
+        display: false,
         text: `${type === "INCOME" ? "Ingresos" : "Egresos"}`,
       },
     },
